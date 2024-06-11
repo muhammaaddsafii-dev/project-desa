@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\RichEditor;
 
 class AnnouncementResource extends Resource
 {
@@ -36,7 +37,11 @@ class AnnouncementResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('title')->required()->maxLength(255), 
+                Forms\Components\DatePicker::make('published_at')->required()->maxDate(now()),
+                RichEditor::make('content')
+                    ->maxLength(65535)
+                    ->columnSpan('full'),
             ]);
     }
 
@@ -44,7 +49,9 @@ class AnnouncementResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title')->searchable()->words(3),
+                Tables\Columns\TextColumn::make('content')->searchable()->words(3),
+                Tables\Columns\TextColumn::make('published_at'),
             ])
             ->filters([
                 //

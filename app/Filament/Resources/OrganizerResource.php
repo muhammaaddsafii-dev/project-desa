@@ -34,7 +34,14 @@ class OrganizerResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')->required()->maxLength(255),
+                Forms\Components\Select::make('position')
+                ->options([
+                    'Kepala Desa' => 'Kepala Desa',
+                    'Sekretaris Desa' => 'Sekretaris Desa',
+                    'Kepala Urusan Keuangan' => 'Kepala Urusan Keuangan',
+                ])->required(),
+                Forms\Components\TextInput::make('contact')->required()->maxLength(255),
             ]);
     }
 
@@ -42,10 +49,17 @@ class OrganizerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('position'),
+                Tables\Columns\TextColumn::make('contact')->searchable(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('position')
+                    ->options([
+                        'Kepala Desa' => 'Kepala Desa',
+                        'Sekretaris Desa' => 'Sekretaris Desa',
+                        'Kepala Urusan Keuangan' => 'Kepala Urusan Keuangan',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

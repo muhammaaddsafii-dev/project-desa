@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
 
 class ActivityResource extends Resource
 {
@@ -36,7 +38,12 @@ class ActivityResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('title')->required()->maxLength(255),
+                FileUpload::make('image'),
+                Forms\Components\TextInput::make('description')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\DatePicker::make('date')->required()->maxDate(now()),
             ]);
     }
 
@@ -44,7 +51,10 @@ class ActivityResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title')->searchable()->words(3),
+                Tables\Columns\TextColumn::make('description')->searchable()->words(3),
+                ImageColumn::make('image'),
+                Tables\Columns\TextColumn::make('date'),
             ])
             ->filters([
                 //
