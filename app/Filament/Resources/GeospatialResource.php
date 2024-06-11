@@ -25,6 +25,13 @@ class GeospatialResource extends Resource
 
     protected static ?int $navigationSort = 11;
 
+    public static ?string $label = 'Data Geospasial';
+
+    public static function getSlug(): string
+    {
+        return 'data-geospasial';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

@@ -19,11 +19,18 @@ class DocumentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
-    protected static ?string $navigationLabel = 'Persuratan';
+    protected static ?string $navigationLabel = 'Permohonan Surat';
 
     protected static ?string $navigationGroup = 'Layanan';
 
     protected static ?int $navigationSort = 6;
+
+    public static ?string $label = 'Permohonan Surat';
+
+    public static function getSlug(): string
+    {
+        return 'permohonan-surat';
+    }
 
     public static function form(Form $form): Form
     {

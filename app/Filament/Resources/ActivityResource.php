@@ -25,6 +25,13 @@ class ActivityResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
+    public static ?string $label = 'Kegiatan Masyarakat';
+
+    public static function getSlug(): string
+    {
+        return 'kegiatan-masyarakat';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

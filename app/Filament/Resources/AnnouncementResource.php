@@ -25,6 +25,13 @@ class AnnouncementResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    public static ?string $label = 'Pengumuman';
+
+    public static function getSlug(): string
+    {
+        return 'pengumuman';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

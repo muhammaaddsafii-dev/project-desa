@@ -25,6 +25,13 @@ class NewsResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
+    public static ?string $label = 'Berita';
+
+    public static function getSlug(): string
+    {
+        return 'berita';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

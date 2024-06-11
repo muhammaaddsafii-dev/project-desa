@@ -25,6 +25,13 @@ class ReportResource extends Resource
 
     protected static ?int $navigationSort = 7;
 
+    public static ?string $label = 'Laporan Masyarakat';
+
+    public static function getSlug(): string
+    {
+        return 'laporan-masyarakat';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

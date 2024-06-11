@@ -25,6 +25,13 @@ class TeritorialResource extends Resource
 
     protected static ?int $navigationSort = 9;
 
+    public static ?string $label = 'wilayah';
+
+    public static function getSlug(): string
+    {
+        return 'wilayah';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

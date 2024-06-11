@@ -25,6 +25,13 @@ class GuideResource extends Resource
 
     protected static ?int $navigationSort = 8;
 
+    public static ?string $label = 'Panduan';
+
+    public static function getSlug(): string
+    {
+        return 'panduan';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

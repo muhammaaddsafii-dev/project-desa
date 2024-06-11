@@ -23,6 +23,13 @@ class OrganizerResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static ?string $label = 'Perangkat Desa';
+
+    public static function getSlug(): string
+    {
+        return 'perangkat-desa';
+    }
+
     public static function form(Form $form): Form
     {
         return $form

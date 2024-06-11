@@ -25,6 +25,13 @@ class ResidentResource extends Resource
 
     protected static ?int $navigationSort = 10;
 
+    public static ?string $label = 'Penduduk';
+
+    public static function getSlug(): string
+    {
+        return 'penduduk';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
