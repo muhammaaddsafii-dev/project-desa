@@ -12,6 +12,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\ToggleButtons;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\BadgeColumn;
 
 class ReportResource extends Resource
 {
@@ -36,7 +39,30 @@ class ReportResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('user_id')
+                ->relationship('user', 'name')
+                ->required(),
+                Forms\Components\TextInput::make('subject')->required()->maxLength(255),
+                Forms\Components\TextInput::make('description')
+                ->required()
+                ->maxLength(255),
+                ToggleButtons::make('status')
+                ->options([
+                    'Diajukan' => 'Diajukan',
+                    'Diproses' => 'Diproses',
+                    'Selesai' => 'Selesai'
+                ])
+                ->colors([
+                    'Diajukan' => 'info',
+                    'Diproses' => 'warning',
+                    'Selesai' => 'success'
+                ])
+                ->icons([
+                    'Diajukan' => 'heroicon-o-pencil',
+                    'Diproses' => 'heroicon-o-clock',
+                    'Selesai' => 'heroicon-o-check-circle'
+                ])
+                ->inline(),
             ]);
     }
 
@@ -44,10 +70,36 @@ class ReportResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('user.name')
+                    ->label('User Name')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('subject')->searchable()->words(3),
+                Tables\Columns\TextColumn::make('description')->words(3),
+                BadgeColumn::make('status')
+                    ->label('Status')
+                    ->sortable()
+                    ->colors([
+                        'info' => 'Diajukan',
+                        'warning' => 'Diproses',
+                        'success' => 'Selesai',
+                    ])
+                    ->icons([
+                        'heroicon-o-pencil' => 'Diajukan',
+                        'heroicon-o-clock' => 'Diproses',
+                        'heroicon-o-check-circle' => 'Selesai',
+                    ])
+                    ->formatStateUsing(function (string $state): string {
+                        return ucfirst($state);
+                    }),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'Diajukan' => 'Diajukan',
+                        'Diproses' => 'Diproses',
+                        'Selesai' => 'Selesai',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
