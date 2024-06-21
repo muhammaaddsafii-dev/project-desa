@@ -14,6 +14,21 @@ class LandingPageController extends Controller
         return view('application.index');
     }
 
+    public function news()
+    {
+        return view('application.news');
+    }
+
+    public function news_details()
+    {
+        return view('application.news-details');
+    }
+
+    public function activity()
+    {
+        return view('application.activity-details');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

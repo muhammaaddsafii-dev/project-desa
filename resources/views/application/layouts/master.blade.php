@@ -41,7 +41,7 @@
 <body class="index-page">
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+            <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="{{ 'assets/img/lg.png' }}" alt="" /> -->
                 <h5 class="sitename"><b>DESA GEOCIRCLE</b></h5>
@@ -49,23 +49,21 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="#hero" class="active">Beranda<br /></a></li>
+                    <li><a href="/" class="active">Beranda<br /></a></li>
                     <li class="dropdown">
                         <a href="#"><span>Profil</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="#about">Tentang Desa</a></li>
                             <li><a href="#about">Visi dan Misi</a></li>
                             <li><a href="#team">Struktur</a></li>
-                            <li><a href="#">Dll</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#"><span>Info Desa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="#faq">Pengumuman</a></li>
-                            <li><a href="/blog.html">Berita</a></li>
-                            <li><a href="#portfolio">Kegiatan</a></li>
-                            <li><a href="#">Dll</a></li>
+                            <li><a href="/berita">Berita</a></li>
+                            <li><a href="/kegiatan">Kegiatan</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -107,7 +105,7 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="index.html"><b>Login</b></a>
+            <a class="btn-getstarted" href="/"><b>Login</b></a>
         </div>
     </header>
 
