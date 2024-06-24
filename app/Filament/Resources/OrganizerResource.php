@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\FileUpload;
 
 class OrganizerResource extends Resource
 {
@@ -42,6 +43,7 @@ class OrganizerResource extends Resource
                     'Kepala Urusan Keuangan' => 'Kepala Urusan Keuangan',
                 ])->required(),
                 Forms\Components\TextInput::make('contact')->required()->maxLength(255),
+                FileUpload::make('image'),
             ]);
     }
 

@@ -103,74 +103,22 @@
                         </div>
 
                         <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
+                            @foreach ($announcements as $announcement)
                             <div class="faq-item">
                                 <i class="faq-icon bi bi-info-circle-fill"></i>
                                 <h3>
-                                    <b>KERJA BAKTI</b> |
-                                    <span class="badge bg-danger" style="color: white">20/06/2024</span>
+                                    <b>{{ $announcement->title }}</b> |
+                                    <span class="badge bg-danger" style="color: white">{{ $announcement->published_at }}</span>
                                 </h3>
                                 <div class="faq-content" style="text-align: justify">
                                     <p>
-                                        <b>Waktu:</b>
                                         <br />
-                                        08.00-11.00
-                                        <br />
-                                        <b>Lokasi:</b>
-                                        <br />
-                                        Balai Desa
-                                        <br />
-                                        <b>Deskripsi:</b>
-                                        <br />
-                                        Dolor sit amet consectetur adipiscing elit pellentesque
-                                        habitant morbi. Id interdum velit laoreet id donec
-                                        ultrices. Fringilla phasellus faucibus scelerisque
-                                        eleifend donec pretium. Est pellentesque elit ullamcorper
-                                        dignissim. Mauris ultrices eros in cursus turpis massa
-                                        tincidunt dui. Dolor sit amet consectetur adipiscing elit
-                                        pellentesque habitant morbi. Id interdum velit laoreet id
-                                        donec ultrices. Fringilla phasellus faucibus scelerisque
-                                        eleifend donec pretium. Est pellentesque elit ullamcorper
-                                        dignissim. Mauris ultrices eros in cursus turpis massa
-                                        tincidunt dui.
+                                        {!! $announcement->content !!}
                                     </p>
                                 </div>
                                 <i class="faq-toggle bi bi-chevron-right"></i>
                             </div>
-                            <!-- End Faq item-->
-
-                            <div class="faq-item">
-                                <i class="faq-icon bi bi-info-circle-fill"></i>
-                                <h3>
-                                    <b>RAPAT KETUA RT</b> |
-                                    <span class="badge bg-danger" style="color: white">10/07/2024</span>
-                                </h3>
-                                <div class="faq-content" style="text-align: justify">
-                                    <p>
-                                        <b>Waktu:</b>
-                                        <br />
-                                        08.00-11.00
-                                        <br />
-                                        <b>Lokasi:</b>
-                                        <br />
-                                        Balai Desa
-                                        <br />
-                                        <b>Deskripsi:</b>
-                                        <br />
-                                        Dolor sit amet consectetur adipiscing elit pellentesque
-                                        habitant morbi. Id interdum velit laoreet id donec
-                                        ultrices. Fringilla phasellus faucibus scelerisque
-                                        eleifend donec pretium. Est pellentesque elit ullamcorper
-                                        dignissim. Mauris ultrices eros in cursus turpis massa
-                                        tincidunt dui. Dolor sit amet consectetur adipiscing elit
-                                        pellentesque habitant morbi. Id interdum velit laoreet id
-                                        donec ultrices. Fringilla phasellus faucibus scelerisque
-                                        eleifend donec pretium. Est pellentesque elit ullamcorper
-                                        dignissim. Mauris ultrices eros in cursus turpis massa
-                                        tincidunt dui.
-                                    </p>
-                                </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div>
+                            @endforeach
                             <!-- End Faq item-->
                         </div>
                     </div>
@@ -423,6 +371,7 @@
 
                                 <div class="container">
                                     <div class="row gy-4">
+                                        @foreach ($news as $news)
                                         <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                                             <article>
                                                 <div class="post-img">
@@ -433,8 +382,7 @@
                                                 <p class="post-category">Politics</p>
 
                                                 <h2 class="title">
-                                                    <a href="blog-details.html">Dolorum optio tempore voluptas
-                                                        dignissimos</a>
+                                                    <a href="{{ route('news.details', ['slug' => $news->slug]) }}">{{ $news->title }}</a>
                                                 </h2>
 
                                                 <div class="d-flex align-items-center">
@@ -450,8 +398,9 @@
                                             </article>
                                         </div>
                                         <!-- End post list item -->
+                                        @endforeach
 
-                                        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                                        {{-- <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                                             <article>
                                                 <div class="post-img">
                                                     <img src="{{('assets/img/blog/blog-2.jpg')}}" alt=""
@@ -506,7 +455,7 @@
                                                 </div>
                                             </article>
                                         </div>
-                                        <!-- End post list item -->
+                                        <!-- End post list item --> --}}
                                     </div>
                                     <!-- End recent posts list -->
                                 </div>

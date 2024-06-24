@@ -13,6 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\FileUpload;
+use Illuminate\Support\Str;
+
 
 class NewsResource extends Resource
 {
@@ -37,8 +40,14 @@ class NewsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')->required()->maxLength(255), 
+                Forms\Components\TextInput::make('title')->required()->maxLength(255)
+                    ->reactive() // Tambahkan ini untuk mendengarkan perubahan
+                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))), // Tambahkan ini untuk mengupdate slug
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\DatePicker::make('published_at')->required()->maxDate(now()),
+                FileUpload::make('image'),
                 RichEditor::make('content')
                     ->maxLength(65535)
                     ->columnSpan('full'),

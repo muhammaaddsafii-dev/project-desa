@@ -17,5 +17,5 @@ use App\Http\Controllers\LandingPageController;
 
 Route::get('/', [LandingPageController::class, 'index']);
 Route::get('/berita', [LandingPageController::class, 'news']);
-Route::get('/detail-berita', [LandingPageController::class, 'news_details']);
+Route::get('/detail-berita/{slug}', [LandingPageController::class, 'news_details'])->name('news.details');
 Route::get('/kegiatan', [LandingPageController::class, 'activity']);

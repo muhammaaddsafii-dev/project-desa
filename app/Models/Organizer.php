@@ -13,5 +13,6 @@ class Organizer extends Model
         'name',
         'position',
         'contact',
+        'image',
     ];
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announcement;
 use Illuminate\Http\Request;
+use App\Models\News;
 
 class LandingPageController extends Controller
 {
@@ -11,17 +13,26 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        return view('application.index');
+        $announcements = Announcement::all();
+        $news = News::all();
+        return view('application.index', [
+            'news' => $news,
+            'announcements' => $announcements,
+        ]);
     }
 
     public function news()
     {
-        return view('application.news');
+        $news = News::all();
+        return view('application.news', [
+            'news' => $news,
+        ]);
     }
 
-    public function news_details()
+    public function news_details($slug)
     {
-        return view('application.news-details');
+        $news = News::find($slug);
+        return view('application.news-details', compact('news'));
     }
 
     public function activity()
