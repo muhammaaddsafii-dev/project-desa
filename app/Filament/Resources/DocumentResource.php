@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class DocumentResource extends Resource
 {
@@ -39,31 +41,37 @@ class DocumentResource extends Resource
     {
         return $form
             ->schema([
+                // Forms\Components\Select::make('user_id')
+                // ->relationship('user', 'name')
+                // ->required(),
                 Forms\Components\Select::make('user_id')
-                ->relationship('user', 'name')
-                ->required(),
+                    ->options(function () {
+                        $user = Auth::user();
+                        return User::where('id', $user->id)->pluck('name', 'id');
+                    })
+                    ->required(),
                 ToggleButtons::make('status')
-                ->options([
-                    'Diajukan' => 'Diajukan',
-                    'Diproses' => 'Diproses',
-                    'Selesai' => 'Selesai'
-                ])
-                ->colors([
-                    'Diajukan' => 'info',
-                    'Diproses' => 'warning',
-                    'Selesai' => 'success'
-                ])
-                ->icons([
-                    'Diajukan' => 'heroicon-o-pencil',
-                    'Diproses' => 'heroicon-o-clock',
-                    'Selesai' => 'heroicon-o-check-circle'
-                ])
-                ->inline(),
+                    ->options([
+                        'Diajukan' => 'Diajukan',
+                        'Diproses' => 'Diproses',
+                        'Selesai' => 'Selesai'
+                    ])
+                    ->colors([
+                        'Diajukan' => 'info',
+                        'Diproses' => 'warning',
+                        'Selesai' => 'success'
+                    ])
+                    ->icons([
+                        'Diajukan' => 'heroicon-o-pencil',
+                        'Diproses' => 'heroicon-o-clock',
+                        'Selesai' => 'heroicon-o-check-circle'
+                    ])
+                    ->inline(),
                 Forms\Components\Select::make('type')
-                ->options([
-                    'Surat Keterangan Slip Gaji' => 'Surat Keterangan Slip Gaji',
-                    'Surat Keterangan Tidak Mampu' => 'Surat Keterangan Tidak Mampu',
-                ])->required(),
+                    ->options([
+                        'Surat Keterangan Slip Gaji' => 'Surat Keterangan Slip Gaji',
+                        'Surat Keterangan Tidak Mampu' => 'Surat Keterangan Tidak Mampu',
+                    ])->required(),
             ]);
     }
 
