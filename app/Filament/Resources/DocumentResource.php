@@ -49,7 +49,9 @@ class DocumentResource extends Resource
                         $user = Auth::user();
                         return User::where('id', $user->id)->pluck('name', 'id');
                     })
-                    ->required(),
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->visible(fn (string $context): bool => $context === 'create'),
                 ToggleButtons::make('status')
                     ->options([
                         'Diajukan' => 'Diajukan',
@@ -78,6 +80,12 @@ class DocumentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function (Builder $query) {
+                $user = Auth::user();
+                if (!$user->hasRole('super_admin')) {
+                    $query->where('user_id', $user->id);
+                }
+            })
             ->columns([
                 TextColumn::make('user.name')
                     ->label('User Name')
