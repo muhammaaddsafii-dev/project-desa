@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class ReportResource extends Resource
 {
@@ -39,30 +41,38 @@ class ReportResource extends Resource
     {
         return $form
             ->schema([
+                // Forms\Components\Select::make('user_id')
+                // ->relationship('user', 'name')
+                // ->required(),
                 Forms\Components\Select::make('user_id')
-                ->relationship('user', 'name')
-                ->required(),
+                    ->options(function () {
+                        $user = Auth::user();
+                        return User::where('id', $user->id)->pluck('name', 'id');
+                    })
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->visible(fn (string $context): bool => $context === 'create'),
                 Forms\Components\TextInput::make('subject')->required()->maxLength(255),
                 Forms\Components\TextInput::make('description')
-                ->required()
-                ->maxLength(255),
+                    ->required()
+                    ->maxLength(255),
                 ToggleButtons::make('status')
-                ->options([
-                    'Diajukan' => 'Diajukan',
-                    'Diproses' => 'Diproses',
-                    'Selesai' => 'Selesai'
-                ])
-                ->colors([
-                    'Diajukan' => 'info',
-                    'Diproses' => 'warning',
-                    'Selesai' => 'success'
-                ])
-                ->icons([
-                    'Diajukan' => 'heroicon-o-pencil',
-                    'Diproses' => 'heroicon-o-clock',
-                    'Selesai' => 'heroicon-o-check-circle'
-                ])
-                ->inline(),
+                    ->options([
+                        'Diajukan' => 'Diajukan',
+                        'Diproses' => 'Diproses',
+                        'Selesai' => 'Selesai'
+                    ])
+                    ->colors([
+                        'Diajukan' => 'info',
+                        'Diproses' => 'warning',
+                        'Selesai' => 'success'
+                    ])
+                    ->icons([
+                        'Diajukan' => 'heroicon-o-pencil',
+                        'Diproses' => 'heroicon-o-clock',
+                        'Selesai' => 'heroicon-o-check-circle'
+                    ])
+                    ->inline(),
             ]);
     }
 
