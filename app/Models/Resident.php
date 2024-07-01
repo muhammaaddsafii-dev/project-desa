@@ -10,14 +10,19 @@ class Resident extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'birth_date',
-        'address',
-        'phone_number',
-        'teritorial_id',
+        'nama',
+        'kks_id',
+        'nik',
+        'status_perkawinan',
+        'jenis_kelamin',
+        'pendidikan',
+        'pekerjaan',
+        'penghasilan_per_bulan',
+        'tanggal_lahir',
+        'whatsapp',
     ];
 
-    public function kk()
+    public function kks()
     {
         return $this->belongsTo(Kk::class);
     }

@@ -36,7 +36,52 @@ class ResidentResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('nama')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Select::make('kks_id')
+                    ->relationship('kks', 'nama_kk')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('nomor_kk')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('nama_kk')
+                            ->required()
+                            ->maxLength(255),
+                    ])
+                    ->required(),
+                Forms\Components\TextInput::make('nik')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Select::make('status_perkawinan')
+                    ->options([
+                        'Belum Menikah' => 'Belum Menikah',
+                        'Menikah' => 'Menikah',
+                        'Cerai' => 'Cerai',
+                    ])
+                    ->nullable(),
+                Forms\Components\Select::make('jenis_kelamin')
+                    ->options([
+                        'Laki-laki' => 'Laki-laki',
+                        'Perempuan' => 'Perempuan',
+                    ])
+                    ->nullable(),
+                Forms\Components\TextInput::make('pendidikan')
+                    ->maxLength(255)
+                    ->nullable(),
+                Forms\Components\TextInput::make('pekerjaan')
+                    ->maxLength(255)
+                    ->nullable(),
+                Forms\Components\TextInput::make('penghasilan_per_bulan')
+                    ->numeric()
+                    ->nullable(),
+                Forms\Components\DatePicker::make('tanggal_lahir')
+                    ->nullable(),
+                Forms\Components\TextInput::make('whatsapp')
+                    ->maxLength(255)
+                    ->nullable(),
             ]);
     }
 
@@ -44,7 +89,22 @@ class ResidentResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('nama')
+                    ->label('Nama')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('kks.nama_kk')
+                    ->label('Nama KK')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('pekerjaan')
+                    ->label('Pekerjaan')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('whatsapp')
+                    ->label('WhatsApp')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
