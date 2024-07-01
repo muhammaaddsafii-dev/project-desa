@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
 
 class OrganizerResource extends Resource
 {
@@ -36,13 +37,15 @@ class OrganizerResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')->required()->maxLength(255),
+                Forms\Components\TextInput::make('whatsapp')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\Select::make('position')
-                ->options([
-                    'Kepala Desa' => 'Kepala Desa',
-                    'Sekretaris Desa' => 'Sekretaris Desa',
-                    'Kepala Urusan Keuangan' => 'Kepala Urusan Keuangan',
-                ])->required(),
-                Forms\Components\TextInput::make('contact')->required()->maxLength(255),
+                    ->options([
+                        'Kepala Desa' => 'Kepala Desa',
+                        'Sekretaris Desa' => 'Sekretaris Desa',
+                        'Kepala Urusan Keuangan' => 'Kepala Urusan Keuangan',
+                    ])->required(),
                 FileUpload::make('image'),
             ]);
     }
@@ -53,7 +56,8 @@ class OrganizerResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('position'),
-                Tables\Columns\TextColumn::make('contact')->searchable(),
+                Tables\Columns\TextColumn::make('whatsapp')->searchable(),
+                ImageColumn::make('image'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('position')

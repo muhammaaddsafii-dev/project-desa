@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('residents', function (Blueprint $table) {
+        Schema::create('kks', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('birth_date');
-            $table->string('address');
-            $table->string('phone_number')->nullable();
-            $table->foreignId('teritorial_id')->constrained()->onDelete('cascade');
+            $table->string('nomor_kk');
+            $table->string('nama_kk');
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('residents');
+        Schema::dropIfExists('kks');
     }
 };

@@ -14,5 +14,6 @@ class Organizer extends Model
         'position',
         'contact',
         'image',
+        'whatsapp',
     ];
 }

@@ -14,6 +14,9 @@ class Document extends Model
         'user_id',
         'type',
         'status',
+        'description',
+        'file',
+        'options',
     ];
 
     public function user()

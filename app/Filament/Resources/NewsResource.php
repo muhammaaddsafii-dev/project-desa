@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Support\Str;
+use Filament\Tables\Columns\BadgeColumn;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 
 class NewsResource extends Resource
@@ -40,6 +43,14 @@ class NewsResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('user_id')
+                    ->options(function () {
+                        $user = Auth::user();
+                        return User::where('id', $user->id)->pluck('name', 'id');
+                    })
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->visible(fn (string $context): bool => $context === 'create'),
                 Forms\Components\TextInput::make('title')->required()->maxLength(255)
                     ->reactive() // Tambahkan ini untuk mendengarkan perubahan
                     ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))), // Tambahkan ini untuk mengupdate slug
@@ -61,6 +72,7 @@ class NewsResource extends Resource
                 Tables\Columns\TextColumn::make('title')->searchable()->words(3),
                 Tables\Columns\TextColumn::make('content')->searchable()->words(3),
                 Tables\Columns\TextColumn::make('published_at'),
+                Tables\Columns\TextColumn::make('user_id'),
             ])
             ->filters([
                 //

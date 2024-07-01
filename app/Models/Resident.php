@@ -17,8 +17,8 @@ class Resident extends Model
         'teritorial_id',
     ];
 
-    public function teritorial()
+    public function kk()
     {
-        return $this->belongsTo(Teritorial::class);
+        return $this->belongsTo(Kk::class);
     }
 }

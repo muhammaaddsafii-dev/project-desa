@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('position');
             $table->string('image')->nullable();
-            $table->string('contact');
+            $table->string('whatsapp')->nullable();
             $table->timestamps();
         });
     }

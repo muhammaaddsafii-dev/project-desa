@@ -17,6 +17,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 
 class DocumentResource extends Resource
 {
@@ -74,6 +76,15 @@ class DocumentResource extends Resource
                         'Surat Keterangan Slip Gaji' => 'Surat Keterangan Slip Gaji',
                         'Surat Keterangan Tidak Mampu' => 'Surat Keterangan Tidak Mampu',
                     ])->required(),
+                Forms\Components\Select::make('options')
+                    ->options([
+                        'Soft file' => 'Soft file',
+                        'Hard file ' => 'hard file',
+                    ])->required(),
+                FileUpload::make('file'),
+                RichEditor::make('description')
+                    ->maxLength(65535)
+                    ->columnSpan('full'),
             ]);
     }
 
@@ -93,6 +104,10 @@ class DocumentResource extends Resource
                     ->searchable(),
                 TextColumn::make('type')
                     ->label('Type')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('options')
+                    ->label('Options')
                     ->sortable()
                     ->searchable(),
                 BadgeColumn::make('status')
@@ -118,6 +133,11 @@ class DocumentResource extends Resource
                         'Diajukan' => 'Diajukan',
                         'Diproses' => 'Diproses',
                         'Selesai' => 'Selesai',
+                    ]),
+                Tables\Filters\SelectFilter::make('options')
+                    ->options([
+                        'Hard file' => 'Hard file',
+                        'Soft file' => 'Soft file',
                     ]),
             ])
             ->actions([
