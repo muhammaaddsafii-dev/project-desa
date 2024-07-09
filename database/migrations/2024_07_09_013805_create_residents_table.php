@@ -18,11 +18,11 @@ return new class extends Migration
             $table->foreignId('rts_id')->constrained('rts')->onDelete('cascade');
             $table->foreignId('rws_id')->constrained('rws')->onDelete('cascade');
             $table->string('nik');
-            $table->string('status_hubungan')->nullable();
+            $table->string('status_hubungan');
             $table->string('status_perkawinan');
             $table->string('jenis_kelamin');
-            $table->string('pendidikan');
-            $table->string('pekerjaan');
+            $table->string('pendidikan')->nullable();
+            $table->string('pekerjaan')->nullable();
             $table->decimal('penghasilan_per_bulan', 10, 2)->nullable();
             $table->date('tanggal_lahir');
             $table->string('whatsapp')->nullable();

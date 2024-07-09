@@ -87,26 +87,31 @@ class ResidentResource extends Resource
                         'Istri' => 'Istri',
                         'Anak' => 'Anak',
                     ])
-                    ->nullable(),
+                    ->required(),
                 Forms\Components\Select::make('status_perkawinan')
                     ->options([
                         'Belum Menikah' => 'Belum Menikah',
                         'Menikah' => 'Menikah',
                         'Cerai' => 'Cerai',
-                    ]),
+                    ])
+                    ->required(),
                 Forms\Components\Select::make('jenis_kelamin')
                     ->options([
                         'Laki-laki' => 'Laki-laki',
                         'Perempuan' => 'Perempuan',
-                    ]),
+                    ])
+                    ->required(),
                 Forms\Components\TextInput::make('pendidikan')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->nullable(),
                 Forms\Components\TextInput::make('pekerjaan')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->nullable(),
                 Forms\Components\TextInput::make('penghasilan_per_bulan')
                     ->numeric()
                     ->nullable(),
-                Forms\Components\DatePicker::make('tanggal_lahir'),
+                Forms\Components\DatePicker::make('tanggal_lahir')
+                    ->required(),
                 Forms\Components\TextInput::make('whatsapp')
                     ->maxLength(255)
                     ->nullable(),
