@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Actions\Action;
 
 class DocumentResource extends Resource
 {
@@ -54,6 +55,24 @@ class DocumentResource extends Resource
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create')
                     ->visible(fn (string $context): bool => $context === 'create'),
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->label('Nama'),
+                Forms\Components\TextInput::make('tempat_lahir')
+                    ->required()
+                    ->label('Tempat Lahir'),
+                Forms\Components\DatePicker::make('tanggal_lahir')
+                    ->required()
+                    ->label('Tanggal Lahir'),
+                Forms\Components\TextInput::make('alamat')
+                    ->required()
+                    ->label('Alamat'),
+                Forms\Components\TextInput::make('fakultas')
+                    ->required()
+                    ->label('Fakultas'),
+                Forms\Components\TextInput::make('nik')
+                    ->required()
+                    ->label('NIK'),
                 ToggleButtons::make('status')
                     ->options([
                         'Diajukan' => 'Diajukan',
@@ -142,6 +161,11 @@ class DocumentResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('download')
+                    ->label('Download')
+                    ->url(fn (Document $record) => route('documents.download', $record))
+                    ->openUrlInNewTab()
+                    ->color('primary'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

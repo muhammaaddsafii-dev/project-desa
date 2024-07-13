@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\DocumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use App\Http\Controllers\LandingPageController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('documents/{document}/download', [DocumentController::class, 'generateDocument'])->name('documents.download');
 
 
 Route::get('/', [LandingPageController::class, 'index']);

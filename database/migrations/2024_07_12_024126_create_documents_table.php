@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('name');
+            $table->string('tempat_lahir');
+            $table->string('tanggal_lahir');
+            $table->string('alamat');
+            $table->string('nik');
+            $table->string('fakultas');
             $table->string('type');
             $table->string('status');
             $table->text('description')->nullable();

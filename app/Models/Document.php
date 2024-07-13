@@ -17,6 +17,12 @@ class Document extends Model
         'description',
         'file',
         'options',
+        'name',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'alamat',
+        'nik',
+        'fakultas',
     ];
 
     public function user()
