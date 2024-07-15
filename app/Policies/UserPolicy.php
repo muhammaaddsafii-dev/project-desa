@@ -143,4 +143,9 @@ class UserPolicy
     {
         return $user->can('reorder_user');
     }
+
+    public function admindownload(User $user)
+    {
+        return $user->role()->where('name', 'super_admin')->exists();
+    }
 }

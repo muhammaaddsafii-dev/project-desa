@@ -20,6 +20,7 @@ use App\Models\User;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Actions\Action;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentResource extends Resource
 {
@@ -44,9 +45,6 @@ class DocumentResource extends Resource
     {
         return $form
             ->schema([
-                // Forms\Components\Select::make('user_id')
-                // ->relationship('user', 'name')
-                // ->required(),
                 Forms\Components\Select::make('user_id')
                     ->options(function () {
                         $user = Auth::user();
@@ -100,7 +98,13 @@ class DocumentResource extends Resource
                         'Soft file' => 'Soft file',
                         'Hard file ' => 'hard file',
                     ])->required(),
-                FileUpload::make('file'),
+                FileUpload::make('file')
+                    ->disk('s3')
+                    ->directory('desa-template/documents')
+                    ->visibility('private')
+                    ->acceptedFileTypes(['application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                    ->maxSize(1024)
+                    ->preserveFilenames(),
                 RichEditor::make('description')
                     ->maxLength(65535)
                     ->columnSpan('full'),
@@ -129,6 +133,7 @@ class DocumentResource extends Resource
                     ->label('Options')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('description'),
                 BadgeColumn::make('status')
                     ->label('Status')
                     ->sortable()
@@ -166,6 +171,16 @@ class DocumentResource extends Resource
                     ->url(fn (Document $record) => route('documents.download', $record))
                     ->openUrlInNewTab()
                     ->color('primary'),
+                Action::make('download')
+                    ->label('Download File')
+                    ->url(function ($record) {
+                        if ($record->file) {
+                            return Storage::disk('s3')->url($record->file);
+                        } else {
+                            return '#';
+                        }
+                    })
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
