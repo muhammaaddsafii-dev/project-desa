@@ -104,7 +104,10 @@ class DocumentResource extends Resource
                     ->visibility('private')
                     ->acceptedFileTypes(['application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
                     ->maxSize(1024)
-                    ->preserveFilenames(),
+                    ->preserveFilenames()
+                    ->hidden(function () {
+                        return ! auth()->user()->hasRole('super_admin');
+                    }),
                 RichEditor::make('description')
                     ->maxLength(65535)
                     ->columnSpan('full'),
@@ -170,7 +173,10 @@ class DocumentResource extends Resource
                     ->label('Download')
                     ->url(fn (Document $record) => route('documents.download', $record))
                     ->openUrlInNewTab()
-                    ->color('primary'),
+                    ->color('primary')
+                    ->hidden(function () {
+                        return ! auth()->user()->hasRole('super_admin');
+                    }),
                 Action::make('download')
                     ->label('Download File')
                     ->url(function ($record) {
@@ -180,7 +186,10 @@ class DocumentResource extends Resource
                             return '#';
                         }
                     })
-                    ->openUrlInNewTab(),
+                    ->openUrlInNewTab()
+                    ->hidden(function () {
+                        return auth()->user()->hasRole('super_admin');
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
