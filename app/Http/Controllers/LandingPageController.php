@@ -21,6 +21,10 @@ class LandingPageController extends Controller
         ]);
     }
 
+    public function map() {
+        return view('application.map');
+    }
+
     public function news()
     {
         $news = News::all();

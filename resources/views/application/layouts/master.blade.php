@@ -36,9 +36,98 @@
       * Author: BootstrapMade.com
       * License: https://bootstrapmade.com/license/
       ======================================================== -->
+
+
+
+    <!-- Leaflet CSS Library -->
+    <!-- <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    /> -->
+    <link rel="stylesheet" href="{{ 'assets/Plugin/libs/leaflet/leaflet.css' }}" />
+    <link rel="stylesheet" href="{{ 'assets/Plugin/fontawesome 5.15.4/all.css' }}" />
+
+    <link rel="stylesheet" href="{{ 'assets/Plugin/libs/leaflet-search/leaflet-search.src.css' }}" />
+    <link rel="stylesheet" href="{{ 'assets/Plugin/libs/leaflet-search2/leaflet-search.css' }}" />
+    <link rel="stylesheet" href="{{ 'assets/Plugin/libs/leaflet-locatecontrol/L.Control.Locate.min.css' }}" />
+
+    <link rel="stylesheet" href="{{ 'assets/Plugin/libs/leaflet/Control.Geocoder.css' }}" />
+    <link rel="stylesheet" href="{{ 'assets/Plugin/libs/leaflet-mouseposition/L.Control.MousePosition.css' }}" />
+    <link rel="stylesheet" type="text/css"
+        href="https://rawgit.com/MarcChasse/leaflet.ScaleFactor/master/leaflet.scalefactor.min.css" />
+    <link rel="stylesheet" href="{{ 'assets/Plugin/libs/leaflet-minimap/Control.MiniMap.css' }}" />
+    <link rel="stylesheet" href="{{ 'assets/Plugin/libs/leaflet-easybutton-master/easy-button.css' }}" />
+    <link rel="stylesheet" href="{{ 'assets/Plugin/libs/lealflet-layertreecontrol/L.LayerTreeControl.css' }}" />
+    <style>
+        html,
+        body,
+        #map {
+            height: 95%;
+        }
+
+        #legenda {
+            position: absolute;
+            margin-bottom: -5px;
+            bottom: 1px;
+            left: 0px;
+            padding: 10px;
+            z-index: 700;
+        }
+
+        .scrollable-menu {
+            max-height: 200px;
+            /* Sesuaikan dengan tinggi yang diinginkan */
+            overflow-y: auto;
+            /* Menambahkan scrollbar vertikal */
+        }
+
+        /* Background pada Judul */
+        *.info {
+            padding: 6px 8px;
+            font: 12px/14px Arial, Helvetica, sans-serif;
+            background: white;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .info h4 {
+            margin: 0 0 5px;
+            color: rgb(0, 0, 0);
+            font-weight: 700;
+        }
+    </style>
+
+
 </head>
 
 <body class="index-page">
+    <script src="{{ 'assets/Plugin/fontawesome 5.15.4/all.js' }}"></script>
+    <!-- Leaflet JavaScript Library -->
+    <script src="https://unpkg.com/leaflet@ 1.5.1/dist/leaflet.js"></script>
+
+    <!-- leaflet js plugin -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet/leaflet.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet/leaflet-src.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet-search/leaflet-search.src.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet-search2/leaflet-search.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/fuse/fuse.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet/Control.Geocoder.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet-locatecontrol/L.Control.Locate.min.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.utils.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.sizes.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet-minimap/Control.MiniMap.js' }}" type="text/javascript"></script>
+    <script src="{{ 'assets/Plugin/libs/lealflet-layertreecontrol/L.LayerTreeControl.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/esri-leaflet/esri-leaflet-debug.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet-easybutton-master/easy-button.js' }}"></script>
+    <script src="{{ 'assets/Plugin/libs/leaflet-mouseposition/L.Control.MousePosition.js' }}"></script>
+    <script src="https://rawgit.com/MarcChasse/leaflet.ScaleFactor/master/leaflet.scalefactor.min.js"></script>
+    <script src="{{ 'assets/Plugin/js_map/Autolinker.min.js' }}"></script>
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
@@ -85,7 +174,7 @@
                                     <li><a href="#">Peta Fasilitas Umum</a></li>
                                     <li><a href="#">Peta Tutupan Lahan</a></li>
                                     <li><a href="#">Peta Kependudukan</a></li>
-                                    <li><a href="#">Peta Dll</a></li>
+                                    <li><a href="/map">Peta Dll</a></li>
                                 </ul>
                             </li>
                             <li><a href="#">Keuangan</a></li>
@@ -157,6 +246,10 @@
 
     <!-- Main JS File -->
     <script src="{{ 'assets/js/main.js' }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>
