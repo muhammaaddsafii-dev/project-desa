@@ -39,7 +39,11 @@ class ActivityResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')->required()->maxLength(255),
-                FileUpload::make('image'),
+                FileUpload::make('image')
+                    ->disk('s3')
+                    ->directory('desa-template/kegiatan')
+                    ->visibility('private')
+                    ->preserveFilenames(),
                 Forms\Components\TextInput::make('description')
                     ->required()
                     ->maxLength(255),
@@ -53,7 +57,8 @@ class ActivityResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')->searchable()->words(3),
                 Tables\Columns\TextColumn::make('description')->searchable()->words(3),
-                ImageColumn::make('image'),
+                Tables\Columns\ImageColumn::make('image')
+                    ->url(fn ($record) => 'https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/' . $record->image),
                 Tables\Columns\TextColumn::make('date'),
             ])
             ->filters([

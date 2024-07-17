@@ -7,12 +7,16 @@
             <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
                 data-aos="zoom-out">
                 <!-- <img
-                    src="{{('assets/img/hero-img.svg')}}"
-                    class="img-fluid animated"
-                    alt=""
-                  /> -->
+                                                        src="{{ 'assets/img/hero-img.svg' }}"
+                                                        class="img-fluid animated"
+                                                        alt=""
+                                                      /> -->
                 <h1 style="color: black">
-                    <b>Selamat Datang di</b><span> <b>Desa GeoCircle</b></span>
+                    <b>Selamat Datang di</b><span>
+                        @foreach ($assets as $asset)
+                            <b>{{ $asset->nama_desa }}</b>
+                    </span>
+                    @endforeach
                 </h1>
                 <p style="color: azure">
                     <i>"Desa Cerdas, Maju, Transparan, dan Sejahtera"</i>
@@ -104,34 +108,35 @@
 
                         <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
                             @foreach ($announcements as $announcement)
-                            <div class="faq-item">
-                                <i class="faq-icon bi bi-info-circle-fill"></i>
-                                <h3>
-                                    <b>{{ $announcement->title }}</b> |
-                                    <span class="badge bg-danger" style="color: white">{{ $announcement->published_at }}</span>
-                                </h3>
-                                <div class="faq-content" style="text-align: justify">
-                                    <p>
-                                        <br />
-                                        {!! $announcement->content !!}
-                                    </p>
+                                <div class="faq-item">
+                                    <i class="faq-icon bi bi-info-circle-fill"></i>
+                                    <h3>
+                                        <b>{{ $announcement->title }}</b> |
+                                        <span class="badge bg-danger"
+                                            style="color: white">{{ $announcement->published_at }}</span>
+                                    </h3>
+                                    <div class="faq-content" style="text-align: justify">
+                                        <p>
+                                            <br />
+                                            {!! $announcement->content !!}
+                                        </p>
+                                    </div>
+                                    <i class="faq-toggle bi bi-chevron-right"></i>
                                 </div>
-                                <i class="faq-toggle bi bi-chevron-right"></i>
-                            </div>
                             @endforeach
                             <!-- End Faq item-->
                         </div>
                     </div>
 
                     <!-- <div class="col-lg-5 order-1 order-lg-2">
-                <img
-                  src="{{('assets/img/faq.jpg')}}"
-                  class="img-fluid"
-                  alt=""
-                  data-aos="zoom-in"
-                  data-aos-delay="100"
-                />
-              </div> -->
+                                                    <img
+                                                      src="{{ 'assets/img/faq.jpg' }}"
+                                                      class="img-fluid"
+                                                      alt=""
+                                                      data-aos="zoom-in"
+                                                      data-aos-delay="100"
+                                                    />
+                                                  </div> -->
                 </div>
             </div>
         </section>
@@ -148,15 +153,15 @@
                 <div class="row g-4 g-lg-5" data-aos="fade-up" data-aos-delay="200">
                     <div class="col-lg-5">
                         <div class="about-img">
-                            <img src="{{('assets/img/Desa.png')}}" class="img-fluid" alt="" />
+                            <img src="{{ 'assets/img/Desa.png' }}" class="img-fluid" alt="" />
                         </div>
                     </div>
 
                     <div class="col-lg-7">
                         <!-- <h3 class="pt-0 pt-lg-5">
-                        Neque officiis dolore maiores et exercitationem quae est seda
-                        lidera pat claero
-                      </h3> -->
+                                                            Neque officiis dolore maiores et exercitationem quae est seda
+                                                            lidera pat claero
+                                                          </h3> -->
 
                         <!-- Tabs -->
                         <ul class="nav nav-pills mb-3">
@@ -270,22 +275,27 @@
                 style="padding-bottom: 20px; background-color: #e2fbff">
                 <div class="container" data-aos="zoom-out">
                     <div class="row g-5">
-                        <div
-                            class="col-lg-8 col-md-6 content d-flex flex-column justify-content-center order-last order-md-first">
-                            <h3>Kepala Desa: <b>Habib Husyien Albani Str.Geo</b></h3>
-                            <p style="text-align: justify">
-                                <i>"Dengan segala potensi yang dimilikinya, Saya berkomitmen
-                                    untuk terus berkembang dan memberikan kontribusi positif
-                                    bagi kesejahteraan warga Desa Geocircle serta lingkungan
-                                    sekitar."</i>
-                            </p>
-                        </div>
+                        @foreach ($organizers as $organizer)
+                            @if ($organizer->position == 'Kepala Desa')
+                                <div
+                                    class="col-lg-8 col-md-6 content d-flex flex-column justify-content-center order-last order-md-first">
+                                    <h3>Kepala Desa: <b>{{ $organizer->name }}</b></h3>
+                                    <p style="text-align: justify">
+                                        <i>"Dengan segala potensi yang dimilikinya, Saya berkomitmen
+                                            untuk terus berkembang dan memberikan kontribusi positif
+                                            bagi kesejahteraan warga Desa Geocircle serta lingkungan
+                                            sekitar."</i>
+                                    </p>
+                                </div>
 
-                        <div class="col-lg-4 col-md-6 order-first order-md-last d-flex align-items-center">
-                            <div class="img">
-                                <img src="{{('assets/img/cta.jpg')}}" alt="" class="img-fluid" />
-                            </div>
-                        </div>
+                                <div class="col-lg-4 col-md-6 order-first order-md-last d-flex align-items-center">
+                                    <div class="img">
+                                        <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $organizer->image }}"
+                                            class="img-fluid" alt="" />
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </section>
@@ -294,61 +304,28 @@
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
                 <div class="row gy-5">
-                    <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="{{('assets/img/team/team-1.jpg')}}" class="img-fluid" alt="" />
-                            </div>
-                            <div class="member-info">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    @foreach ($organizers as $organizer)
+                        @if ($organizer->position !== 'Kepala Desa')
+                            <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="200">
+                                <div class="team-member">
+                                    <div class="member-img">
+                                        <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $organizer->image }}"
+                                            class="img-fluid" alt="" />
+                                    </div>
+                                    <div class="member-info">
+                                        <div class="social">
+                                            <a href=""><i class="bi bi-twitter-x"></i></a>
+                                            <a href=""><i class="bi bi-facebook"></i></a>
+                                            <a href=""><i class="bi bi-instagram"></i></a>
+                                            <a href=""><i class="bi bi-linkedin"></i></a>
+                                        </div>
+                                        <h4>{{ $organizer->name }}</h4>
+                                        <span>{{ $organizer->position }}</span>
+                                    </div>
                                 </div>
-                                <h4>Walter White</h4>
-                                <span>Chief Executive Officer</span>
                             </div>
-                        </div>
-                    </div>
-                    <!-- End Team Member -->
-
-                    <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="{{('assets/img/team/team-2.jpg')}}" class="img-fluid" alt="" />
-                            </div>
-                            <div class="member-info">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                                <h4>Sarah Jhonson</h4>
-                                <span>Product Manager</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Team Member -->
-
-                    <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="600">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="{{('assets/img/team/team-3.jpg')}}" class="img-fluid" alt="" />
-                            </div>
-                            <div class="member-info">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                                <h4>William Anderson</h4>
-                                <span>CTO</span>
-                            </div>
-                        </div>
-                    </div>
+                        @endif
+                    @endforeach
                     <!-- End Team Member -->
                 </div>
             </div>
@@ -372,32 +349,33 @@
                                 <div class="container">
                                     <div class="row gy-4">
                                         @foreach ($news as $news)
-                                        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                                            <article>
-                                                <div class="post-img">
-                                                    <img src="{{('assets/img/blog/blog-1.jpg')}}" alt=""
-                                                        class="img-fluid" />
-                                                </div>
-
-                                                <p class="post-category">Politics</p>
-
-                                                <h2 class="title">
-                                                    <a href="{{ route('news.details', ['slug' => $news->slug]) }}">{{ $news->title }}</a>
-                                                </h2>
-
-                                                <div class="d-flex align-items-center">
-                                                    <img src="{{('assets/img/blog/blog-author.jpg')}}" alt=""
-                                                        class="img-fluid post-author-img flex-shrink-0" />
-                                                    <div class="post-meta">
-                                                        <p class="post-author">Maria Doe</p>
-                                                        <p class="post-date">
-                                                            <time datetime="2022-01-01">Jan 1, 2022</time>
-                                                        </p>
+                                            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                                <article>
+                                                    <div class="post-img">
+                                                        <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $news->image }}"
+                                                            alt="" class="img-fluid" />
                                                     </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <!-- End post list item -->
+
+                                                    <p class="post-category">Politics</p>
+
+                                                    <h2 class="title">
+                                                        <a
+                                                            href="{{ route('news.details', ['slug' => $news->slug]) }}">{{ $news->title }}</a>
+                                                    </h2>
+
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="{{ 'assets/img/blog/blog-author.jpg' }}" alt=""
+                                                            class="img-fluid post-author-img flex-shrink-0" />
+                                                        <div class="post-meta">
+                                                            <p class="post-author">Maria Doe</p>
+                                                            <p class="post-date">
+                                                                <time datetime="2022-01-01">Jan 1, 2022</time>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            <!-- End post list item -->
                                         @endforeach
 
                                         {{-- <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
@@ -492,163 +470,21 @@
                     <!-- End Portfolio Filters -->
 
                     <div class="row g-0 isotope-container" data-aos="fade-up" data-aos-delay="200">
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-internal">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/app-1.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/app-1.jpg')}}" data-gallery="portfolio-gallery-app"
-                                        class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
+                        @foreach ($activities as $activity)
+                            <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-internal">
+                                <div class="portfolio-content h-100">
+                                    <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $activity->image }}"
+                                        alt="" class="img-fluid" />
+                                    <div class="portfolio-info">
+                                        <a href="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $activity->image }}"
+                                            data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
+                                                class="bi bi-zoom-in"></i></a>
+                                        <a href="portfolio-details.html" title="More Details" class="details-link"><i
+                                                class="bi bi-link-45deg"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-eksternal">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/product-1.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/product-1.jpg')}}" data-gallery="portfolio-gallery-product"
-                                        class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-sosial">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/branding-1.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/branding-1.jpg')}}"
-                                        data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/books-1.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/books-1.jpg')}}" data-gallery="portfolio-gallery-book"
-                                        class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-internal">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/app-2.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/app-2.jpg')}}" data-gallery="portfolio-gallery-app"
-                                        class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-eksternal">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/product-2.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/product-2.jpg')}}" data-gallery="portfolio-gallery-product"
-                                        class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-sosial">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/branding-2.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/branding-2.jpg')}}"
-                                        data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/books-2.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/books-2.jpg')}}" data-gallery="portfolio-gallery-book"
-                                        class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/app-3.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/app-3.jpg')}}" data-gallery="portfolio-gallery-app"
-                                        class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-eksternal">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/product-3.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/product-3.jpg')}}" data-gallery="portfolio-gallery-product"
-                                        class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-sosial">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/branding-3.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/branding-3.jpg')}}"
-                                        data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                            class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Portfolio Item -->
-
-                        <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-books">
-                            <div class="portfolio-content h-100">
-                                <img src="{{('assets/img/portfolio/books-3.jpg')}}" class="img-fluid" alt="" />
-                                <div class="portfolio-info">
-                                    <a href="{{('assets/img/portfolio/books-3.jpg')}}" data-gallery="portfolio-gallery-book"
-                                        class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                                    <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                            class="bi bi-link-45deg"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                         <!-- End Portfolio Item -->
                     </div>
                     <!-- End Portfolio Container -->
@@ -673,7 +509,7 @@
                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{('assets/img/services-1.jpg')}}" class="img-fluid" alt="" />
+                                <img src="{{ 'assets/img/services-1.jpg' }}" class="img-fluid" alt="" />
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
@@ -694,7 +530,7 @@
                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{('assets/img/services-2.jpg')}}" class="img-fluid" alt="" />
+                                <img src="{{ 'assets/img/services-2.jpg' }}" class="img-fluid" alt="" />
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
@@ -715,7 +551,7 @@
                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{('assets/img/services-3.jpg')}}" class="img-fluid" alt="" />
+                                <img src="{{ 'assets/img/services-3.jpg' }}" class="img-fluid" alt="" />
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
@@ -737,7 +573,7 @@
                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{('assets/img/services-4.jpg')}}" class="img-fluid" alt="" />
+                                <img src="{{ 'assets/img/services-4.jpg' }}" class="img-fluid" alt="" />
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
@@ -759,7 +595,7 @@
                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{('assets/img/services-5.jpg')}}" class="img-fluid" alt="" />
+                                <img src="{{ 'assets/img/services-5.jpg' }}" class="img-fluid" alt="" />
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
@@ -782,7 +618,7 @@
                     <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="700">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{('assets/img/services-6.jpg')}}" class="img-fluid" alt="" />
+                                <img src="{{ 'assets/img/services-6.jpg' }}" class="img-fluid" alt="" />
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
@@ -884,7 +720,7 @@
                                 </p>
                             </div>
                             <div class="col-lg-4 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
-                                <img src="{{('assets/img/features-1.svg')}}" alt="" class="img-fluid" />
+                                <img src="{{ 'assets/img/features-1.svg' }}" alt="" class="img-fluid" />
                             </div>
                         </div>
                     </div>
@@ -946,7 +782,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 order-1 order-lg-2 text-center">
-                                <img src="{{('assets/img/features-2.svg')}}" alt="" class="img-fluid" />
+                                <img src="{{ 'assets/img/features-2.svg' }}" alt="" class="img-fluid" />
                             </div>
                         </div>
                     </div>
@@ -982,7 +818,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 order-1 order-lg-2 text-center">
-                                <img src="{{('assets/img/features-3.svg')}}" alt="" class="img-fluid" />
+                                <img src="{{ 'assets/img/features-3.svg' }}" alt="" class="img-fluid" />
                             </div>
                         </div>
                     </div>

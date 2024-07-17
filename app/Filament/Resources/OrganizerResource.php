@@ -46,7 +46,11 @@ class OrganizerResource extends Resource
                         'Sekretaris Desa' => 'Sekretaris Desa',
                         'Kepala Urusan Keuangan' => 'Kepala Urusan Keuangan',
                     ])->required(),
-                FileUpload::make('image'),
+                FileUpload::make('image')
+                    ->disk('s3')
+                    ->directory('desa-template/organisasi')
+                    ->visibility('private')
+                    ->preserveFilenames(),
             ]);
     }
 

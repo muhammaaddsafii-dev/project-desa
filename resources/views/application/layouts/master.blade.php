@@ -133,7 +133,9 @@
             <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="{{ 'assets/img/lg.png' }}" alt="" /> -->
-                <h5 class="sitename"><b>DESA GEOCIRCLE</b></h5>
+                @foreach ($assets as $asset)
+                <h5 class="sitename"><b>{{$asset->nama_desa}}</b></h5>
+                @endforeach
             </a>
 
             <nav id="navmenu" class="navmenu">

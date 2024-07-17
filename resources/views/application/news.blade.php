@@ -24,7 +24,7 @@
                         <div class="col-lg-4">
                             <article>
                                 <div class="post-img">
-                                    <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid" />
+                                    <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $news->image }}" alt="" class="img-fluid" />
                                 </div>
 
                                 <p class="post-category">Politics</p>

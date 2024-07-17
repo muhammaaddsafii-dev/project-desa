@@ -58,7 +58,11 @@ class NewsResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('published_at')->required()->maxDate(now()),
-                FileUpload::make('image'),
+                FileUpload::make('image')
+                    ->disk('s3')
+                    ->directory('desa-template/news')
+                    ->visibility('private')
+                    ->preserveFilenames(),
                 RichEditor::make('content')
                     ->maxLength(65535)
                     ->columnSpan('full'),

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Models\Organizer;
+use App\Models\Asset;
 
 class LandingPageController extends Controller
 {
@@ -15,13 +18,20 @@ class LandingPageController extends Controller
     {
         $announcements = Announcement::all();
         $news = News::all();
+        $organizers = Organizer::all();
+        $activities = Activity::all();
+        $assets = Asset::all();
         return view('application.index', [
             'news' => $news,
             'announcements' => $announcements,
+            'organizers' => $organizers,
+            'activities' => $activities,
+            'assets' => $assets,
         ]);
     }
 
-    public function map() {
+    public function map()
+    {
         return view('application.map');
     }
 
@@ -35,7 +45,8 @@ class LandingPageController extends Controller
 
     public function news_details($slug)
     {
-        $news = News::find($slug);
+        $news = News::where('slug', $slug)->firstOrFail();
+
         return view('application.news-details', compact('news'));
     }
 
