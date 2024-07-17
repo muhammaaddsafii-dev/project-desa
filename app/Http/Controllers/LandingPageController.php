@@ -32,7 +32,10 @@ class LandingPageController extends Controller
 
     public function map()
     {
-        return view('application.map');
+        $assets = Asset::all();
+        return view('application.map', [
+            'assets' => $assets,
+        ]);
     }
 
     public function news()
