@@ -21,6 +21,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Actions\Action;
 use Illuminate\Support\Facades\Storage;
+use Twilio\Rest\Client;
 
 class DocumentResource extends Resource
 {
@@ -87,7 +88,26 @@ class DocumentResource extends Resource
                         'Diproses' => 'heroicon-o-clock',
                         'Selesai' => 'heroicon-o-check-circle'
                     ])
-                    ->inline(),
+                    ->inline()
+                    ->afterStateUpdated(function ($state, $livewire) {
+                        if ($state === 'Selesai') {
+                            $user = User::find($livewire->data['user_id']);
+                            if ($user && $user->whatsapp) {
+                                $sid = env('TWILIO_SID');
+                                $token = env('TWILIO_TOKEN');
+                                $from = env('TWILIO_FROM');
+                                $client = new Client($sid, $token);
+
+                                $client->messages->create(
+                                    $user->whatsapp,
+                                    [
+                                        'from' => $from,
+                                        'body' => 'Dokumen Anda telah selesai diproses.'
+                                    ]
+                                );
+                            }
+                        }
+                    }),
                 Forms\Components\Select::make('type')
                     ->options([
                         'Surat Keterangan Slip Gaji' => 'Surat Keterangan Slip Gaji',
@@ -106,7 +126,7 @@ class DocumentResource extends Resource
                     ->maxSize(1024)
                     ->preserveFilenames()
                     ->hidden(function () {
-                        return ! auth()->user()->hasRole('super_admin');
+                        return !auth()->user()->hasRole('super_admin');
                     }),
                 RichEditor::make('description')
                     ->maxLength(65535)
@@ -175,7 +195,7 @@ class DocumentResource extends Resource
                     ->openUrlInNewTab()
                     ->color('primary')
                     ->hidden(function () {
-                        return ! auth()->user()->hasRole('super_admin');
+                        return !auth()->user()->hasRole('super_admin');
                     }),
                 Action::make('download')
                     ->label('Download File')
