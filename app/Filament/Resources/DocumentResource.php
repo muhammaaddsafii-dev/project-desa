@@ -22,6 +22,8 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Actions\Action;
 use Illuminate\Support\Facades\Storage;
 use Twilio\Rest\Client;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class DocumentResource extends Resource
 {
@@ -93,18 +95,30 @@ class DocumentResource extends Resource
                         if ($state === 'Selesai') {
                             $user = User::find($livewire->data['user_id']);
                             if ($user && $user->whatsapp) {
+                                // Format nomor WhatsApp ke format E.164
+                                $whatsappNumber = $user->whatsapp;
+                                if (Str::startsWith($whatsappNumber, '0')) {
+                                    // Mengubah nomor dari 08129873XXXX menjadi +628129873XXXX
+                                    $whatsappNumber = '+62' . substr($whatsappNumber, 1);
+                                }
+
+                                // Kirim SMS menggunakan Twilio
                                 $sid = env('TWILIO_SID');
                                 $token = env('TWILIO_TOKEN');
                                 $from = env('TWILIO_FROM');
                                 $client = new Client($sid, $token);
 
-                                $client->messages->create(
-                                    $user->whatsapp,
-                                    [
-                                        'from' => $from,
-                                        'body' => 'Dokumen Anda telah selesai diproses.'
-                                    ]
-                                );
+                                try {
+                                    $client->messages->create(
+                                        $whatsappNumber,
+                                        [
+                                            'from' => $from,
+                                            'body' => 'Dokumen Anda telah selesai diproses.'
+                                        ]
+                                    );
+                                } catch (\Exception $e) {
+                                    \Log::error('Error sending SMS: ' . $e->getMessage());
+                                }
                             }
                         }
                     }),
