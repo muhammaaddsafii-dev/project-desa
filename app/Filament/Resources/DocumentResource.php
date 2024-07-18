@@ -92,21 +92,43 @@ class DocumentResource extends Resource
                     ])
                     ->inline()
                     ->afterStateUpdated(function ($state, $livewire) {
-                        if ($state === 'Selesai') {
-                            $user = User::find($livewire->data['user_id']);
+                        $sid = env('TWILIO_SID');
+                        $token = env('TWILIO_TOKEN');
+                        $from = env('TWILIO_FROM');
+                        $client = new Client($sid, $token);
+
+                        if ($state === 'Diajukan') {
+                            $superAdmins = User::whereHas('roles', function ($query) {
+                                $query->where('name', 'super_admin');
+                            })->get();
+
+                            foreach ($superAdmins as $admin) {
+                                if ($admin->whatsapp) {
+                                    $whatsappNumber = $admin->whatsapp;
+                                    if (Str::startsWith($whatsappNumber, '0')) {
+                                        $whatsappNumber = '+62' . substr($whatsappNumber, 1);
+                                    }
+
+                                    try {
+                                        $client->messages->create(
+                                            $whatsappNumber,
+                                            [
+                                                'from' => $from,
+                                                'body' => 'Dokumen baru telah diajukan.'
+                                            ]
+                                        );
+                                    } catch (\Exception $e) {
+                                        \Log::error('Error sending SMS to ' . $admin->whatsapp . ': ' . $e->getMessage());
+                                    }
+                                }
+                            }
+                        } elseif ($state === 'Selesai') {
+                            $user = User::find($livewire->data['id']);
                             if ($user && $user->whatsapp) {
-                                // Format nomor WhatsApp ke format E.164
                                 $whatsappNumber = $user->whatsapp;
                                 if (Str::startsWith($whatsappNumber, '0')) {
-                                    // Mengubah nomor dari 08129873XXXX menjadi +628129873XXXX
                                     $whatsappNumber = '+62' . substr($whatsappNumber, 1);
                                 }
-
-                                // Kirim SMS menggunakan Twilio
-                                $sid = env('TWILIO_SID');
-                                $token = env('TWILIO_TOKEN');
-                                $from = env('TWILIO_FROM');
-                                $client = new Client($sid, $token);
 
                                 try {
                                     $client->messages->create(
