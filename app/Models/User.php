@@ -8,10 +8,27 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Http;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
+
+    public function sendWhatsAppMessage($message)
+    {
+        $token = env('FONNTE_API_TOKEN');
+        $target = $this->whatsapp;
+
+        $response = Http::withHeaders([
+            'Authorization' => $token,
+        ])->post('https://api.fonnte.com/send', [
+            'target' => $target,
+            'message' => $message,
+            'countryCode' => '62',
+        ]);
+
+        return $response->successful();
+    }
 
     /**
      * The attributes that are mass assignable.

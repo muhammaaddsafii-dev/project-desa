@@ -74,7 +74,7 @@ class DocumentResource extends Resource
                 Forms\Components\TextInput::make('nik')
                     ->required()
                     ->label('NIK'),
-                ToggleButtons::make('status')
+                Forms\Components\ToggleButtons::make('status')
                     ->options([
                         'Diajukan' => 'Diajukan',
                         'Diproses' => 'Diproses',
@@ -91,55 +91,18 @@ class DocumentResource extends Resource
                         'Selesai' => 'heroicon-o-check-circle'
                     ])
                     ->inline()
-                    ->afterStateUpdated(function ($state, $livewire) {
-                        $sid = env('TWILIO_SID');
-                        $token = env('TWILIO_TOKEN');
-                        $from = env('TWILIO_FROM');
-                        $client = new Client($sid, $token);
-
-                        if ($state === 'Diajukan') {
-                            $superAdmins = User::whereHas('roles', function ($query) {
-                                $query->where('name', 'super_admin');
-                            })->get();
-
-                            foreach ($superAdmins as $admin) {
-                                if ($admin->whatsapp) {
-                                    $whatsappNumber = $admin->whatsapp;
-                                    if (Str::startsWith($whatsappNumber, '0')) {
-                                        $whatsappNumber = '+62' . substr($whatsappNumber, 1);
-                                    }
-
-                                    try {
-                                        $client->messages->create(
-                                            $whatsappNumber,
-                                            [
-                                                'from' => $from,
-                                                'body' => 'Dokumen baru telah diajukan.'
-                                            ]
-                                        );
-                                    } catch (\Exception $e) {
-                                        \Log::error('Error sending SMS to ' . $admin->whatsapp . ': ' . $e->getMessage());
-                                    }
-                                }
-                            }
-                        } elseif ($state === 'Selesai') {
-                            $user = User::find($livewire->data['id']);
+                    ->afterStateUpdated(function ($state, $set, $get, $record) {
+                        if ($state === 'Selesai') {
+                            $user = User::find($record->user_id);
                             if ($user && $user->whatsapp) {
-                                $whatsappNumber = $user->whatsapp;
-                                if (Str::startsWith($whatsappNumber, '0')) {
-                                    $whatsappNumber = '+62' . substr($whatsappNumber, 1);
-                                }
-
-                                try {
-                                    $client->messages->create(
-                                        $whatsappNumber,
-                                        [
-                                            'from' => $from,
-                                            'body' => 'Dokumen Anda telah selesai diproses.'
-                                        ]
-                                    );
-                                } catch (\Exception $e) {
-                                    \Log::error('Error sending SMS: ' . $e->getMessage());
+                                $user->sendWhatsAppMessage('Document Anda telah selesai diproses.');
+                            }
+                        } elseif ($state === 'Diajukan') {
+                            // Mengirim pesan ke semua pengguna dengan peran 'super_admin'
+                            $superAdmins = User::role('super_admin')->get();
+                            foreach ($superAdmins as $superAdmin) {
+                                if ($superAdmin->whatsapp) {
+                                    $superAdmin->sendWhatsAppMessage('Ada dokumen baru yang diajukan.');
                                 }
                             }
                         }
