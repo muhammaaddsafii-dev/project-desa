@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Geospasial | Peta Kependudukan</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon" />
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Main CSS File -->
+    <link href="/assets/css/main.css" rel="stylesheet" />
+
+    <!-- Leaflet CSS Library -->
+    <!-- <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    /> -->
+    <link rel="stylesheet" href="../Plugin/libs/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="../Plugin/fontawesome 5.15.4/all.css" />
+
+    <link
+      rel="stylesheet"
+      href="../Plugin/libs/leaflet-search/leaflet-search.src.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../Plugin/libs/leaflet-search2/leaflet-search.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../Plugin/libs/leaflet-locatecontrol/L.Control.Locate.min.css"
+    />
+
+    <link rel="stylesheet" href="../Plugin/libs/leaflet/Control.Geocoder.css" />
+    <link
+      rel="stylesheet"
+      href="../Plugin/libs/leaflet-mouseposition/L.Control.MousePosition.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://rawgit.com/MarcChasse/leaflet.ScaleFactor/master/leaflet.scalefactor.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../Plugin/libs/leaflet-minimap/Control.MiniMap.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../Plugin/libs/leaflet-easybutton-master/easy-button.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../Plugin/libs/leaflet-control-select/leaflet.control.select.css"
+    />
+    <link
+      rel="stylesheet"
+      href="../Plugin/libs/leaflet-layergrup-control/leaflet.groupedlayercontrol.css"
+    />
+    <style>
+      html,
+      body,
+      #map {
+        height: 93%;
+      }
+      /* Background pada Judul */
+      *.info {
+        padding: 6px 8px;
+        font: 12px/14px Arial, Helvetica, sans-serif;
+        background: white;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      .info h4 {
+        margin: 0 0 5px;
+        color: rgb(0, 0, 0);
+        font-weight: 700;
+      }
+
+      .leaflet-control-layers-list {
+        max-height: 150px;
+        overflow-y: auto;
+        overflow-x: auto;
+      }
+      .leaflet-control-layers label {
+        display: flex;
+        align-items: center;
+      }
+      .leaflet-control-layers img {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body class="blog-details-page">
+    <script src="../Plugin/fontawesome 5.15.4/all.js"></script>
+    <!-- Leaflet JavaScript Library -->
+    <script src="https://unpkg.com/leaflet@ 1.5.1/dist/leaflet.js"></script>
+
+    <!-- leaflet js plugin -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="../Plugin/libs/leaflet/leaflet.js"></script>
+    <script src="../Plugin/libs/leaflet/leaflet-src.js"></script>
+    <script src="../Plugin/libs/leaflet-search/leaflet-search.src.js"></script>
+    <script src="../Plugin/libs/leaflet-search2/leaflet-search.js"></script>
+    <script src="../Plugin/libs/fuse/fuse.js"></script>
+    <script src="../Plugin/libs/leaflet/Control.Geocoder.js"></script>
+    <script src="../Plugin/libs/leaflet-locatecontrol/L.Control.Locate.min.js"></script>
+    <script src="../Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.js"></script>
+    <script src="../Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.utils.js"></script>
+    <script src="../Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.sizes.js"></script>
+    <script src="../Plugin/libs/leaflet-control-select/leaflet.control.select.src.js"></script>
+    <script
+      src="../Plugin/libs/leaflet-minimap/Control.MiniMap.js"
+      type="text/javascript"
+    ></script>
+    <script src="../Plugin/libs/leaflet-layergrup-control/leaflet.groupedlayercontrol.js"></script>
+    <script src="../Plugin/libs/esri-leaflet/esri-leaflet-debug.js"></script>
+    <script src="../Plugin/libs/leaflet-easybutton-master/easy-button.js"></script>
+    <script src="../Plugin/libs/leaflet-mouseposition/L.Control.MousePosition.js"></script>
+    <script src="https://rawgit.com/MarcChasse/leaflet.ScaleFactor/master/leaflet.scalefactor.min.js"></script>
+    <script src="../Plugin/js_map/Autolinker.min.js"></script>
+
+    <header id="header" class="header d-flex align-items-center sticky-top">
+      <div
+        class="container-fluid position-relative d-flex align-items-center justify-content-between"
+      >
+        <a
+          href="index.html"
+          class="logo d-flex align-items-center me-auto me-xl-0"
+        >
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.png" alt=""> -->
+          <h5 class="sitename"><b>DESA GEOCIRCLE</b></h5>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li>
+              <a href="#hero">Beranda<br /></a>
+            </li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Profil</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a href="#about">Tentang Desa</a></li>
+                <li><a href="#about">Visi dan Misi</a></li>
+                <li><a href="#team">Struktur</a></li>
+                <li><a href="#">Dll</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Info Desa</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a href="#faq">Pengumuman</a></li>
+                <li><a href="/blog.html">Berita</a></li>
+                <li><a href="#portfolio">Kegiatan</a></li>
+                <li><a href="#">Dll</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="active"
+                ><span>Data Desa</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li class="dropdown">
+                  <a href="#"
+                    ><span>Statistik</span>
+                    <i class="bi bi-chevron-down toggle-dropdown"></i
+                  ></a>
+                  <ul>
+                    <li><a href="#">Teritorial</a></li>
+                    <li><a href="#">Kependudukan</a></li>
+                    <li><a href="#">dll</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#"
+                    ><span>Geospasial</span>
+                    <i class="bi bi-chevron-down toggle-dropdown"></i
+                  ></a>
+                  <ul>
+                    <li><a href="#">Peta Fasilitas Umum</a></li>
+                    <li><a href="#">Peta Tutupan Lahan</a></li>
+                    <li><a href="#">Peta Kependudukan</a></li>
+                    <li><a href="#">Peta Dll</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Keuangan</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Layanan</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a href="#">Surat Online</a></li>
+                <li><a href="#">Pengaduan</a></li>
+                <li><a href="#">Panduan</a></li>
+                <li><a href="#">Dll</a></li>
+              </ul>
+            </li>
+            <li><a href="#contact">Kontak</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="btn-getstarted" href="index.html"><b>Login</b></a>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Page Title -->
+      <div class="page-title" data-aos="fade" style="background-color: #effdff">
+        <div
+          class="container d-lg-flex justify-content-between align-items-center"
+        >
+          <nav class="breadcrumbs">
+            <ol>
+              <li><a href="#">Data Desa</a></li>
+              <li class="current">Geospasial</li>
+            </ol>
+          </nav>
+
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn btn-danger btn-sm dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              style="font-size: 14px; margin-top: 10px"
+            >
+              Jenis Peta
+            </button>
+            <ul class="dropdown-menu" style="font-size: 14px">
+              <li><a class="dropdown-item" href="#">Peta 1</a></li>
+              <li><a class="dropdown-item" href="#">Peta 2</a></li>
+              <li><a class="dropdown-item" href="#">Peta 3</a></li>
+            </ul>
+          </div>
+          <!-- <nav class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              href="#"
+              role="button"
+              aria-expanded="false"
+              style="font-size: 14px; margin-top: 10px"
+              >Jenis Peta</a
+            >
+            <ul class="dropdown-menu" style="font-size: 14px">
+              <li><a class="dropdown-item" href="#">Peta 1</a></li>
+              <li><a class="dropdown-item" href="#">Peta 2</a></li>
+              <li><a class="dropdown-item" href="#">Peta 3</a></li>
+            </ul>
+          </nav> -->
+        </div>
+      </div>
+      <!-- End Page Title -->
+    </main>
+
+    <div id="map"></div>
+    <script>
+      // Definisi ikon
+      var icons = {
+        rumah: L.icon({
+          iconUrl: "assets/img/legend/home.png",
+          iconSize: [12, 12],
+        }),
+        sosial: L.icon({
+          iconUrl: "assets/img/legend/kantorpemerintah.png",
+          iconSize: [22, 22],
+        }),
+        kantor: L.icon({
+          iconUrl: "assets/img/legend/industri.png",
+          iconSize: [22, 22],
+        }),
+        pendidikan: L.icon({
+          iconUrl: "assets/img/legend/pendidikan.png",
+          iconSize: [22, 22],
+        }),
+        pdj: L.icon({
+          iconUrl: "assets/img/legend/pdj.png",
+          iconSize: [22, 22],
+        }),
+        peribadatan: L.icon({
+          iconUrl: "assets/img/legend/masjid.png",
+          iconSize: [22, 22],
+        }),
+        rth: L.icon({
+          iconUrl: "assets/img/legend/makam.png",
+          iconSize: [22, 22],
+        }),
+        jalan: L.icon({
+          iconUrl: "assets/img/legend/jalanlokal.png",
+          iconSize: [22, 22],
+        }),
+        sungai: L.icon({
+          iconUrl: "assets/img/legend/sungai.png",
+          iconSize: [22, 22],
+        }),
+        drainase: L.icon({
+          iconUrl: "assets/img/legend/drainase.png",
+          iconSize: [22, 22],
+        }),
+        batasadmin: L.icon({
+          iconUrl: "assets/img/legend/batasadmin.png",
+          iconSize: [22, 22],
+        }),
+        batastanahdesa: L.icon({
+          iconUrl: "assets/img/legend/batastanahdesa.png",
+          iconSize: [22, 22],
+        }),
+      };
+
+      // Peta dasar
+      var basemaps = {
+        GoogleMaps: L.tileLayer(
+          "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+          { maxZoom: 18 }
+        ),
+        Streets: L.tileLayer(
+          "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          {
+            maxZoom: 19,
+            attribution:
+              '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          }
+        ),
+      };
+      /* Initial Map */
+      var map = L.map("map", {
+        zoomControl: false,
+        maxZoom: 30,
+        minZoom: 1,
+        layers: [basemaps.Streets],
+      }).setView([-7.5752, 110.68339], 16);
+
+      /* Judul dan Subjudul */
+      var title = new L.Control();
+      title.onAdd = function (map) {
+        this._div = L.DomUtil.create("div", "info");
+        this.update();
+        return this._div;
+      };
+      title.update = function () {
+        this._div.innerHTML =
+          "<h4>PETA SARANA PRASARANA DESA KEMASAN</h4>DIBUAT: GEOCIRCLE INDONESIA";
+      };
+      title.addTo(map);
+
+      var zoomBar = L.easyBar([
+        L.easyButton("<big>+</big>", function (control, map) {
+          map.setZoom(map.getZoom() + 1);
+        }),
+        L.easyButton("fa-home fa-lg", function (control, map) {
+          map.setView([-7.5752, 110.68339], 14);
+        }),
+        // L.easyButton("fa-home fa-lg", function (control, map) {
+        //   map.fitBounds(loadbatasGeoJSON.getBounds());
+        // }),
+        L.easyButton("<big>-</big>", function (control, map) {
+          map.setZoom(map.getZoom() - 1);
+        }),
+      ]);
+      zoomBar.addTo(map);
+
+      // Fungsi untuk memuat file GeoJSON dengan ikon sesuai jenis
+      var fasum = (url) => {
+        return fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            let layers = {};
+            data.features.forEach((feature) => {
+              let jenis = feature.properties.JENIS;
+              let icon;
+              switch (jenis) {
+                case "Fasilitas Sosial":
+                  icon = icons.sosial;
+                  break;
+                case "Perkantoran":
+                  icon = icons.kantor;
+                  break;
+                case "Pendidikan":
+                  icon = icons.pendidikan;
+                  break;
+                case "Perdagangan dan Jasa":
+                  icon = icons.pdj;
+                  break;
+                case "Peribadatan":
+                  icon = icons.peribadatan;
+                  break;
+                case "Ruang Terbuka Hijau":
+                  icon = icons.rth;
+                  break;
+                default:
+                  icon = icons.sosial; // Default icon
+              }
+              if (!layers[jenis]) {
+                layers[jenis] = L.geoJson(null, {
+                  pointToLayer: (feature, latlng) =>
+                    L.marker(latlng, { icon }).bindPopup(
+                      "Jenis Fasum: " +
+                        feature.properties.JENIS +
+                        "<br>" +
+                        "Nama: " +
+                        feature.properties.TOPONIM
+                    ),
+                });
+              }
+              layers[jenis].addData(feature);
+            });
+            return layers;
+          });
+      };
+
+      // Fungsi untuk memuat file GeoJSON
+      var loadrumah = (url, icon) => {
+        return fetch(url)
+          .then((response) => response.json())
+          .then((data) =>
+            L.geoJson(data, {
+              pointToLayer: (feature, latlng) =>
+                L.marker(latlng, { icon }).bindPopup(
+                  "Pemiliki Rumah: " + feature.properties.Nama_Kepal
+                ),
+            })
+          );
+      };
+
+      // Fungsi untuk memuat file GeoJSON perairan
+      var loadWaterGeoJSON = (url) => {
+        return fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            const createLayer = (type, color, weight) => {
+              return L.geoJson(data, {
+                filter: (feature) =>
+                  feature.properties.JENIS.toLowerCase() === type,
+                style: { color: color, weight: weight, fillOpacity: 0.6 },
+                onEachFeature: (feature, layer) => {
+                  layer.bindPopup("Jenis: " + feature.properties.JENIS);
+                },
+              });
+            };
+
+            let sungaiLayer = createLayer("sungai", "#38a9eb", 2.0);
+            let irigasiLayer = createLayer("irigasi", "#47f0c6", 1.0);
+
+            return { sungai: sungaiLayer, irigasi: irigasiLayer };
+          });
+      };
+
+      // Fungsi untuk memuat file GeoJSON jalan
+      var loadJalanGeoJSON = (url) => {
+        return fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            let jalanLayer = L.geoJson(data, {
+              filter: (feature) =>
+                feature.properties.KETERANGAN.toLowerCase() === "jalan",
+              style: { color: "Red", weight: 2.0, fillOpacity: 0.6 },
+              onEachFeature: (feature, layer) => {
+                layer.bindPopup(feature.properties.KETERANGAN);
+              },
+            });
+
+            return { jalan: jalanLayer };
+          });
+      };
+
+      // Fungsi untuk memuat file GeoJSON batas admin
+      var loadbatasGeoJSON = (url) => {
+        return fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            let batasadminLayer = L.geoJson(data, {
+              style: function (feature) {
+                return {
+                  weight: 2.0,
+                  opacity: 1.0,
+                  color: "black",
+                  dashArray: "10,5,1,5,1,5",
+                  lineCap: "butt",
+                  lineJoin: "miter",
+                };
+              },
+              onEachFeature: (feature, layer) => {
+                var content =
+                  "Dukuh: " +
+                  feature.properties.DUKUH +
+                  "<br>" +
+                  "RT: " +
+                  feature.properties.RT +
+                  "<br>" +
+                  "RW: " +
+                  feature.properties.RW +
+                  "<br>" +
+                  "Ketua RT: " +
+                  feature.properties.KETUA_RT +
+                  "<br>";
+
+                layer.on({
+                  click: function (e) {
+                    // Menampilkan popup pada layer yang diklik
+                    batasadminLayer.bindPopup(content);
+                  },
+                  mouseover: function (e) {
+                    // Highlight layer saat mouse berada di atasnya
+                    var batasadminLayer = e.target; // Menggunakan variabel layer yang sesuai
+                    batasadminLayer.setStyle({
+                      color: "black",
+                      weight: 0.2,
+                      opacity: 1,
+                      fillColor: "#c3eff5",
+                      fillOpacity: 0.4,
+                    });
+                    batasadminLayer.bindTooltip(feature.properties.DUKUH);
+                  },
+                  mouseout: function (e) {
+                    //Fungsi mouse keluar dari obyek
+                    batasadminLayer.resetStyle(e.target); //Mengembalikan style garis ke style awal
+                    map.closePopup(); //Menutup popup
+                  },
+                });
+              },
+            });
+            return { batasadmin: batasadminLayer };
+          });
+      };
+
+      // Fungsi untuk memuat file GeoJSON Tanah Desa
+      var loadtanahdesaGeoJSON = (url) => {
+        return fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            let tanahdesaLayer = L.geoJson(data, {
+              style: function (feature) {
+                return {
+                  weight: 2.0,
+                  opacity: 1.0,
+                  color: "orange",
+                };
+              },
+              onEachFeature: (feature, layer) => {
+                var content =
+                  "NIK: " +
+                  feature.properties.NIK +
+                  "<br>" +
+                  "Alamat OBJP: " +
+                  feature.properties.ALMAT_OBJP +
+                  "<br>" +
+                  "Luas (m2): " +
+                  feature.properties.LUAS +
+                  "<br>";
+
+                layer.on({
+                  click: function (e) {
+                    // Menampilkan popup pada layer yang diklik
+                    tanahdesaLayer.bindPopup(content);
+                  },
+                  mouseover: function (e) {
+                    // Highlight layer saat mouse berada di atasnya
+                    var tanahdesaLayer = e.target; // Menggunakan variabel layer yang sesuai
+                    tanahdesaLayer.setStyle({
+                      color: "black",
+                      weight: 0.2,
+                      opacity: 1,
+                      fillColor: "#62f71b",
+                      fillOpacity: 0.4,
+                    });
+                    tanahdesaLayer.bindTooltip(feature.properties.NAMA_WP);
+                  },
+                  mouseout: function (e) {
+                    //Fungsi mouse keluar dari obyek
+                    tanahdesaLayer.resetStyle(e.target); //Mengembalikan style garis ke style awal
+                    map.closePopup(); //Menutup popup
+                  },
+                });
+              },
+            });
+            return { batastanah: tanahdesaLayer };
+          });
+      };
+
+      // Memuat data GeoJSON dan menyimpan lapisan ke dalam array
+      var rumahLayer = loadrumah("../Data/penduduk.geojson", icons.rumah);
+      var fasumLayer = fasum("../Data/fasum.geojson");
+      var jalanLayer = loadJalanGeoJSON("../Data/jalan.geojson");
+      var waterLayer = loadWaterGeoJSON("../Data/perairan.geojson");
+      var batasadminLayer = loadbatasGeoJSON("../Data/batas_admin.geojson");
+      var tanahdesaLayer = loadtanahdesaGeoJSON("../Data/tanah_desa.geojson");
+
+      // Fungsi untuk membuat label dengan ikon
+      var createLayerLabel = (icon, label) =>
+        `<img src="${icon.options.iconUrl}" width="20" height="20"> ${label}`;
+
+      // Menambahkan kontrol lapisan berkelompok
+      var addGroupedLayerControl = (layers) => {
+        var groupedOverlays = {
+          Kependudukan: {
+            [createLayerLabel(icons.rumah, "Rumah Penduduk")]:
+              layers.rumahpenduduk,
+          },
+          "Fasilitas Umum": {
+            [createLayerLabel(icons.sosial, "Fasilitas Sosial")]:
+              layers.fasum["Fasilitas Sosial"],
+            [createLayerLabel(icons.kantor, "Perkantoran")]:
+              layers.fasum["Perkantoran"],
+            [createLayerLabel(icons.pendidikan, "Pendidikan")]:
+              layers.fasum["Pendidikan"],
+            [createLayerLabel(icons.pdj, "Perdagangan dan Jasa")]:
+              layers.fasum["Perdagangan dan Jasa"],
+            [createLayerLabel(icons.peribadatan, "Peribadatan")]:
+              layers.fasum["Peribadatan"],
+            [createLayerLabel(icons.rth, "Ruang Terbuka Hijau")]:
+              layers.fasum["Ruang Terbuka Hijau"],
+          },
+          Jalan: {
+            [createLayerLabel(icons.jalan, "Jalan")]: layers.jalan,
+          },
+          Perairan: {
+            [createLayerLabel(icons.sungai, "Sungai")]: layers.water.sungai,
+            [createLayerLabel(icons.drainase, "Irigasi")]: layers.water.irigasi,
+          },
+          "Batas Admin": {
+            [createLayerLabel(icons.batasadmin, "Batas Admin")]:
+              layers.batasadmin,
+          },
+          "Tanah Desa": {
+            [createLayerLabel(icons.batastanahdesa, "Tanah Desa")]:
+              layers.batastanah,
+          },
+        };
+
+        L.control
+          .groupedLayers(basemaps, groupedOverlays, {
+            collapsed: true,
+          })
+          .addTo(map);
+      };
+
+      // Menambahkan kontrol lapisan setelah semua data dimuat
+      Promise.all([
+        rumahLayer,
+        fasumLayer,
+        jalanLayer,
+        waterLayer,
+        batasadminLayer,
+        tanahdesaLayer,
+      ]).then(
+        ([rumahpenduduk, fasum, jalan, water, batasadmin, batastanah]) => {
+          var layerGroups = {
+            rumahpenduduk: rumahpenduduk.addTo(map), // Menambahkan Rumah Penduduk ke peta
+            fasum: fasum,
+            jalan: jalan.jalan.addTo(map), // Menambahkan Jalan ke peta
+            water: {
+              sungai: water.sungai.addTo(map), // Menambahkan Sungai ke peta
+              irigasi: water.irigasi.addTo(map), // Menambahkan Irigasi ke peta
+            },
+            batasadmin: batasadmin.batasadmin.addTo(map),
+            batastanah: batastanah.batastanah,
+          };
+
+          addGroupedLayerControl(layerGroups);
+        }
+      );
+    </script>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendor/php-email-form/validate.js"></script>
+    <script src="/assets/vendor/aos/aos.js"></script>
+    <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="/assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

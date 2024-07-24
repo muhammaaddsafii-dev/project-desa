@@ -3,82 +3,87 @@
 @section('content')
     <main class="main">
         <!-- Page Title -->
-        <div class="page-title" data-aos="fade">
+        <div class="page-title" data-aos="fade" style="background-color: #effdff; padding: 12px">
             <div class="container d-lg-flex justify-content-between align-items-center">
-                <h3 class="mb-2 mb-lg-0"><b>PETA DESA</b></h3>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="index.html">Geospasial</a></li>
-                        <li class="current">Peta Kependudukan</li>
+                        <li><a href="#">Data Desa</a></li>
+                        <li class="current">Geospasial</li>
                     </ol>
                 </nav>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-getstarted btn-sm dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="font-size: 14px; margin-top: 10px">
+                        Kategori Peta
+                    </button>
+                    <ul class="dropdown-menu" style="font-size: 14px">
+                        <li>
+                            <a class="dropdown-item" href="/peta-kependudukan">Peta Kependudukan</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/peta-sarana-prasarana">Peta Sarana Prasarana</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/peta-kondisi-jalan">Peta Kondisi Jalan</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <nav class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown"
+                href="#"
+                role="button"
+                aria-expanded="false"
+                style="font-size: 14px; margin-top: 10px"
+                >Kategori Peta</a
+              >
+              <ul class="dropdown-menu" style="font-size: 14px">
+                <li><a class="dropdown-item" href="#">Peta 1</a></li>
+                <li><a class="dropdown-item" href="#">Peta 2</a></li>
+                <li><a class="dropdown-item" href="#">Peta 3</a></li>
+              </ul>
+            </nav> -->
             </div>
         </div>
         <!-- End Page Title -->
     </main>
 
-    <div class="btn-group dropup" id="legenda">
-        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-            aria-expanded="false" style="font-size: small">
-            Legenda
-        </button>
-        <div class="dropdown-menu scrollable-menu" style="font-size: small" aria-labelledby="dropdownMenuButton">
-            <span class="badge bg-success" style="margin-left: 9px; font-size: small">Fasilitas Umum</span>
-            <a class="dropdown-item"><img src="{{'assets/assets-map/img/legend/kantorpemerintah.png'}}" height="18" width="18" />
-                Fasilitas Sosial</a>
-            <a class="dropdown-item"><img src="{{'assets/assets-map/img/legend/industri.png'}}" height="18" width="18" />
-                Perkantoran</a>
-            <a class="dropdown-item"><img src="{{'assets/assets-map/img/legend/pendidikan.png'}}" height="18" width="18" />
-                Pendidikan</a>
-            <a class="dropdown-item"><img src="{{'assets/assets-map/img/legend/pdj.png'}}" height="18" width="18" />
-                Perdagangan dan Jasa</a>
-            <a class="dropdown-item"><img src="{{'assets/assets-map/img/legend/masjid.png'}}" height="18" width="18" />
-                Peribadatan</a>
-
-            <a class="dropdown-item"><img src="{{'assets/assets-map/img/legend/makam.png'}}" height="18" width="18" />
-                Makam</a>
-            <span class="badge bg-success"
-                style="
-                margin-left: 9px;
-                font-size: small;
-                margin-bottom: 6px;
-                margin-top: 6px;
-              ">Jaringan
-                Jalan</span>
-            <a class="dropdown-item"><img src="{{'assets/assets-map/img/legend/jalanlokal.png'}}" height="18" width="18" />
-                Jalan Lokal</a>
-            <span class="badge bg-success"
-                style="
-                margin-left: 9px;
-                font-size: small;
-                margin-bottom: 6px;
-                margin-top: 6px;
-              ">Perairan</span>
-            <a class="dropdown-item"><img src="{{'assets/assets-map/img/legend/sungai.png'}}" height="18" width="18" />
-                Sungai</a>
-            <a class="dropdown-item"><img src="{{'assets/assets-map/img/legend/drainase.png'}}" height="18" width="18" />
-                Irigasi</a>
-            <span class="badge bg-success"
-                style="
-                margin-left: 9px;
-                font-size: small;
-                margin-bottom: 6px;
-                margin-top: 6px;
-              ">Batas
-                Administrasi</span>
-            <a class="dropdown-item"><img src="{{'assets/assets-map/img/legend/batasadmin.png'}}" height="18" width="18" />
-                Batas Padukuhan</a>
-        </div>
-    </div>
-
     <div id="map"></div>
     <script>
+        var icons = {
+            rumah: L.icon({
+                iconUrl: "assets/img/legend/home.png",
+                iconSize: [15, 15],
+            }),
+            jalan: L.icon({
+                iconUrl: "assets/img/legend/jalanlokal.png",
+                iconSize: [22, 22],
+            }),
+            sungai: L.icon({
+                iconUrl: "assets/img/legend/sungai.png",
+                iconSize: [22, 22],
+            }),
+            drainase: L.icon({
+                iconUrl: "assets/img/legend/drainase.png",
+                iconSize: [22, 22],
+            }),
+            batasadmin: L.icon({
+                iconUrl: "assets/img/legend/batasadmin.png",
+                iconSize: [22, 22],
+            }),
+            batastanahdesa: L.icon({
+                iconUrl: "assets/img/legend/batastanahdesa.png",
+                iconSize: [22, 22],
+            }),
+        };
         /* Initial Map */
         var map = L.map("map", {
             zoomControl: false,
             maxZoom: 30,
             minZoom: 1,
-        }).setView([-7.5752, 110.68339], 15);
+        }).setView([-7.5752, 110.68339], 16);
         /* Judul dan Subjudul */
         var title = new L.Control();
         title.onAdd = function(map) {
@@ -88,7 +93,7 @@
         };
         title.update = function() {
             this._div.innerHTML =
-                "<h4>PETA SARANA PRASARANA DESA KEMASAN</h4>DIBUAT: GEOCIRCLE INDONESIA";
+                "<h4>PETA KEPENDUDUKAN DESA KEMASAN</h4>DIBUAT: GEOCIRCLE INDONESIA";
         };
         title.addTo(map);
 
@@ -142,16 +147,14 @@
         /* Tile Basemap */
         var basemapLayers = {
             //Basemap: OpenStreetMap
-            layer_OSM: L.tileLayer(
-                "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-                    subdomains: ["a", "b", "c"],
-                    minZoom: 0,
-                    maxZoom: 30,
-                }
-            ),
+            OSM: L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                subdomains: ["a", "b", "c"],
+                minZoom: 0,
+                maxZoom: 30,
+            }),
             //Basemap: GoogleMaps
-            layer_GoogleMaps: L.tileLayer(
+            GoogleMaps: L.tileLayer(
                 "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
                     minZoom: 0,
                     maxZoom: 30,
@@ -159,93 +162,52 @@
             ),
         };
 
-        map.addLayer(basemapLayers.layer_GoogleMaps);
+        map.addLayer(basemapLayers.OSM);
 
         var basemapLayersCopy = {
             //Basemap: OpenStreetMap
-            layer_OSM: L.tileLayer(
-                "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                    subdomains: ["a", "b", "c"],
-                    minZoom: 0,
-                    maxZoom: 13,
-                }
-            ),
+            OSM: L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                subdomains: ["a", "b", "c"],
+                minZoom: 0,
+                maxZoom: 13,
+            }),
 
             //Basemap: GoogleMaps
-            layer_GoogleMaps: L.tileLayer(
+            GoogleMaps: L.tileLayer(
                 "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
                     minZoom: 0,
                     maxZoom: 13,
                 }
             ),
         };
-        /* memanggil data file geojson point */
-        $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/fasum.geojson", function(data) {
-            fasum.addData(data);
-            map.addLayer(fasum);
-            //map.fitBounds(fasum.getBounds());
+
+        $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/penduduk.geojson", function(data) {
+            rumah.addData(data);
+            map.addLayer(rumah);
         });
-        //Mengatur Simbol Titik
-        function FasumSimbologi(JENIS) {
-            if (JENIS == "Fasilitas Sosial") {
-                return "{{'assets/assets-map/img/legend/kantorpemerintah.png'}}";
-            } else if (JENIS == "Perkantoran") {
-                return "{{'assets/assets-map/img/legend/industri.png'}}";
-            } else if (JENIS == "Ruang Terbuka Hijau") {
-                return "{{'assets/assets-map/img/legend/makam.png'}}";
-            } else if (JENIS == "Pendidikan") {
-                return "{{'assets/assets-map/img/legend/pendidikan.png'}}";
-            } else if (JENIS == "Perdagangan dan Jasa") {
-                return "{{'assets/assets-map/img/legend/pdj.png'}}";
-            } else {
-                return "{{'assets/assets-map/img/legend/masjid.png'}}";
-            }
-        }
-        //Menampilkan Data Titik
-        var fasum = L.geoJson(null, {
+        // Deklarasi variabel rumah
+        var rumah = L.geoJson(null, {
             pointToLayer: function(feature, latlng) {
-                var smallIcon = new L.Icon({
-                    pane: "pane_fasum",
-                    iconSize: [30, 30],
-                    iconAnchor: [13, 27],
-                    popupAnchor: [1, -24],
-                    iconUrl: FasumSimbologi(feature.properties.JENIS.toString()),
-                });
+                var icon = icons.rumah; // Sesuaikan dengan tipe ikon yang diinginkan
                 return L.marker(latlng, {
-                    icon: smallIcon,
+                    icon: icon
                 });
             },
             onEachFeature: function(feature, layer) {
-                /* Variable content untuk memanggil atribut dari data file geojson */
-                var content =
-                    "Jenis Fasum : " +
-                    feature.properties.JENIS +
-                    "<br>" +
-                    "Nama Fasum : " +
-                    feature.properties.TOPONIM +
-                    "<br>";
+                var content = "Pemilik Rumah : " + feature.properties.Nama_Kepal;
 
                 layer.on({
                     click: function(e) {
-                        //Fungsi ketika icon simbol di-klik
-                        fasum.bindPopup(content);
+                        layer.bindPopup(content).openPopup();
                     },
-
-                    mouseover: function(e) {
-                        fasum.bindTooltip(feature.properties.JENIS);
-                    },
-
-                    //mouseout: function (e) {
-                    //fasum.closePopup();
-                    //},
                 });
             },
         });
+
         /* memanggil data file geojson line */
         $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/jalan.geojson", function(data) {
             jalan.addData(data);
             map.addLayer(jalan);
-            //map.fitBounds(fasum.getBounds());
         });
 
         //Menampilkan Data Garis
@@ -279,56 +241,55 @@
             },
         });
 
-        /* memanggil data file geojson line */
+        // Memuat data GeoJSON
         $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/perairan.geojson", function(data) {
-            perairan.addData(data);
-            map.addLayer(perairan);
-            //map.fitBounds(fasum.getBounds());
+            jaringanAir.addData(data);
         });
 
-        //Menampilkan Data Garis
-        var perairan = L.geoJson(null, {
+        // Buat dua feature group untuk sungai dan irigasi
+        var sungaiLayer = L.featureGroup().addTo(map);
+        var irigasiLayer = L.featureGroup().addTo(map);
+
+        // Pisahkan data jaringan air berdasarkan jenis
+        var jaringanAir = L.geoJson(null, {
             style: function(feature) {
-                if (feature.properties.JENIS == "Sungai") {
+                if (feature.properties.JENIS === "Sungai") {
                     return {
-                        pane: "pane_perairan",
-                        opacity: 1,
                         color: "#38a9eb",
                         weight: 2.0,
+                        pane: "pane_sungai",
                     };
-                }
-                if (feature.properties.JENIS == "Irigasi") {
+                } else if (feature.properties.JENIS === "Irigasi") {
                     return {
-                        pane: "pane_perairan",
-                        opacity: 1,
                         color: "#33efc0",
                         weight: 1.0,
+                        pane: "pane_irigasi",
                     };
                 }
             },
-
             onEachFeature: function(feature, layer) {
                 layer.on({
                     click: function(e) {
-                        //Fungsi ketika icon simbol di-klik
-                        perairan.bindPopup(content);
+                        layer.bindPopup(feature.properties.JENIS);
                     },
-
                     mouseover: function(e) {
-                        perairan.bindTooltip(feature.properties.JENIS);
+                        layer.bindTooltip(feature.properties.JENIS);
                     },
-
-                    //mouseout: function (e) {
-                    //fasum.closePopup();
-                    //},
                 });
+
+                // Menambahkan layer ke feature group yang sesuai
+                if (feature.properties.JENIS === "Sungai") {
+                    sungaiLayer.addLayer(layer);
+                } else if (feature.properties.JENIS === "Irigasi") {
+                    irigasiLayer.addLayer(layer);
+                }
             },
         });
+
         /* memanggil data file geojson area */
         $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/tanah_desa.geojson", function(data) {
             TanahDesa.addData(data);
             map.addLayer(TanahDesa);
-            //map.fitBounds(fasum.getBounds());
         });
         //Deklarasi variabel batas admin
         var TanahDesa = L.geoJSON(null, {
@@ -337,7 +298,7 @@
                     pane: "pane_tanahdesa",
                     weight: 2.0,
                     opacity: 0.5,
-                    color: "red",
+                    color: "orange",
                 };
             },
             onEachFeature: function(feature, layer) {
@@ -391,7 +352,8 @@
                     pane: "pane_batasdukuh",
                     weight: 2.0,
                     opacity: 0.5,
-                    color: "#42ff6b",
+                    color: "black",
+                    fillColor: "#b3b9ba",
                     dashArray: "10,5,1,5,1,5",
                     lineCap: "butt",
                     lineJoin: "miter",
@@ -425,7 +387,7 @@
                             color: "grey", //Warna garis tepi polygon
                             weight: 0.2, //Tebal garis tepi polygon
                             opacity: 1, //Transparansi garis tepi polygon
-                            fillColor: "#62f71b", //Warna tengah polygon
+                            fillColor: "#beeff6", //Warna tengah polygon
                             fillOpacity: 0.4, //Transparansi polygon
                         });
                         BatasDukuh.bindTooltip(feature.properties.DUKUH);
@@ -438,65 +400,85 @@
                 });
             },
         });
+        map.createPane("pane_jalan");
+        map.getPane("pane_jalan").style.zIndex = 404;
+        map.getPane("pane_jalan").style["mix-blend-mode"] = "normal";
+
+        map.createPane("pane_sungai");
+        map.getPane("pane_sungai").style.zIndex = 403;
+        map.getPane("pane_sungai").style["mix-blend-mode"] = "normal";
+
+        map.createPane("pane_irigasi");
+        map.getPane("pane_irigasi").style.zIndex = 402;
+        map.getPane("pane_irigasi").style["mix-blend-mode"] = "normal";
+
         map.createPane("pane_batasdukuh");
-        map.getPane("pane_batasdukuh").style.zIndex = 400;
+        map.getPane("pane_batasdukuh").style.zIndex = 401;
         map.getPane("pane_batasdukuh").style["mix-blend-mode"] = "normal";
 
         map.createPane("pane_tanahdesa");
         map.getPane("pane_tanahdesa").style.zIndex = 400;
         map.getPane("pane_tanahdesa").style["mix-blend-mode"] = "normal";
 
-        map.createPane("pane_perairan");
-        map.getPane("pane_perairan").style.zIndex = 400;
-        map.getPane("pane_perairan").style["mix-blend-mode"] = "normal";
+        // Fungsi untuk membuat label dengan ikon
+        var createLayerLabel = (icon, label) =>
+            `<img src="${icon.options.iconUrl}" width="20" height="20"> ${label}`;
 
-        map.createPane("pane_jalan");
-        map.getPane("pane_jalan").style.zIndex = 400;
-        map.getPane("pane_jalan").style["mix-blend-mode"] = "normal";
+        var addGroupedLayerControl = (layers) => {
+            var groupedOverlays = {
+                Kependudukan: {
+                    [createLayerLabel(icons.rumah, "Rumah Penduduk")]: layers.rumah,
+                },
+                "Jaringan Jalan": {
+                    [createLayerLabel(icons.jalan, "Jalan")]: layers.jalan,
+                },
+                "Jaringan Air": {
+                    [createLayerLabel(icons.sungai, "Sungai")]: layers.sungai,
+                    [createLayerLabel(icons.drainase, "Irigasi")]: layers.irigasi,
+                },
+                "Tanah Desa": {
+                    [createLayerLabel(icons.batastanahdesa, "Tanah Desa")]: layers.tanahdesa,
+                },
+                "Batas Dukuh": {
+                    [createLayerLabel(icons.batasadmin, "Batas Dukuh")]: layers.batasdukuh,
+                },
+            };
 
-        map.createPane("pane_fasum");
-        map.getPane("pane_fasum").style.zIndex = 400;
-        map.getPane("pane_fasum").style["mix-blend-mode"] = "normal";
-
-        var overlayMaps = {
-            "Fasilitas Umum": fasum,
-            "Jaringan Jalan": jalan,
-            "Jaringan Air": perairan,
-            "Tanah Desa": TanahDesa,
-            "Batas Dukuh": BatasDukuh,
+            L.control
+                .groupedLayers(basemapLayers, groupedOverlays, {
+                    collapsed: true
+                })
+                .addTo(map);
         };
 
-        L.control
-            .layers(basemapLayers, overlayMaps, {
-                collapsed: true,
-            })
-            .addTo(map);
+        var layers = {
+            rumah: rumah,
+            jalan: jalan,
+            sungai: sungaiLayer,
+            irigasi: irigasiLayer,
+            tanahdesa: TanahDesa,
+            batasdukuh: BatasDukuh,
+        };
 
-        /*cari layer*/
-        var searchControl = new L.Control.Search({
+        addGroupedLayerControl(layers);
+
+        var controlSearch = new L.Control.Search({
             position: "topleft",
-            textPlaceholder: "Cari Padukuhan...",
-            layer: BatasDukuh, //Nama variabel layer
-            propertyName: "DUKUH", //Field untuk pencarian
-            marker: false,
-            moveToLocation: function(latlng, title, map) {
-                var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-                map.setView(latlng, zoom);
+            textPlaceholder: "Cari Rumah...",
+            layer: rumah,
+            initial: false,
+            zoom: 20,
+            marker: {
+                circle: {
+                    radius: 10, // Sesuaikan ukuran radius lingkaran
+                    color: "red", // Warna lingkaran
+                    opacity: 0.5, // Opasitas lingkaran
+                },
             },
+            propertyName: "Nama_Kepal", // Pastikan nama field yang sesuai untuk pencarian
         });
-        searchControl
-            .on("search:locationfound", function(e) {
-                e.layer.setStyle({
-                    fillColor: "#ffff00",
-                    color: "#0000ff",
-                });
-            })
-            .on("search:collapsed", function(e) {
-                featuresLayer.eachLayer(function(layer) {
-                    featuresLayer.resetStyle(layer);
-                });
-            });
-        map.addControl(searchControl);
+
+        map.addControl(controlSearch);
 
         L.control
             .browserPrint({
@@ -544,7 +526,7 @@
             opacity: 0,
             fillOpacity: 0,
         };
-        var miniMap = new L.Control.MiniMap(basemapLayersCopy.layer_GoogleMaps, {
+        var miniMap = new L.Control.MiniMap(basemapLayersCopy.OSM, {
             width: 100,
             height: 100,
             toggleDisplay: true,

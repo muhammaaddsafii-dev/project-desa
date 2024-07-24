@@ -38,6 +38,30 @@ class LandingPageController extends Controller
         ]);
     }
 
+    public function petakependudukan()
+    {
+        $assets = Asset::all();
+        return view('application.maps.peta-kependudukan', [
+            'assets' => $assets,
+        ]);   
+    }
+
+    public function petakondisijalan()
+    {
+        $assets = Asset::all();
+        return view('application.maps.peta-kondisi-jalan', [
+            'assets' => $assets,
+        ]); 
+    }
+
+    public function petasaranaprasarana()
+    {
+        $assets = Asset::all();
+        return view('application.maps.peta-sarana-prasarana', [
+            'assets' => $assets,
+        ]);   
+    }
+
     public function news()
     {
         $news = News::all();
