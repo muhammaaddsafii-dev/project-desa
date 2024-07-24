@@ -245,57 +245,46 @@ class ResidentResource extends Resource
                     ->label('Kemampuan Membeli Pakaian')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('status_tempat_tinggal')
                     ->label('Status Tempat Tinggal')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('luas_lantai')
                     ->label('Luas Lantai')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('jenis_dinding')
                     ->label('Jenis Dinding')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('fasilitas_mck')
                     ->label('Fasilitas MCK')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('fasilitas_ipal')
                     ->label('Fasilitas IPAL')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('fasilitas_energi_penerangan')
                     ->label('Fasilitas Energi Penerangan')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('fasilitas_air_minum')
                     ->label('Fasilitas Air Minum')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('bahan_bakar')
                     ->label('Bahan Bakar')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('kartu_jaminan_kesehatan')
                     ->label('Kartu Jaminan Kesehatan')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('kemampuan_berobat')
                     ->label('Kemampuan Berobat')
                     ->sortable()
                     ->searchable(),
-
                 Tables\Columns\TextColumn::make('akses_informasi')
                     ->label('Akses Informasi')
                     ->sortable()
