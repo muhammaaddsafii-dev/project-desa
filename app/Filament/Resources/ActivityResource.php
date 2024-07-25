@@ -57,8 +57,8 @@ class ActivityResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')->searchable()->words(3),
                 Tables\Columns\TextColumn::make('description')->searchable()->words(3),
-                Tables\Columns\ImageColumn::make('image')
-                    ->url(fn ($record) => 'https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/' . $record->image),
+                // Tables\Columns\ImageColumn::make('image')
+                //     ->url(fn ($record) => 'https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/' . $record->image),
                 Tables\Columns\TextColumn::make('date'),
             ])
             ->filters([

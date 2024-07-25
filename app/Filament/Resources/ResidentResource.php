@@ -201,7 +201,7 @@ class ResidentResource extends Resource
                     ->label('Status Perkawinan')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('jenis_kelamin0')
+                Tables\Columns\TextColumn::make('jenis_kelamin')
                     ->label('Jenis Kelamin')
                     ->sortable()
                     ->searchable(),
