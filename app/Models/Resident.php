@@ -9,51 +9,37 @@ class Resident extends Model
 {
     use HasFactory;
 
+    protected $table = 'penduduk';
+
     protected $fillable = [
-        'nama',
-        'kks_id',
-        'rts_id',
-        'rws_id',
-        'nik',
-        'status_hubungan',
-        'status_perkawinan',
-        'jenis_kelamin',
-        'pendidikan',
-        'pekerjaan',
-        'penghasilan_per_bulan',
-        'tanggal_lahir',
-        'whatsapp',
-        'kepemilikan_harta_lancar',
-        'kemampuan_konsumsi',
-        'rasio_pengeluaran_pangan',
-        'jenis_konsumsi',
-        'kemampuan_membeli_pakaian',
-        'status_tempat_tinggal',
-        'luas_lantai',
-        'jenis_lantai',
-        'jenis_dinding',
-        'fasilitas_mck',
-        'fasilitas_ipal',
-        'fasilitas_energi_penerangan',
-        'fasilitas_air_minum',
-        'bahan_bakar',
-        'kartu_jaminan_kesehatan',
-        'kemampuan_berobat',
-        'akses_informasi',
+        'Nomor',
+        'Foto',
+        'Nama_Kepal',
+        'Jenis_Kela',
+        'Status_Tem',
+        'Luas_Lanta',
+        'Jenis_Lant',
+        'Jenis_Dind',
+        'Fasilitas_',
+        'Fasilitas1',
+        'Fasilita_1',
+        'Bahan_Baka',
+        'Kartu_Jami',
+        'Akses_Info',
+        'RT',
+        'RW',
+        'Keterangan',
+        'Profesi_KK',
+        'NIK',
+        'DATA',
+        'Jumlah_KK',
+        'SUMBER',
+        'latitude',
+        'longitude',
     ];
 
-    public function kks()
-    {
-        return $this->belongsTo(Kk::class);
-    }
-    
-    public function rts()
-    {
-        return $this->belongsTo(Rt::class);
-    }
-    
-    public function rws()
-    {
-        return $this->belongsTo(Rw::class);
-    }
+    protected $casts = [
+        'latitude' => 'float',
+        'longitude' => 'float',
+    ];
 }

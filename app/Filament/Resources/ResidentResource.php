@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ResidentResource extends Resource
 {
@@ -36,136 +38,38 @@ class ResidentResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('kks_id')
-                    ->relationship('kks', 'nama_kk')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('nomor_kk')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('nama_kk')
-                            ->required()
-                            ->maxLength(255),
-                    ])
-                    ->required(),
-                Forms\Components\Select::make('rts_id')
-                    ->relationship('rts', 'nama_rt')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('nomor_rt')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('nama_rt')
-                            ->required()
-                            ->maxLength(255),
-                    ])
-                    ->required(),
-                Forms\Components\Select::make('rws_id')
-                    ->relationship('rws', 'nama_rw')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('nomor_rw')
-                            ->required()
-                            ->maxLength(255),
-                        Forms\Components\TextInput::make('nama_rw')
-                            ->required()
-                            ->maxLength(255),
-                    ])
-                    ->required(),
-                Forms\Components\TextInput::make('nik')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('status_hubungan')
+                Forms\Components\TextInput::make('Nomor')->required(),
+                Forms\Components\FileUpload::make('Foto')
+                    ->image()
+                    ->directory('resident-photos')
+                    ->visibility('public'),
+                Forms\Components\TextInput::make('Nama_Kepal')->label('Nama Kepala Keluarga'),
+                Forms\Components\Select::make('Jenis_Kela')
+                    ->label('Jenis Kelamin')
                     ->options([
-                        'Suami' => 'Suami',
-                        'Istri' => 'Istri',
-                        'Anak' => 'Anak',
-                    ])
-                    ->required(),
-                Forms\Components\Select::make('status_perkawinan')
-                    ->options([
-                        'Belum Menikah' => 'Belum Menikah',
-                        'Menikah' => 'Menikah',
-                        'Cerai' => 'Cerai',
-                    ])
-                    ->required(),
-                Forms\Components\Select::make('jenis_kelamin')
-                    ->options([
-                        'Laki-laki' => 'Laki-laki',
-                        'Perempuan' => 'Perempuan',
-                    ])
-                    ->required(),
-                Forms\Components\TextInput::make('pendidikan')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('pekerjaan')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('penghasilan_per_bulan')
-                    ->numeric()
-                    ->nullable(),
-                Forms\Components\DatePicker::make('tanggal_lahir')
-                    ->required(),
-                Forms\Components\TextInput::make('whatsapp')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('kepemilikan_harta_lancar')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('kemampuan_konsumsi')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('rasio_pengeluaran_pangan')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('jenis_konsumsi')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('kemampuan_membeli_pakaian')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('status_tempat_tinggal')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('luas_lantai')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('jenis_lantai')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('jenis_dinding')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('fasilitas_mck')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('fasilitas_ipal')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('fasilitas_energi_penerangan')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('fasilitas_air_minum')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('bahan_bakar')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('kartu_jaminan_kesehatan')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('kemampuan_berobat')
-                    ->maxLength(255)
-                    ->nullable(),
-                Forms\Components\TextInput::make('akses_informasi')
-                    ->maxLength(255)
-                    ->nullable(),
+                        'L' => 'Laki-laki',
+                        'P' => 'Perempuan',
+                    ]),
+                Forms\Components\TextInput::make('Status_Tem')->label('Status Tempat Tinggal'),
+                Forms\Components\TextInput::make('Luas_Lanta')->label('Luas Lantai'),
+                Forms\Components\TextInput::make('Jenis_Lant')->label('Jenis Lantai'),
+                Forms\Components\TextInput::make('Jenis_Dind')->label('Jenis Dinding'),
+                Forms\Components\TextInput::make('Fasilitas_')->label('Fasilitas 1'),
+                Forms\Components\TextInput::make('Fasilitas1')->label('Fasilitas 2'),
+                Forms\Components\TextInput::make('Fasilita_1')->label('Fasilitas 3'),
+                Forms\Components\TextInput::make('Bahan_Baka')->label('Bahan Bakar'),
+                Forms\Components\TextInput::make('Kartu_Jami')->label('Kartu Jaminan'),
+                Forms\Components\TextInput::make('Akses_Info')->label('Akses Informasi'),
+                Forms\Components\TextInput::make('RT'),
+                Forms\Components\TextInput::make('RW'),
+                Forms\Components\Textarea::make('Keterangan'),
+                Forms\Components\TextInput::make('Profesi_KK')->label('Profesi Kepala Keluarga'),
+                Forms\Components\TextInput::make('NIK'),
+                Forms\Components\TextInput::make('DATA'),
+                Forms\Components\TextInput::make('Jumlah_KK')->label('Jumlah KK'),
+                Forms\Components\TextInput::make('SUMBER')->label('Sumber'),
+                Forms\Components\TextInput::make('latitude')->numeric(),
+                Forms\Components\TextInput::make('longitude')->numeric(),
             ]);
     }
 
@@ -173,122 +77,12 @@ class ResidentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')
-                    ->label('Nama')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kks.nama_kk')
-                    ->label('Nama KK')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('rts.nama_rt')
-                    ->label('RT')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('rws.nama_rw')
-                    ->label('RW')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('nik')
-                    ->label('NIK')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status_hubungan')
-                    ->label('Status Hubungan')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status_perkawinan')
-                    ->label('Status Perkawinan')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jenis_kelamin')
-                    ->label('Jenis Kelamin')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('pendidikan')
-                    ->label('Pendidikan')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('pekerjaan')
-                    ->label('Pekerjaan')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('penghasilan_per_bulan')
-                    ->label('Penghasilan Per Bulan')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tanggal_lahir')
-                    ->label('Tanggal Lahir')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('whatsapp')
-                    ->label('WhatsApp')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kepemilikan_harta_lancar')
-                    ->label('Kepemilikan Harta Lancar')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kemampuan_konsumsi')
-                    ->label('Kemampuan Konsumsi')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('rasio_pengeluaran_pangan')
-                    ->label('Rasio Pengeluaran Pangan')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jenis_konsumsi')
-                    ->label('Jenis Konsumsi')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kemampuan_membeli_pakaian')
-                    ->label('Kemampuan Membeli Pakaian')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status_tempat_tinggal')
-                    ->label('Status Tempat Tinggal')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('luas_lantai')
-                    ->label('Luas Lantai')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jenis_dinding')
-                    ->label('Jenis Dinding')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('fasilitas_mck')
-                    ->label('Fasilitas MCK')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('fasilitas_ipal')
-                    ->label('Fasilitas IPAL')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('fasilitas_energi_penerangan')
-                    ->label('Fasilitas Energi Penerangan')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('fasilitas_air_minum')
-                    ->label('Fasilitas Air Minum')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('bahan_bakar')
-                    ->label('Bahan Bakar')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kartu_jaminan_kesehatan')
-                    ->label('Kartu Jaminan Kesehatan')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kemampuan_berobat')
-                    ->label('Kemampuan Berobat')
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('akses_informasi')
-                    ->label('Akses Informasi')
-                    ->sortable()
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('Nomor'),
+                Tables\Columns\ImageColumn::make('Foto'),
+                Tables\Columns\TextColumn::make('Nama_Kepal')->label('Nama Kepala Keluarga'),
+                Tables\Columns\TextColumn::make('Jenis_Kela')->label('Jenis Kelamin'),
+                Tables\Columns\TextColumn::make('RT'),
+                Tables\Columns\TextColumn::make('RW'),
 
             ])
             ->filters([
@@ -296,6 +90,7 @@ class ResidentResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -318,5 +113,51 @@ class ResidentResource extends Resource
             'create' => Pages\CreateResident::route('/create'),
             'edit' => Pages\EditResident::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
+    {
+        return parent::getEloquentQuery()->withoutGlobalScopes();
+    }
+
+    public static function afterCreate(Resident $record): void
+    {
+        static::updateGeoJson();
+    }
+
+    public static function afterUpdate(Resident $record): void
+    {
+        static::updateGeoJson();
+    }
+
+    public static function afterDelete(Resident $record): void
+    {
+        static::updateGeoJson();
+    }
+
+    protected static function updateGeoJson(): void
+    {
+        $residents = Resident::all();
+
+        $features = $residents->map(function ($resident) {
+            return [
+                'type' => 'Feature',
+                'properties' => $resident->toArray(),
+                'geometry' => [
+                    'type' => 'Point',
+                    'coordinates' => [$resident->longitude, $resident->latitude, 0.0],
+                ],
+            ];
+        });
+
+        $geoJson = [
+            'type' => 'FeatureCollection',
+            'name' => 'penduduk.geojson',
+            'features' => $features,
+        ];
+
+        $json = json_encode($geoJson, JSON_PRETTY_PRINT);
+
+        Storage::disk('s3')->put('desa-template/geojson/penduduk.geojson', $json);
     }
 }
