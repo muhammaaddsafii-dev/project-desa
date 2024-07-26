@@ -9,8 +9,10 @@ class Guide extends Model
 {
     use HasFactory;
 
+    protected $table = 'panduan';
+
     protected $fillable = [
         'title',
-        'content',
+        'pdf_file',
     ];
 }
