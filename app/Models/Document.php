@@ -13,6 +13,7 @@ class Document extends Model
     protected $fillable = [
         'user_id',
         'type',
+        'nomor_surat',
         'status',
         'description',
         'file',

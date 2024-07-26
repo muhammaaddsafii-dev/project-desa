@@ -16,6 +16,7 @@ use App\Http\Controllers\DocumentController;
 */
 
 Route::get('documents/{document}/download', [DocumentController::class, 'generateDocument'])->name('documents.download');
+Route::post('/upload-and-process-document', [DocumentController::class, 'uploadAndProcessDocument'])->name('upload-and-process-document');
 
 
 Route::get('/', [LandingPageController::class, 'index']);

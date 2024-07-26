@@ -112,6 +112,9 @@ class DocumentResource extends Resource
                         'Surat Keterangan Slip Gaji' => 'Surat Keterangan Slip Gaji',
                         'Surat Keterangan Tidak Mampu' => 'Surat Keterangan Tidak Mampu',
                     ])->required(),
+                Forms\Components\TextInput::make('nomor_surat')
+                    ->label('Nomor Surat')
+                    ->visible(fn () => auth()->user()->hasRole('super_admin')),
                 Forms\Components\Select::make('options')
                     ->options([
                         'Soft file' => 'Soft file',
@@ -200,7 +203,7 @@ class DocumentResource extends Resource
                     ->label('Download File')
                     ->url(function ($record) {
                         if ($record->file) {
-                            return Storage::disk('s3')->url($record->file);
+                            return route('documents.download', $record);
                         } else {
                             return '#';
                         }
