@@ -23,9 +23,11 @@
                 </p>
                 <div class="d-flex">
                     <a href="#features" class="btn-get-started scrollto">Layanan</a>
-                    <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
+                    @foreach ($assets as $asset)
+                    <a href="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{$asset->header_video}}"
                         class="glightbox btn-watch-video d-flex align-items-center"><i
                             class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                    @endforeach
                 </div>
             </div>
         </section>

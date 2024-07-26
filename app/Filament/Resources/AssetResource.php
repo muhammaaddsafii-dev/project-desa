@@ -37,8 +37,18 @@ class AssetResource extends Resource
                 RichEditor::make('misi'),
                 RichEditor::make('lokasi_dan_geografi'),
                 RichEditor::make('potensi_dan_sumberdaya'),
-                FileUpload::make('header_image'),
-                Forms\Components\TextInput::make('header_video')->maxLength(255),
+                FileUpload::make('header_image')
+                    ->label('Image Cover')
+                    ->disk('s3')
+                    ->directory('desa-template/assets')
+                    ->visibility('private')
+                    ->preserveFilenames(),
+                FileUpload::make('header_video')
+                    ->label('Video')
+                    ->disk('s3')
+                    ->directory('desa-template/assets')
+                    ->visibility('private')
+                    ->preserveFilenames(),
             ]);
     }
 
