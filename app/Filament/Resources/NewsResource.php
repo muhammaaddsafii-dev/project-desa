@@ -59,10 +59,21 @@ class NewsResource extends Resource
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('published_at')->required()->maxDate(now()),
                 FileUpload::make('image')
+                    ->label('Image Cover')
                     ->disk('s3')
                     ->directory('desa-template/news')
                     ->visibility('private')
                     ->preserveFilenames(),
+                Forms\Components\Repeater::make('images')
+                    ->relationship()
+                    ->schema([
+                        Forms\Components\FileUpload::make('image_path')
+                            ->disk('s3')
+                            ->directory('desa-template/news')
+                            ->preserveFilenames()
+                            ->maxFiles(5),
+                    ])
+                    ->columns(1),
                 RichEditor::make('content')
                     ->maxLength(65535)
                     ->columnSpan('full'),

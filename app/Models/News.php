@@ -17,4 +17,9 @@ class News extends Model
         'image',
         'published_at',
     ];
+
+    public function images()
+    {
+        return $this->hasMany(NewsImage::class);
+    }
 }

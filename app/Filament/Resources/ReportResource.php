@@ -73,6 +73,16 @@ class ReportResource extends Resource
                         'Selesai' => 'heroicon-o-check-circle'
                     ])
                     ->inline(),
+                Forms\Components\Repeater::make('images')
+                    ->relationship()
+                    ->schema([
+                        Forms\Components\FileUpload::make('image_path')
+                            ->disk('s3')
+                            ->directory('desa-template/laporan')
+                            ->preserveFilenames()
+                            ->maxFiles(5),
+                    ])
+                    ->columns(1),
             ]);
     }
 

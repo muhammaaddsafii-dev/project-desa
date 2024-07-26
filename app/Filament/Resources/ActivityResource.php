@@ -17,6 +17,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
 
 class ActivityResource extends Resource
@@ -51,13 +52,24 @@ class ActivityResource extends Resource
                     ])
                     ->required(),
                 FileUpload::make('image')
+                    ->label('Image Cover')
                     ->disk('s3')
                     ->directory('desa-template/kegiatan')
                     ->visibility('private')
                     ->preserveFilenames(),
-                TextInput::make('description')
-                    ->required()
-                    ->maxLength(255),
+                RichEditor::make('description')
+                    ->maxLength(65535)
+                    ->columnSpan('full'),
+                Forms\Components\Repeater::make('images')
+                    ->relationship()
+                    ->schema([
+                        Forms\Components\FileUpload::make('image_path')
+                            ->disk('s3')
+                            ->directory('desa-template/kegiatan')
+                            ->preserveFilenames()
+                            ->maxFiles(5),
+                    ])
+                    ->columns(1),
                 Forms\Components\DatePicker::make('date')->required()->maxDate(now()),
             ]);
     }

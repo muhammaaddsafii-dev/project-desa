@@ -5,18 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Announcement extends Model
+class NewsImage extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'content',
-        'published_at',
+        'news_id',
+        'image_path',
     ];
 
-    public function images()
+    public function product()
     {
-        return $this->hasMany(AnnouncementImage::class);
+        return $this->belongsTo(News::class);
     }
 }

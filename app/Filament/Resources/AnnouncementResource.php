@@ -37,11 +37,21 @@ class AnnouncementResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')->required()->maxLength(255), 
+                Forms\Components\TextInput::make('title')->required()->maxLength(255),
                 Forms\Components\DatePicker::make('published_at')->required()->maxDate(now()),
                 RichEditor::make('content')
                     ->maxLength(65535)
                     ->columnSpan('full'),
+                Forms\Components\Repeater::make('images')
+                    ->relationship()
+                    ->schema([
+                        Forms\Components\FileUpload::make('image_path')
+                            ->disk('s3')
+                            ->directory('desa-template/pengumuman')
+                            ->preserveFilenames()
+                            ->maxFiles(5),
+                    ])
+                    ->columns(1),
             ]);
     }
 
