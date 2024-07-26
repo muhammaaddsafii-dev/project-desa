@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\RichEditor;
 
 class OrganizerResource extends Resource
 {
@@ -51,6 +52,9 @@ class OrganizerResource extends Resource
                     ->directory('desa-template/organisasi')
                     ->visibility('private')
                     ->preserveFilenames(),
+                RichEditor::make('quote')
+                    ->maxLength(65535)
+                    ->columnSpan('full'),
             ]);
     }
 

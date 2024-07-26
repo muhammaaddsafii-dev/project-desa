@@ -13,7 +13,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 
 class ActivityResource extends Resource
 {
@@ -38,13 +42,20 @@ class ActivityResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')->required()->maxLength(255),
+                TextInput::make('title')->required()->maxLength(255),
+                Select::make('category')
+                    ->label('Category')
+                    ->options([
+                        'Internal' => 'Internal',
+                        'Eksternal' => 'Eksternal',
+                    ])
+                    ->required(),
                 FileUpload::make('image')
                     ->disk('s3')
                     ->directory('desa-template/kegiatan')
                     ->visibility('private')
                     ->preserveFilenames(),
-                Forms\Components\TextInput::make('description')
+                TextInput::make('description')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('date')->required()->maxDate(now()),
@@ -55,14 +66,19 @@ class ActivityResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')->searchable()->words(3),
-                Tables\Columns\TextColumn::make('description')->searchable()->words(3),
-                // Tables\Columns\ImageColumn::make('image')
+                TextColumn::make('title')->searchable()->words(3),
+                TextColumn::make('category')->searchable()->words(3),
+                TextColumn::make('description')->searchable()->words(3),
+                // ImageColumn::make('image')
                 //     ->url(fn ($record) => 'https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/' . $record->image),
-                Tables\Columns\TextColumn::make('date'),
+                TextColumn::make('date'),
             ])
             ->filters([
-                //
+                SelectFilter::make('category')
+                    ->options([
+                        'Internal' => 'Internal',
+                        'Eksternal' => 'Eksternal',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

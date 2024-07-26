@@ -14,5 +14,6 @@ class Activity extends Model
         'description',
         'image',
         'date',
+        'category',
     ];
 }
