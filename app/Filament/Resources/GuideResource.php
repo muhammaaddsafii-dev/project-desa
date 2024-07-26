@@ -16,6 +16,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\HtmlString;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Actions\Action;
 
 class GuideResource extends Resource
 {
@@ -56,26 +58,17 @@ class GuideResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')->sortable()->searchable(),
-                TextColumn::make('pdf_file')
-                    ->label('PDF URL')
-                    ->formatStateUsing(function ($record) {
-                        $baseUrl = 'https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com';
-                        $filePath = $record->pdf_file;
-                        $fullUrl = $baseUrl . '/' . $filePath;
-
-                        return new HtmlString(
-                            '<div>' .
-                                '<span style="display: block; color: #D97706;">' . basename($filePath) . '</span>' .
-                                '<a class="text-center" style="color: #D97706; display: block;" href="' . $fullUrl . '" target="_blank">View PDF</a>' .
-                                '</div>'
-                        );
-                    })
-                    ->html(),
             ])
             ->filters([
                 //
             ])
             ->actions([
+                Action::make('view')
+                    ->label('Lihat')
+                    ->icon('heroicon-o-eye') // Anda bisa mengganti ikon sesuai kebutuhan
+                    ->color('primary') // Mengatur warna ikon sesuai tema Anda
+                    ->url(fn ($record) => 'https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/' . $record->pdf_file)
+                    ->openUrlInNewTab(), // Membuka URL di tab baru
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
