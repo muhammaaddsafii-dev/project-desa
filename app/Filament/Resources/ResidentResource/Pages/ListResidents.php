@@ -16,4 +16,12 @@ class ListResidents extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            ResidentResource\Widgets\JumlahPendudukRT::class,
+            ResidentResource\Widgets\KartuJaminan::class,
+        ];
+    }
 }

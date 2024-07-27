@@ -160,4 +160,12 @@ class ResidentResource extends Resource
 
         Storage::disk('s3')->put('desa-template/geojson/penduduk.geojson', $json);
     }
+
+    public static function getWidgets(): array
+    {
+        return [
+            ResidentResource\Widgets\JumlahPendudukRT::class,
+            ResidentResource\Widgets\KartuJaminan::class,
+        ];
+    }
 }
