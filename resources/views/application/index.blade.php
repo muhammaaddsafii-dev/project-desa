@@ -7,10 +7,10 @@
             <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
                 data-aos="zoom-out">
                 <!-- <img
-                                                                                    src="{{ 'assets/img/hero-img.svg' }}"
-                                                                                    class="img-fluid animated"
-                                                                                    alt=""
-                                                                                  /> -->
+                                                                                                src="{{ 'assets/img/hero-img.svg' }}"
+                                                                                                class="img-fluid animated"
+                                                                                                alt=""
+                                                                                              /> -->
                 <h1 style="color: black">
                     <b>Selamat Datang di</b><span>
                         @foreach ($assets as $asset)
@@ -187,14 +187,14 @@
                     </div>
 
                     <!-- <div class="col-lg-5 order-1 order-lg-2">
-                                      <img
-                                        src="assets/img/faq.jpg"
-                                        class="img-fluid"
-                                        alt=""
-                                        data-aos="zoom-in"
-                                        data-aos-delay="100"
-                                      />
-                                    </div> -->
+                                                  <img
+                                                    src="assets/img/faq.jpg"
+                                                    class="img-fluid"
+                                                    alt=""
+                                                    data-aos="zoom-in"
+                                                    data-aos-delay="100"
+                                                  />
+                                                </div> -->
                 </div>
             </div>
         </section>
@@ -214,74 +214,75 @@
                 <p>Informasi terkait Desa Geocircle beserta visi dan misi nya</p>
             </div>
             <!-- End Section Title -->
-            @foreach($assets as $asset)
-            <div class="container" data-aos="fade-up">
-                <div class="row g-4 g-lg-5" data-aos="fade-up" data-aos-delay="200">
-                    <div class="col-lg-5">
-                        <div class="about-img">
-                            <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{$asset->header_image}}" class="img-fluid" alt="" />
+            @foreach ($assets as $asset)
+                <div class="container" data-aos="fade-up">
+                    <div class="row g-4 g-lg-5" data-aos="fade-up" data-aos-delay="200">
+                        <div class="col-lg-5">
+                            <div class="about-img">
+                                <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $asset->header_image }}"
+                                    class="img-fluid" alt="" />
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-7">
-                        <!-- <h3 class="pt-0 pt-lg-5">
-                                                                                        Neque officiis dolore maiores et exercitationem quae est seda
-                                                                                        lidera pat claero
-                                                                                      </h3> -->
+                        <div class="col-lg-7">
+                            <!-- <h3 class="pt-0 pt-lg-5">
+                                                                                                    Neque officiis dolore maiores et exercitationem quae est seda
+                                                                                                    lidera pat claero
+                                                                                                  </h3> -->
 
-                        <!-- Tabs -->
-                        <ul class="nav nav-pills mb-3">
-                            <li>
-                                <a class="nav-link active" data-bs-toggle="pill" href="#TentangDesa">Tentang Desa</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" data-bs-toggle="pill" href="#VisiMisi">Visi & Misi</a>
-                            </li>
-                        </ul>
-                        <!-- End Tabs -->
+                            <!-- Tabs -->
+                            <ul class="nav nav-pills mb-3">
+                                <li>
+                                    <a class="nav-link active" data-bs-toggle="pill" href="#TentangDesa">Tentang Desa</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link" data-bs-toggle="pill" href="#VisiMisi">Visi & Misi</a>
+                                </li>
+                            </ul>
+                            <!-- End Tabs -->
 
-                        <!-- Tab Content -->
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="TentangDesa">
-                                <div class="d-flex align-items-center mt-4">
-                                    <h4>Lokasi dan Geografi:</h4>
+                            <!-- Tab Content -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="TentangDesa">
+                                    <div class="d-flex align-items-center mt-4">
+                                        <h4>Lokasi dan Geografi:</h4>
+                                    </div>
+                                    <p style="text-align: justify">
+                                        {!! $asset->lokasi_dan_geografi !!}
+                                    </p>
+                                    <p style="text-align: justify">
+                                        {!! $asset->penduduk_dan_demografi !!}
+                                    </p>
+
+                                    <div class="d-flex align-items-center mt-4">
+                                        <h4>Potensi dan Sumber Daya:</h4>
+                                    </div>
+                                    <p style="text-align: justify">
+                                        {!! $asset->potensi_dan_sumberdaya !!}
+                                    </p>
                                 </div>
-                                <p style="text-align: justify">
-                                    {!! $asset->lokasi_dan_geografi !!}
-                                </p>
-                                <p style="text-align: justify">
-                                    {!! $asset->penduduk_dan_demografi !!}
-                                </p>
+                                <!-- End Tab 1 Content -->
 
-                                <div class="d-flex align-items-center mt-4">
-                                    <h4>Potensi dan Sumber Daya:</h4>
+                                <div class="tab-pane fade" id="VisiMisi">
+                                    <div class="d-flex align-items-center mt-4">
+                                        <h4>Visi</h4>
+                                    </div>
+                                    <p>
+                                        {!! $asset->visi !!}
+                                    </p>
+
+                                    <div class="d-flex align-items-center mt-4">
+                                        <h4>Misi</h4>
+                                    </div>
+                                    <p>
+                                        {!! $asset->misi !!}
+                                    </p>
                                 </div>
-                                <p style="text-align: justify">
-                                    {!! $asset->potensi_dan_sumberdaya !!}
-                                </p>
+                                <!-- End Tab 2 Content -->
                             </div>
-                            <!-- End Tab 1 Content -->
-
-                            <div class="tab-pane fade" id="VisiMisi">
-                                <div class="d-flex align-items-center mt-4">
-                                    <h4>Visi</h4>
-                                </div>
-                                <p>
-                                    {!! $asset->visi !!}
-                                </p>
-
-                                <div class="d-flex align-items-center mt-4">
-                                    <h4>Misi</h4>
-                                </div>
-                                <p>
-                                    {!! $asset->misi !!}
-                                </p>
-                            </div>
-                            <!-- End Tab 2 Content -->
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </section>
         <!-- /About Section -->
@@ -368,11 +369,11 @@
 
                                 <div class="container">
                                     <div class="row gy-4">
-                                        @foreach ($news as $news)
+                                        @foreach ($news as $newsItem)
                                             <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                                                 <article>
                                                     <div class="post-img">
-                                                        <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $news->image }}"
+                                                        <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $newsItem->image }}"
                                                             alt="" class="img-fluid" />
                                                     </div>
 
@@ -380,82 +381,32 @@
 
                                                     <h2 class="title">
                                                         <a
-                                                            href="{{ route('news.details', ['slug' => $news->slug]) }}">{{ $news->title }}</a>
+                                                            href="{{ route('news.details', ['slug' => $newsItem->slug]) }}">{{ $newsItem->title }}</a>
                                                     </h2>
 
                                                     <div class="d-flex align-items-center">
-                                                        <img src="{{ 'assets/img/blog/blog-author.jpg' }}" alt=""
+                                                        <img src="{{ asset('assets/img/blog/blog-author.jpg') }}"
+                                                            alt=""
                                                             class="img-fluid post-author-img flex-shrink-0" />
                                                         <div class="post-meta">
-                                                            <p class="post-author">{{ $news->author->name }}</p>
+                                                            <p class="post-author">{{ $newsItem->author->name }}</p>
                                                             <p class="post-date">
-                                                                <time datetime="2022-01-01">{{ $news->datetime }}</time>
+                                                                <time
+                                                                    datetime="{{ $newsItem->created_at->format('Y-m-d') }}">{{ $newsItem->created_at->format('M d, Y') }}</time>
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </article>
                                             </div>
-                                            <!-- End post list item -->
                                         @endforeach
-
-                                        {{-- <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                                            <article>
-                                                <div class="post-img">
-                                                    <img src="{{('assets/img/blog/blog-2.jpg')}}" alt=""
-                                                        class="img-fluid" />
-                                                </div>
-
-                                                <p class="post-category">Sports</p>
-
-                                                <h2 class="title">
-                                                    <a href="blog-details.html">Nisi magni odit consequatur autem nulla
-                                                        dolorem</a>
-                                                </h2>
-
-                                                <div class="d-flex align-items-center">
-                                                    <img src="{{('assets/img/blog/blog-author-2.jpg')}}" alt=""
-                                                        class="img-fluid post-author-img flex-shrink-0" />
-                                                    <div class="post-meta">
-                                                        <p class="post-author">Allisa Mayer</p>
-                                                        <p class="post-date">
-                                                            <time datetime="2022-01-01">Jun 5, 2022</time>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <!-- End post list item -->
-
-                                        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                                            <article>
-                                                <div class="post-img">
-                                                    <img src="{{('assets/img/blog/blog-3.jpg')}}" alt=""
-                                                        class="img-fluid" />
-                                                </div>
-
-                                                <p class="post-category">Entertainment</p>
-
-                                                <h2 class="title">
-                                                    <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo
-                                                        quia
-                                                        et soluta</a>
-                                                </h2>
-
-                                                <div class="d-flex align-items-center">
-                                                    <img src="{{('assets/img/blog/blog-author-3.jpg')}}" alt=""
-                                                        class="img-fluid post-author-img flex-shrink-0" />
-                                                    <div class="post-meta">
-                                                        <p class="post-author">Mark Dower</p>
-                                                        <p class="post-date">
-                                                            <time datetime="2022-01-01">Jun 22, 2022</time>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <!-- End post list item --> --}}
                                     </div>
-                                    <!-- End recent posts list -->
+
+                                    <!-- Pagination -->
+                                    <div class="row mt-4">
+                                        <div class="col-12 d-flex justify-content-center">
+                                            {{ $news->links() }}
+                                        </div>
+                                    </div>
                                 </div>
                             </section>
                             <a href="" class="read-more align-self-end"
@@ -507,6 +458,11 @@
                         <!-- End Portfolio Item -->
                     </div>
                     <!-- End Portfolio Container -->
+                    <div class="row mt-4">
+                        <div class="col-12 d-flex justify-content-center">
+                            {{ $activities->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

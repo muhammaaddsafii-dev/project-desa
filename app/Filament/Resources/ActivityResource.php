@@ -52,6 +52,7 @@ class ActivityResource extends Resource
                     ])
                     ->required(),
                 FileUpload::make('image')
+                    ->required()
                     ->label('Image Cover')
                     ->disk('s3')
                     ->directory('desa-template/kegiatan')
@@ -59,8 +60,10 @@ class ActivityResource extends Resource
                     ->preserveFilenames(),
                 RichEditor::make('description')
                     ->maxLength(65535)
-                    ->columnSpan('full'),
+                    ->columnSpan('full')
+                    ->required(),
                 Forms\Components\Repeater::make('images')
+                    ->required()
                     ->relationship()
                     ->schema([
                         Forms\Components\FileUpload::make('image_path')

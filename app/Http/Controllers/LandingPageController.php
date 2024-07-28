@@ -17,9 +17,10 @@ class LandingPageController extends Controller
     public function index()
     {
         $announcements = Announcement::with('images')->get();
-        $news = News::with('author')->get();
+        $news = News::with('author')->orderBy('created_at', 'desc')->paginate(1);
         $organizers = Organizer::all();
-        $activities = Activity::all();
+        // $activities = Activity::all();
+        $activities = Activity::orderBy('created_at', 'desc')->paginate(1);
         $assets = Asset::all();
         return view('application.index', [
             'news' => $news,
