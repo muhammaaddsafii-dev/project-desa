@@ -16,8 +16,8 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::all();
-        $news = News::all();
+        $announcements = Announcement::with('images')->get();
+        $news = News::with('author')->get();
         $organizers = Organizer::all();
         $activities = Activity::all();
         $assets = Asset::all();
@@ -43,7 +43,7 @@ class LandingPageController extends Controller
         $assets = Asset::all();
         return view('application.maps.peta-kependudukan', [
             'assets' => $assets,
-        ]);   
+        ]);
     }
 
     public function petakondisijalan()
@@ -51,7 +51,7 @@ class LandingPageController extends Controller
         $assets = Asset::all();
         return view('application.maps.peta-kondisi-jalan', [
             'assets' => $assets,
-        ]); 
+        ]);
     }
 
     public function petasaranaprasarana()
@@ -59,27 +59,40 @@ class LandingPageController extends Controller
         $assets = Asset::all();
         return view('application.maps.peta-sarana-prasarana', [
             'assets' => $assets,
-        ]);   
+        ]);
     }
 
     public function news()
     {
+        $assets = Asset::all();
         $news = News::all();
         return view('application.news', [
             'news' => $news,
+            'assets' => $assets,
         ]);
     }
 
     public function news_details($slug)
     {
-        $news = News::where('slug', $slug)->firstOrFail();
+        $assets = Asset::all();
+        $news = News::with('author')->where('slug', $slug)->firstOrFail();
+        $recentNews = News::where('slug', '!=', $slug)->latest()->take(5)->get();
 
-        return view('application.news-details', compact('news'));
+        return view('application.news-details', [
+            'news' => $news,
+            'assets' => $assets,
+            'recentNews' => $recentNews,
+        ]);
     }
 
-    public function activity()
+    public function activity_details($id)
     {
-        return view('application.activity-details');
+        $assets = Asset::all();
+        $activity = Activity::with('images')->findOrFail($id);
+        return view('application.activity-details', [
+            'activity' => $activity,
+            'assets' => $assets,
+        ]);
     }
 
     /**

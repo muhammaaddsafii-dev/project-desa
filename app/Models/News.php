@@ -22,4 +22,8 @@ class News extends Model
     {
         return $this->hasMany(NewsImage::class);
     }
+
+    public function author(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

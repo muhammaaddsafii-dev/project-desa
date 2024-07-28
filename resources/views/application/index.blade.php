@@ -7,10 +7,10 @@
             <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
                 data-aos="zoom-out">
                 <!-- <img
-                                                        src="{{ 'assets/img/hero-img.svg' }}"
-                                                        class="img-fluid animated"
-                                                        alt=""
-                                                      /> -->
+                                                                    src="{{ 'assets/img/hero-img.svg' }}"
+                                                                    class="img-fluid animated"
+                                                                    alt=""
+                                                                  /> -->
                 <h1 style="color: black">
                     <b>Selamat Datang di</b><span>
                         @foreach ($assets as $asset)
@@ -24,9 +24,9 @@
                 <div class="d-flex">
                     <a href="#features" class="btn-get-started scrollto">Layanan</a>
                     @foreach ($assets as $asset)
-                    <a href="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{$asset->header_video}}"
-                        class="glightbox btn-watch-video d-flex align-items-center"><i
-                            class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                        <a href="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $asset->header_video }}"
+                            class="glightbox btn-watch-video d-flex align-items-center"><i
+                                class="bi bi-play-circle"></i><span>Watch Video</span></a>
                     @endforeach
                 </div>
             </div>
@@ -97,7 +97,7 @@
         </section>
         <!-- /Featured Services Section -->
         <!-- Faq Section -->
-        <section id="faq" class="faq section" style="background-color: #e2fbff">
+        {{-- <section id="faq" class="faq section" style="background-color: #e2fbff">
             <div class="container-fluid">
                 <div class="row gy-4">
                     <div class="col-lg-12 d-flex flex-column justify-content-center order-2 order-lg-1">
@@ -131,18 +131,80 @@
                     </div>
 
                     <!-- <div class="col-lg-5 order-1 order-lg-2">
-                                                    <img
-                                                      src="{{ 'assets/img/faq.jpg' }}"
-                                                      class="img-fluid"
-                                                      alt=""
-                                                      data-aos="zoom-in"
-                                                      data-aos-delay="100"
-                                                    />
-                                                  </div> -->
+                                                                <img
+                                                                  src="{{ 'assets/img/faq.jpg' }}"
+                                                                  class="img-fluid"
+                                                                  alt=""
+                                                                  data-aos="zoom-in"
+                                                                  data-aos-delay="100"
+                                                                />
+                                                              </div> -->
                 </div>
             </div>
         </section>
-        <!-- /Faq Section -->
+        <!-- /Faq Section --> --}}
+        <section id="faq" class="faq section" style="background-color: #e2fbff">
+            <div class="container-fluid">
+                <div class="row gy-4">
+                    <div class="col-lg-12 d-flex flex-column justify-content-center order-2 order-lg-1">
+                        <div class="content px-xl-5" data-aos="fade-up" data-aos-delay="100" style="text-align: center">
+                            <h3 style="color: #df1529">
+                                <b>PENGUMUMAN</b>
+                            </h3>
+                            <p>Informasi terkait segala pengumuman di Desa Geocircle.</p>
+                        </div>
+
+                        <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
+                            @foreach ($announcements as $announcement)
+                                <div class="faq-item">
+                                    <i class="faq-icon bi bi-info-circle-fill"></i>
+                                    <h3>
+                                        <b>{{ $announcement->title }}</b> |
+                                        <span class="badge bg-danger"
+                                            style="color: white">{{ $announcement->published_at }}</span>
+                                    </h3>
+                                    <div class="faq-content" style="text-align: justify">
+                                        <p>
+                                            <span class="row d-flex justify-content-center">
+                                                @foreach ($announcement->images as $image)
+                                                    <span class="col-lg-4 col-sm-12">
+                                                        <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $image->image_path }}" class="img-fluid">
+                                                    </span>
+                                                @endforeach
+                                            </span>
+                                            <br>
+                                            {!! $announcement->content !!}
+                                        </p>
+
+                                    </div>
+                                    <i class="faq-toggle bi bi-chevron-right"></i>
+                                </div>
+                            @endforeach
+                            <!-- End Faq item-->
+
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-lg-5 order-1 order-lg-2">
+                      <img
+                        src="assets/img/faq.jpg"
+                        class="img-fluid"
+                        alt=""
+                        data-aos="zoom-in"
+                        data-aos-delay="100"
+                      />
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
         <!-- About Section -->
         <section id="about" class="about section">
             <!-- Section Title -->
@@ -161,9 +223,9 @@
 
                     <div class="col-lg-7">
                         <!-- <h3 class="pt-0 pt-lg-5">
-                                                            Neque officiis dolore maiores et exercitationem quae est seda
-                                                            lidera pat claero
-                                                          </h3> -->
+                                                                        Neque officiis dolore maiores et exercitationem quae est seda
+                                                                        lidera pat claero
+                                                                      </h3> -->
 
                         <!-- Tabs -->
                         <ul class="nav nav-pills mb-3">
@@ -369,9 +431,9 @@
                                                         <img src="{{ 'assets/img/blog/blog-author.jpg' }}" alt=""
                                                             class="img-fluid post-author-img flex-shrink-0" />
                                                         <div class="post-meta">
-                                                            <p class="post-author">Maria Doe</p>
+                                                            <p class="post-author">{{ $news->author->name }}</p>
                                                             <p class="post-date">
-                                                                <time datetime="2022-01-01">Jan 1, 2022</time>
+                                                                <time datetime="2022-01-01">{{ $news->datetime }}</time>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -481,8 +543,8 @@
                                         <a href="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $activity->image }}"
                                             data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
                                                 class="bi bi-zoom-in"></i></a>
-                                        <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                                class="bi bi-link-45deg"></i></a>
+                                        <a href="{{ route('activity_details', $activity->id) }}" title="More Details"
+                                            class="details-link"><i class="bi bi-link-45deg"></i></a>
                                     </div>
                                 </div>
                             </div>

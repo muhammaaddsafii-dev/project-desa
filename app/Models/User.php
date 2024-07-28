@@ -71,4 +71,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Report::class);
     }
+
+    public function news()
+    {
+        return $this->hasMany(News::class, 'user_id');
+    }
 }

@@ -9,8 +9,8 @@
     <meta content="" name="keywords" />
 
     <!-- Favicons -->
-    <link href="{{ 'assets/img/favicon.png' }}" rel="icon" />
-    <link href="{{ 'assets/img/apple-touch-icon.png' }}" rel="apple-touch-icon" />
+    <link href="{{ asset('assets/img/favicon.png') }}" rel="icon" />
+    <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon" />
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
@@ -20,14 +20,14 @@
         rel="stylesheet" />
 
     <!-- Vendor CSS Files -->
-    <link href="{{ 'assets/vendor/bootstrap/css/bootstrap.min.css' }}" rel="stylesheet" />
-    <link href="{{ 'assets/vendor/bootstrap-icons/bootstrap-icons.css' }}" rel="stylesheet" />
-    <link href="{{ 'assets/vendor/aos/aos.css' }}" rel="stylesheet" />
-    <link href="{{ 'assets/vendor/glightbox/css/glightbox.min.css' }}" rel="stylesheet" />
-    <link href="{{ 'assets/vendor/swiper/swiper-bundle.min.css' }}" rel="stylesheet" />
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet" />
 
     <!-- Main CSS File -->
-    <link href="{{ 'assets/css/main.css' }}" rel="stylesheet" />
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" />
 
     <!-- =======================================================
       * Template Name: HeroBiz
@@ -46,23 +46,26 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     /> -->
-    <link rel="stylesheet" href="{{ 'assets/map-assets/Plugin/libs/leaflet/leaflet.css' }}" />
-    <link rel="stylesheet" href="{{ 'assets/map-assets/Plugin/fontawesome 5.15.4/all.css' }}" />
+    <link rel="stylesheet" href="{{ asset('assets/map-assets/Plugin/libs/leaflet/leaflet.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/map-assets/Plugin/fontawesome 5.15.4/all.css') }}" />
 
-    <link rel="stylesheet" href="{{ 'assets/map-assets/Plugin/libs/leaflet-search/leaflet-search.src.css' }}" />
-    <link rel="stylesheet" href="{{ 'assets/map-assets/Plugin/libs/leaflet-control-search/leaflet-search.css' }}" />
     <link rel="stylesheet"
-        href="{{ 'assets/map-assets/Plugin/libs/leaflet-locatecontrol/L.Control.Locate.min.css' }}" />
+        href="{{ asset('assets/map-assets/Plugin/libs/leaflet-search/leaflet-search.src.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('assets/map-assets/Plugin/libs/leaflet-control-search/leaflet-search.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('assets/map-assets/Plugin/libs/leaflet-locatecontrol/L.Control.Locate.min.css') }}" />
 
-    <link rel="stylesheet" href="{{ 'assets/map-assets/Plugin/libs/leaflet/Control.Geocoder.css' }}" />
+    <link rel="stylesheet" href="{{ asset('assets/map-assets/Plugin/libs/leaflet/Control.Geocoder.css') }}" />
     <link rel="stylesheet"
-        href="{{ 'assets/map-assets/Plugin/libs/leaflet-mouseposition/L.Control.MousePosition.css' }}" />
+        href="{{ asset('assets/map-assets/Plugin/libs/leaflet-mouseposition/L.Control.MousePosition.css') }}" />
     <link rel="stylesheet" type="text/css"
         href="https://rawgit.com/MarcChasse/leaflet.ScaleFactor/master/leaflet.scalefactor.min.css" />
-    <link rel="stylesheet" href="{{ 'assets/map-assets/Plugin/libs/leaflet-minimap/Control.MiniMap.css' }}" />
-    <link rel="stylesheet" href="{{ 'assets/map-assets/Plugin/libs/leaflet-easybutton-master/easy-button.css' }}" />
+    <link rel="stylesheet" href="{{ asset('assets/map-assets/Plugin/libs/leaflet-minimap/Control.MiniMap.css') }}" />
     <link rel="stylesheet"
-        href="{{ 'assets/map-assets/Plugin/libs/leaflet-layergrup-control/leaflet.groupedlayercontrol.css' }}" />
+        href="{{ asset('assets/map-assets/Plugin/libs/leaflet-easybutton-master/easy-button.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('assets/map-assets/Plugin/libs/leaflet-layergrup-control/leaflet.groupedlayercontrol.css') }}" />
     <style>
         html,
         body,
@@ -129,36 +132,40 @@
 </head>
 
 <body class="index-page">
-    <script src="{{ 'assets/map-assets/Plugin/fontawesome 5.15.4/all.js' }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/fontawesome 5.15.4/all.js') }}"></script>
     <!-- Leaflet JavaScript Library -->
     <script src="https://unpkg.com/leaflet@ 1.5.1/dist/leaflet.js"></script>
 
     <!-- leaflet js plugin -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet/leaflet.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet/leaflet-src.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet-search/leaflet-search.src.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet-control-search/leaflet-search.src.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/fuse/fuse.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet/Control.Geocoder.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet-locatecontrol/L.Control.Locate.min.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.utils.js' }}">
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet/leaflet.js') }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet/leaflet-src.js') }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-search/leaflet-search.src.js') }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-control-search/leaflet-search.src.js') }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/fuse/fuse.js') }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet/Control.Geocoder.js') }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-locatecontrol/L.Control.Locate.min.js') }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.js') }}">
     </script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.sizes.js' }}">
+    <script
+        src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.utils.js') }}">
     </script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet-minimap/Control.MiniMap.js' }}" type="text/javascript"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet-layergrup-control/leaflet.groupedlayercontrol.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/esri-leaflet/esri-leaflet-debug.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet-easybutton-master/easy-button.js' }}"></script>
-    <script src="{{ 'assets/map-assets/Plugin/libs/leaflet-mouseposition/L.Control.MousePosition.js' }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.sizes.js') }}">
+    </script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-minimap/Control.MiniMap.js') }}" type="text/javascript">
+    </script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-layergrup-control/leaflet.groupedlayercontrol.js') }}">
+    </script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/esri-leaflet/esri-leaflet-debug.js') }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-easybutton-master/easy-button.js') }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-mouseposition/L.Control.MousePosition.js') }}"></script>
     <script src="https://rawgit.com/MarcChasse/leaflet.ScaleFactor/master/leaflet.scalefactor.min.js"></script>
-    <script src="{{ 'assets/map-assets/Plugin/js_map/Autolinker.min.js' }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/js_map/Autolinker.min.js') }}"></script>
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="{{ 'assets/img/lg.png' }}" alt="" /> -->
+                <!-- <img src="{{ asset('assets/img/lg.png') }}" alt="" /> -->
                 @foreach ($assets as $asset)
                     <h5 class="sitename"><b>{{ $asset->nama_desa }}</b></h5>
                 @endforeach
@@ -180,7 +187,7 @@
                         <ul>
                             <li><a href="#faq">Pengumuman</a></li>
                             <li><a href="/berita">Berita</a></li>
-                            <li><a href="/kegiatan">Kegiatan</a></li>
+                            <li><a href="#portfolio">Kegiatan</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -255,16 +262,16 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
-    <script src="{{ 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' }}"></script>
-    <script src="{{ 'assets/vendor/php-email-form/validate.js' }}"></script>
-    <script src="{{ 'assets/vendor/aos/aos.js' }}"></script>
-    <script src="{{ 'assets/vendor/glightbox/js/glightbox.min.js' }}"></script>
-    <script src="{{ 'assets/vendor/swiper/swiper-bundle.min.js' }}"></script>
-    <script src="{{ 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' }}"></script>
-    <script src="{{ 'assets/vendor/isotope-layout/isotope.pkgd.min.js' }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
+    <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
 
     <!-- Main JS File -->
-    <script src="{{ 'assets/js/main.js' }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>

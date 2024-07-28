@@ -23,6 +23,7 @@ Route::get('/', [LandingPageController::class, 'index']);
 Route::get('/berita', [LandingPageController::class, 'news']);
 Route::get('/detail-berita/{slug}', [LandingPageController::class, 'news_details'])->name('news.details');
 Route::get('/kegiatan', [LandingPageController::class, 'activity']);
+Route::get('/kegiatan/{id}', [LandingPageController::class, 'activity_details'])->name('activity_details');
 Route::get('/map', [LandingPageController::class, 'map']);
 Route::get('/peta-kependudukan', [LandingPageController::class, 'petakependudukan']);
 Route::get('/peta-kondisi-jalan', [LandingPageController::class, 'petakondisijalan']);
