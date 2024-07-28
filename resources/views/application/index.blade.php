@@ -7,10 +7,10 @@
             <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
                 data-aos="zoom-out">
                 <!-- <img
-                                                                    src="{{ 'assets/img/hero-img.svg' }}"
-                                                                    class="img-fluid animated"
-                                                                    alt=""
-                                                                  /> -->
+                                                                                    src="{{ 'assets/img/hero-img.svg' }}"
+                                                                                    class="img-fluid animated"
+                                                                                    alt=""
+                                                                                  /> -->
                 <h1 style="color: black">
                     <b>Selamat Datang di</b><span>
                         @foreach ($assets as $asset)
@@ -168,7 +168,8 @@
                                             <span class="row d-flex justify-content-center">
                                                 @foreach ($announcement->images as $image)
                                                     <span class="col-lg-4 col-sm-12">
-                                                        <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $image->image_path }}" class="img-fluid">
+                                                        <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $image->image_path }}"
+                                                            class="img-fluid">
                                                     </span>
                                                 @endforeach
                                             </span>
@@ -186,14 +187,14 @@
                     </div>
 
                     <!-- <div class="col-lg-5 order-1 order-lg-2">
-                      <img
-                        src="assets/img/faq.jpg"
-                        class="img-fluid"
-                        alt=""
-                        data-aos="zoom-in"
-                        data-aos-delay="100"
-                      />
-                    </div> -->
+                                      <img
+                                        src="assets/img/faq.jpg"
+                                        class="img-fluid"
+                                        alt=""
+                                        data-aos="zoom-in"
+                                        data-aos-delay="100"
+                                      />
+                                    </div> -->
                 </div>
             </div>
         </section>
@@ -213,19 +214,20 @@
                 <p>Informasi terkait Desa Geocircle beserta visi dan misi nya</p>
             </div>
             <!-- End Section Title -->
+            @foreach($assets as $asset)
             <div class="container" data-aos="fade-up">
                 <div class="row g-4 g-lg-5" data-aos="fade-up" data-aos-delay="200">
                     <div class="col-lg-5">
                         <div class="about-img">
-                            <img src="{{ 'assets/img/Desa.png' }}" class="img-fluid" alt="" />
+                            <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{$asset->header_image}}" class="img-fluid" alt="" />
                         </div>
                     </div>
 
                     <div class="col-lg-7">
                         <!-- <h3 class="pt-0 pt-lg-5">
-                                                                        Neque officiis dolore maiores et exercitationem quae est seda
-                                                                        lidera pat claero
-                                                                      </h3> -->
+                                                                                        Neque officiis dolore maiores et exercitationem quae est seda
+                                                                                        lidera pat claero
+                                                                                      </h3> -->
 
                         <!-- Tabs -->
                         <ul class="nav nav-pills mb-3">
@@ -245,45 +247,17 @@
                                     <h4>Lokasi dan Geografi:</h4>
                                 </div>
                                 <p style="text-align: justify">
-                                    Desa [Nama Desa] terletak di Kecamatan [Nama Kecamatan],
-                                    Kabupaten [Nama Kabupaten], Provinsi [Nama Provinsi]. Desa
-                                    ini memiliki luas wilayah sekitar [Luas Wilayah] hektar
-                                    dengan topografi yang bervariasi mulai dari dataran rendah
-                                    hingga perbukitan. Dikelilingi oleh hamparan sawah dan
-                                    kebun, Desa [Nama Desa] menawarkan pemandangan alam yang
-                                    asri dan menenangkan.
+                                    {!! $asset->lokasi_dan_geografi !!}
                                 </p>
-
-                                <div class="d-flex align-items-center mt-4">
-                                    <h4>Penduduk dan Demografi:</h4>
-                                </div>
                                 <p style="text-align: justify">
-                                    Desa [Nama Desa] dihuni oleh sekitar [Jumlah Penduduk] jiwa
-                                    yang terdiri dari [Jumlah KK] kepala keluarga. Mayoritas
-                                    penduduk desa ini bekerja di sektor pertanian, perikanan,
-                                    dan peternakan. Selain itu, terdapat pula sejumlah warga
-                                    yang bekerja sebagai pengrajin, pedagang, dan tenaga
-                                    pendidikan. Penduduk Desa [Nama Desa] dikenal ramah, gotong
-                                    royong, dan menjunjung tinggi nilai-nilai adat serta tradisi
-                                    lokal.
+                                    {!! $asset->penduduk_dan_demografi !!}
                                 </p>
 
                                 <div class="d-flex align-items-center mt-4">
                                     <h4>Potensi dan Sumber Daya:</h4>
                                 </div>
                                 <p style="text-align: justify">
-                                    Desa [Nama Desa] memiliki berbagai potensi sumber daya alam
-                                    yang dapat dikembangkan, seperti: Pertanian: Komoditas
-                                    unggulan meliputi padi, jagung, sayuran, dan buah-buahan.
-                                    Perikanan: Potensi perikanan air tawar dengan budidaya ikan
-                                    lele, nila, dan gurame. Peternakan: Ternak sapi, kambing,
-                                    dan ayam menjadi andalan peternakan desa. Pariwisata: Desa
-                                    ini memiliki sejumlah destinasi wisata menarik, seperti
-                                    [Nama Destinasi Wisata], yang menawarkan keindahan alam dan
-                                    kegiatan ekowisata. Kerajinan: Produk kerajinan tangan
-                                    seperti anyaman bambu, batik, dan ukiran kayu yang memiliki
-                                    nilai seni tinggi dan diminati pasar lokal maupun luar
-                                    daerah.
+                                    {!! $asset->potensi_dan_sumberdaya !!}
                                 </p>
                             </div>
                             <!-- End Tab 1 Content -->
@@ -293,30 +267,14 @@
                                     <h4>Visi</h4>
                                 </div>
                                 <p>
-                                    Mewujudkan Desa [Nama Desa] yang Mandiri, Sejahtera, dan
-                                    Berdaya Saing dengan Berbasis pada Potensi Lokal dan
-                                    Kearifan Budaya.
+                                    {!! $asset->visi !!}
                                 </p>
 
                                 <div class="d-flex align-items-center mt-4">
                                     <h4>Misi</h4>
                                 </div>
                                 <p>
-                                    <i class="bi bi-check2"></i>Meningkatkan Kesejahteraan
-                                    Ekonomi Masyarakat Desa
-                                </p>
-                                <p>
-                                    <i class="bi bi-check2"></i>
-                                    Meningkatkan Kualitas Pendidikan dan Kesehatan Masyarakat
-                                </p>
-                                <p>
-                                    <i class="bi bi-check2"></i>
-                                    Mewujudkan Tata Kelola Pemerintahan Desa yang Transparan dan
-                                    Akuntabel
-                                </p>
-                                <p>
-                                    <i class="bi bi-check2"></i>Meningkatkan Infrastruktur dan
-                                    Konektivitas Desa
+                                    {!! $asset->misi !!}
                                 </p>
                             </div>
                             <!-- End Tab 2 Content -->
@@ -324,6 +282,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
         </section>
         <!-- /About Section -->
 
@@ -345,10 +304,7 @@
                                     class="col-lg-8 col-md-6 content d-flex flex-column justify-content-center order-last order-md-first">
                                     <h3>Kepala Desa: <b>{{ $organizer->name }}</b></h3>
                                     <p style="text-align: justify">
-                                        <i>"Dengan segala potensi yang dimilikinya, Saya berkomitmen
-                                            untuk terus berkembang dan memberikan kontribusi positif
-                                            bagi kesejahteraan warga Desa Geocircle serta lingkungan
-                                            sekitar."</i>
+                                        {!! $organizer->quote !!}
                                     </p>
                                 </div>
 
@@ -502,7 +458,7 @@
                                     <!-- End recent posts list -->
                                 </div>
                             </section>
-                            <a href="/blog.html" class="read-more align-self-end"
+                            <a href="" class="read-more align-self-end"
                                 style="margin-top: 20px"><span>Lainnya</span><i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
@@ -529,7 +485,6 @@
                         <li data-filter="*" class="filter-active">All</li>
                         <li data-filter=".filter-internal">Internal</li>
                         <li data-filter=".filter-eksternal">Eksternal</li>
-                        <li data-filter=".filter-sosial">Sosial</li>
                     </ul>
                     <!-- End Portfolio Filters -->
 
@@ -557,12 +512,11 @@
         </section>
         <!-- /Portfolio Section -->
 
-        <!-- Services Section -->
-        <section id="services" class="services section">
+        <section id="services" class="services section" style="background-color:#97c3cb">
             <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
-                <h3><b>DATA DESA</b></h3>
-                <p>
+            <div class="container section-title" data-aos="fade-up" style="color: white;">
+                <h3 style="color: white;""><b>DATA DESA</b></h3>
+                <p style="color: white;">
                     Informasi terkait data statistik dan data geospasial Desa Geocircle
                 </p>
             </div>
@@ -570,10 +524,10 @@
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
                 <div class="row gy-5">
-                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="col-xl-4" data-aos="zoom-in" data-aos-delay="200">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{ 'assets/img/services-1.jpg' }}" class="img-fluid" alt="" />
+                                <img src="{{ asset('assets/img/services-1.jpg') }}" class="img-fluid" alt="" />
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
@@ -591,10 +545,10 @@
                     </div>
                     <!-- End Service Item -->
 
-                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="col-xl-4" data-aos="zoom-in" data-aos-delay="300">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{ 'assets/img/services-2.jpg' }}" class="img-fluid" alt="" />
+                                <img src="{{ asset('assets/img/services-2.jpg') }}" class="img-fluid" alt="" />
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
@@ -612,17 +566,17 @@
                     </div>
                     <!-- End Service Item -->
 
-                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="col-xl-4" data-aos="zoom-in" data-aos-delay="400">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{ 'assets/img/services-3.jpg' }}" class="img-fluid" alt="" />
+                                <img src="{{ asset('assets/img/services-3.jpg') }}" class="img-fluid" alt="" />
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
-                                    <i class="bi bi-easel"></i>
+                                    <i class="bi bi-map-fill"></i>
                                 </div>
-                                <a href="service-details.html" class="stretched-link">
-                                    <h3>Dll</h3>
+                                <a href="#" class="stretched-link">
+                                    <h3>Geospasial</h3>
                                 </a>
                                 <p>
                                     Ut excepturi voluptatem nisi sed. Quidem fuga consequatur.
@@ -633,79 +587,10 @@
                         </div>
                     </div>
                     <!-- End Service Item -->
-
-                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="500">
-                        <div class="service-item">
-                            <div class="img">
-                                <img src="{{ 'assets/img/services-4.jpg' }}" class="img-fluid" alt="" />
-                            </div>
-                            <div class="details position-relative">
-                                <div class="icon">
-                                    <i class="bi bi-map-fill"></i>
-                                </div>
-                                <a href="#" class="stretched-link">
-                                    <h3>Peta Fasilitas Umum</h3>
-                                </a>
-                                <p>
-                                    Non et temporibus minus omnis sed dolor esse consequatur.
-                                    Cupiditate sed error ea fuga sit provident adipisci neque.
-                                </p>
-                                <a href="service-details.html" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Service Item -->
-
-                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="600">
-                        <div class="service-item">
-                            <div class="img">
-                                <img src="{{ 'assets/img/services-5.jpg' }}" class="img-fluid" alt="" />
-                            </div>
-                            <div class="details position-relative">
-                                <div class="icon">
-                                    <i class="bi bi-map-fill"></i>
-                                </div>
-                                <a href="service-details.html" class="stretched-link">
-                                    <h3>Peta Penggunaan Lahan</h3>
-                                </a>
-                                <p>
-                                    Cumque et suscipit saepe. Est maiores autem enim facilis ut
-                                    aut ipsam corporis aut. Sed animi at autem alias eius
-                                    labore.
-                                </p>
-                                <a href="service-details.html" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Service Item -->
-
-                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="700">
-                        <div class="service-item">
-                            <div class="img">
-                                <img src="{{ 'assets/img/services-6.jpg' }}" class="img-fluid" alt="" />
-                            </div>
-                            <div class="details position-relative">
-                                <div class="icon">
-                                    <i class="bi bi-map-fill"></i>
-                                </div>
-                                <a href="service-details.html" class="stretched-link">
-                                    <h3>Peta Kependudukan</h3>
-                                </a>
-                                <p>
-                                    Hic molestias ea quibusdam eos. Fugiat enim doloremque aut
-                                    neque non et debitis iure. Corrupti recusandae ducimus enim.
-                                </p>
-                                <a href="service-details.html" class="stretched-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Service Item -->
                 </div>
             </div>
         </section>
-        <!-- /Services Section -->
 
-        <!-- Features Section -->
         <section id="features" class="features section">
             <div class="container section-title" data-aos="fade-up">
                 <h3><b>LAYANAN</b></h3>
@@ -744,28 +629,70 @@
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="features-tab-1">
                         <div class="row gy-4">
-                            <div class="col-lg-8 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
-                                <h4>Panduan</h4>
+                            <div class="col-lg-12 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+                                <h3>Panduan</h3>
                                 <p>
-                                    Berikut langkah-langkah menggunakan layanan pembuatan surat
-                                    online dan pengaduan keluh kesah masyarakat:
+                                    Berikut Informasi Panduan Panggunaan Website Desa Kemasan:
                                 </p>
                                 <ul>
                                     <li>
-                                        <i class="bi bi-check-circle-fill"></i> Silahkan masuk ke
-                                        menu layanan kemudian pilih surat online/pengaduan
+                                        <i class="bi bi-info-circle-fill"></i> Website Desa
+                                        Kemasan digunakan sebagai salah satu sarana perseberan
+                                        informasi, manajemen data dan penunjang operasional desa
+                                        agar lebih efektif dan efesien.
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-info-circle-fill"></i> Pengguna Website
+                                        Desa Kemasan digunakan terkhusus untuk warga Desa Kemasan
+                                        setempat.
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-info-circle-fill"></i> Fasilitas website
+                                        meliputi pemberian informasi, pengaduan dan permohonan
+                                        surat secara online.
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-info-circle-fill"></i> Informasi lebih
+                                        lanjut silahkan hubungi pihak desa melalui kontak yang
+                                        tersedia.
+                                    </li>
+                                </ul>
+                                <p class="fst-italic">
+                                    <b>Mohon untuk digunakan secara bijak! Terima kasih.</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Tab Content 1 -->
+
+                    <div class="tab-pane fade" id="features-tab-2">
+                        <div class="row gy-4">
+                            <div class="col-lg-12 order-2 order-lg-1">
+                                <h3>Surat Online</h3>
+                                <p>Berikut langkah-langkah pembuatan surat online:</p>
+                                <ul>
+                                    <li>
+                                        <i class="bi bi-info-circle-fill"></i> Pembuatan surat
+                                        online hanya bisa dilakulan oleh warga Desa Kemasan.
                                     </li>
                                     <li>
                                         <i class="bi bi-check-circle-fill"></i> Silahkan login
-                                        dengan cara memasukkan nama dan nik (selain warga Desa
-                                        Geocircle dipastikan tidak dapat masuk).
+                                        dahulu dengan memasukkan NIK dan password.
                                     </li>
                                     <li>
-                                        <i class="bi bi-check-circle-fill"></i> Isikan form sesuai
-                                        kebutuhan yang ingin anda ajukan/adukan.
+                                        <i class="bi bi-check-circle-fill"></i> Masuk ke menu
+                                        permohonan surat
                                     </li>
                                     <li>
-                                        <i class="bi bi-check-circle-fill"></i> Jika anda memilih
+                                        <i class="bi bi-check-circle-fill"></i> Silahkan pilih
+                                        jenis permohonan surat yang ingin diajukan
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-check-circle-fill"></i> Selanjutnya isikan
+                                        form yang tersedia
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-info-circle-fill"></i> Jika anda memilih
                                         opsi hard file maka file akan di cetak dan wajib diambil
                                         di kantor kelurahan tetapi jika anda memilih opsi soft
                                         file surat bisa di download dalam bentuk pdf.
@@ -780,73 +707,9 @@
                                     </li>
                                 </ul>
                                 <p class="fst-italic">
-                                    Mohon untuk digunakan secara bijak! Terima kasih.
+                                    <b>Mohon untuk digunakan secara bijak! Terima kasih.</b>
                                 </p>
-                            </div>
-                            <div class="col-lg-4 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
-                                <img src="{{ 'assets/img/features-1.svg' }}" alt="" class="img-fluid" />
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Tab Content 1 -->
-
-                    <div class="tab-pane fade" id="features-tab-2">
-                        <div class="row gy-4">
-                            <div class="col-lg-8 order-2 order-lg-1">
-                                <h3>Surat Online</h3>
-                                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                                    <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <input type="text" name="name" class="form-control" id="name"
-                                                placeholder="Nama" required="" />
-                                        </div>
-                                        <div class="col-md-6 form-group mt-3 mt-md-0">
-                                            <input type="email" class="form-control" name="email" id="email"
-                                                placeholder="Email" required="" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <input type="text" class="form-control" name="subject" id="subject"
-                                            placeholder="NIK" required="" />
-                                    </div>
-
-                                    <div class="form-group mt-3">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Jenis Pengajuan Surat</option>
-                                            <option value="1">Surat Keterangan Tidak Mampu</option>
-                                            <option value="2">
-                                                Surat Keterangan Belum Pernah Menikah
-                                            </option>
-                                            <option value="3">Surat Keterangan Kelahiran</option>
-                                            <option value="4">Surat Keterangan Kematian</option>
-                                            <option value="5">Surat Keterangan Penghasilan</option>
-                                            <option value="6">Surat Keterangan Usaha</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <textarea class="form-control" name="message" placeholder="Tulis Keterangan Lain Jika Perlu" required=""></textarea>
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="option1" />
-                                            <label class="form-check-label" for="inlineRadio1"><i>Hard File</i></label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="inlineRadio2" value="option2" />
-                                            <label class="form-check-label" for="inlineRadio2"><i>Soft File</i></label>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding: 10px">
-                                    <button class="btn btn-outline-success" type="button">
-                                        Login Dulu
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 order-1 order-lg-2 text-center">
-                                <img src="{{ 'assets/img/features-2.svg' }}" alt="" class="img-fluid" />
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding: 10px"></div>
                             </div>
                         </div>
                     </div>
@@ -854,35 +717,35 @@
 
                     <div class="tab-pane fade" id="features-tab-3">
                         <div class="row gy-4">
-                            <div class="col-lg-8 order-2 order-lg-1">
+                            <div class="col-lg-12 order-2 order-lg-1">
                                 <h3>Pengaduan</h3>
-                                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                                    <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <input type="text" name="name" class="form-control" id="name"
-                                                placeholder="Nama" required="" />
-                                        </div>
-                                        <div class="col-md-6 form-group mt-3 mt-md-0">
-                                            <input type="email" class="form-control" name="email" id="email"
-                                                placeholder="Email" required="" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <input type="text" class="form-control" name="subject" id="subject"
-                                            placeholder="NIK" required="" />
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <textarea class="form-control" name="message" placeholder="Tulis Pengaduan" required=""></textarea>
-                                    </div>
-                                </form>
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding: 10px">
-                                    <button class="btn btn-outline-success" type="button">
-                                        Login Dulu
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 order-1 order-lg-2 text-center">
-                                <img src="{{ 'assets/img/features-3.svg' }}" alt="" class="img-fluid" />
+                                <p>Berikut langkah-langkah pengaduan online:</p>
+                                <ul>
+                                    <li>
+                                        <i class="bi bi-info-circle-fill"></i> Pengaduan hanya
+                                        bisa dilakulan oleh warga Desa Kemasan.
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-check-circle-fill"></i> Silahkan login
+                                        dahulu dengan memasukkan NIK dan password.
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-check-circle-fill"></i> Masuk ke menu
+                                        pengaduan
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-check-circle-fill"></i> Silahkan isikan
+                                        form yang tersedia
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-check-circle-fill"></i> Pilih kirim.
+                                    </li>
+                                </ul>
+                                <p class="fst-italic">
+                                    <b>Sampaikan aduanmu secara bijak dan sopan! Terima
+                                        kasih.</b>
+                                </p>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="padding: 10px"></div>
                             </div>
                         </div>
                     </div>
@@ -890,9 +753,7 @@
                 </div>
             </div>
         </section>
-        <!-- /Features Section -->
 
-        <!-- Contact Section -->
         <section id="contact" class="contact section">
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -908,78 +769,51 @@
                     referrerpolicy="no-referrer-when-downgrade" frameborder="0" allowfullscreen=""></iframe>
             </div>
             <!-- End Google Maps -->
-
             <div class="container" data-aos="fade">
-                <div class="row gy-5 gx-lg-5">
-                    <div class="col-lg-4">
-                        <div class="info">
-                            <h3>Hubungi Kontak</h3>
-                            <p>Silahkan hubungi nomor atau email dibawah.</p>
-
-                            <div class="info-item d-flex">
-                                <i class="bi bi-geo-alt flex-shrink-0"></i>
-                                <div>
+                <div class="row gy-5 gx-lg-5 ">
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="margin-top: 10px;">
+                        <div class="info-item">
+                            <div class="row">
+                                <div class="col-1 my-auto">
+                                    <i class="bi bi-geo-alt flex-shrink-0"></i>
+                                </div>
+                                <div class="col-11">
                                     <h4>Lokasi:</h4>
                                     <p>Corongan, Maguwoharjo, Sleman DIY</p>
                                 </div>
                             </div>
-                            <!-- End Info Item -->
-
-                            <div class="info-item d-flex">
-                                <i class="bi bi-envelope flex-shrink-0"></i>
-                                <div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="margin-top: 10px;">
+                        <div class="info-item">
+                            <div class="row">
+                                <div class="col-1 my-auto">
+                                    <i class="bi bi-envelope flex-shrink-0"></i>
+                                </div>
+                                <div class="col-11">
                                     <h4>Email:</h4>
-                                    <p>desageocircle@gmail.com</p>
+                                    <p>geocircle@gmail.com</p>
                                 </div>
                             </div>
-                            <!-- End Info Item -->
-
-                            <div class="info-item d-flex">
-                                <i class="bi bi-phone flex-shrink-0"></i>
-                                <div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12" style="margin-top: 10px;">
+                        <div class="info-item">
+                            <div class="row">
+                                <div class="col-1 my-auto">
+                                    <i class="bi bi-phone flex-shrink-0"></i>
+                                </div>
+                                <div class="col-11">
                                     <h4>Telp:</h4>
                                     <p>085171231926</p>
                                 </div>
                             </div>
-                            <!-- End Info Item -->
                         </div>
                     </div>
-
-                    <div class="col-lg-8">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Nama" required="" />
-                                </div>
-                                <div class="col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Email" required="" />
-                                </div>
-                            </div>
-                            <div class="form-group mt-3">
-                                <input type="text" class="form-control" name="subject" id="subject"
-                                    placeholder="NIK" required="" />
-                            </div>
-                            <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" placeholder="Tulis Pengaduan" required=""></textarea>
-                            </div>
-                            <div class="my-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">
-                                    Pesan Telah Dikirim. Terima Kasih!
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="submit">Kirim Pengaduan</button>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- End Contact Form -->
                 </div>
             </div>
+            </div>
         </section>
-        <!-- /Contact Section -->
+
     </main>
 @endsection

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\RichEditor;
+use Illuminate\Support\Facades\Storage;
 
 class OrganizerResource extends Resource
 {
@@ -65,7 +66,11 @@ class OrganizerResource extends Resource
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('position'),
                 Tables\Columns\TextColumn::make('whatsapp')->searchable(),
-                ImageColumn::make('image'),
+                ImageColumn::make('image')
+                    ->getStateUsing(function ($record) {
+                        $path = $record->image;
+                        return Storage::disk('s3')->temporaryUrl($path, now()->addMinutes(5));
+                    }),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('position')
