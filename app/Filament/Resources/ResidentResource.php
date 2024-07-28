@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Dotswan\MapPicker\Fields\Map;
+use Filament\Forms\Set;
+
 
 class ResidentResource extends Resource
 {
@@ -68,8 +71,40 @@ class ResidentResource extends Resource
                 Forms\Components\TextInput::make('DATA'),
                 Forms\Components\TextInput::make('Jumlah_KK')->label('Jumlah KK'),
                 Forms\Components\TextInput::make('SUMBER')->label('Sumber'),
-                Forms\Components\TextInput::make('latitude')->numeric(),
-                Forms\Components\TextInput::make('longitude')->numeric(),
+                Forms\Components\Hidden::make('latitude'),
+                Forms\Components\Hidden::make('longitude'),
+                Map::make('location')
+                    ->label('Lokasi')
+                    ->columnSpanFull()
+                    ->default([
+                        'lat' => 40.4168,
+                        'lng' => -3.7038,
+                    ])
+                    ->afterStateUpdated(function (Set $set, ?array $state): void {
+                        // Update hidden fields
+                        $set('latitude', $state['lat']);
+                        $set('longitude', $state['lng']);
+                    })
+                    ->afterStateHydrated(function ($state, $record, Set $set): void {
+                        if ($record) {
+                            $set('location', ['lat' => $record->latitude ?? null, 'lng' => $record->longitude ?? null]);
+                        }
+                    })
+                    ->liveLocation()
+                    ->showMarker()
+                    ->markerColor("#22c55eff")
+                    ->showFullscreenControl()
+                    ->showZoomControl()
+                    ->draggable()
+                    ->tilesUrl("https://tile.openstreetmap.de/{z}/{x}/{y}.png")
+                    ->zoom(15)
+                    ->detectRetina()
+                    ->showMyLocationButton()
+                    ->extraTileControl([])
+                    ->extraControl([
+                        'zoomDelta' => 1,
+                        'zoomSnap' => 2,
+                    ]),
             ]);
     }
 
