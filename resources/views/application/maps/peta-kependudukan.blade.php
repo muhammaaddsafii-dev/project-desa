@@ -199,7 +199,8 @@
 
                 layer.on({
                     click: function(e) {
-                        layer.bindPopup(content).openPopup();
+                        // layer.bindPopup(content).openPopup();
+                        layer.bindPopup(content);
                     },
                 });
             },

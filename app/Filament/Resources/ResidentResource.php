@@ -26,7 +26,7 @@ class ResidentResource extends Resource
 
     protected static ?string $navigationLabel = 'Penduduk';
 
-    protected static ?string $navigationGroup = 'Data Statistik';
+    protected static ?string $navigationGroup = 'Data';
 
     protected static ?int $navigationSort = 10;
 
@@ -43,9 +43,10 @@ class ResidentResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('Nomor')->required(),
                 Forms\Components\FileUpload::make('Foto')
-                    ->image()
-                    ->directory('resident-photos')
-                    ->visibility('public'),
+                    ->disk('s3')
+                    ->directory('desa-template/images/rumah-warga')
+                    ->visibility('private')
+                    ->preserveFilenames(),
                 Forms\Components\TextInput::make('Nama_Kepal')->label('Nama Kepala Keluarga'),
                 Forms\Components\Select::make('Jenis_Kela')
                     ->label('Jenis Kelamin')
@@ -111,13 +112,36 @@ class ResidentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(Resident::latestRecords())
             ->columns([
                 Tables\Columns\TextColumn::make('Nomor'),
-                Tables\Columns\ImageColumn::make('Foto'),
+                Tables\Columns\ImageColumn::make('Foto')
+                    ->getStateUsing(function ($record) {
+                        return $record->getFotoUrl(); // Method to get full URL
+                    })
+                    ->label('Foto'),
                 Tables\Columns\TextColumn::make('Nama_Kepal')->label('Nama Kepala Keluarga'),
                 Tables\Columns\TextColumn::make('Jenis_Kela')->label('Jenis Kelamin'),
+                Tables\Columns\TextColumn::make('Status_Tem')->label('Status Tempat Tinggal'),
+                Tables\Columns\TextColumn::make('Luas_Lanta')->label('Luas Lantai'),
+                Tables\Columns\TextColumn::make('Jenis_Lant')->label('Jenis Lantai'),
+                Tables\Columns\TextColumn::make('Jenis_Dind')->label('Jenis Dinding'),
+                Tables\Columns\TextColumn::make('Fasilitas_')->label('Fasilitas 1'),
+                Tables\Columns\TextColumn::make('Fasilitas1')->label('Fasilitas 2'),
+                Tables\Columns\TextColumn::make('Fasilita_1')->label('Fasilitas 3'),
+                Tables\Columns\TextColumn::make('Bahan_Baka')->label('Bahan Bakar'),
+                Tables\Columns\TextColumn::make('Kartu_Jami')->label('Kartu Jaminan'),
+                Tables\Columns\TextColumn::make('Akses_Info')->label('Akses Informasi'),
                 Tables\Columns\TextColumn::make('RT'),
                 Tables\Columns\TextColumn::make('RW'),
+                Tables\Columns\TextColumn::make('Keterangan'),
+                Tables\Columns\TextColumn::make('Profesi_KK')->label('Profesi Kepala Keluarga'),
+                Tables\Columns\TextColumn::make('NIK'),
+                Tables\Columns\TextColumn::make('DATA'),
+                Tables\Columns\TextColumn::make('Jumlah_KK')->label('Jumlah KK'),
+                Tables\Columns\TextColumn::make('SUMBER')->label('Sumber'),
+                Tables\Columns\TextColumn::make('latitude'),
+                Tables\Columns\TextColumn::make('longitude'),
 
             ])
             ->filters([

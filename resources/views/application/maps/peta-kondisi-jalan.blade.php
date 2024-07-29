@@ -197,7 +197,7 @@
             fasum.addData(data);
         });
 
-        var fasumGroups = {
+        var kondisijalanGroups = {
             baik: L.featureGroup().addTo(map),
             cukup: L.featureGroup().addTo(map),
             kurang: L.featureGroup().addTo(map),
@@ -241,13 +241,13 @@
 
                 // Menentukan grup dan menambahkan layer
                 if (feature.properties.KONDISI === "Baik") {
-                    fasumGroups.baik.addLayer(layer);
+                    kondisijalanGroups.baik.addLayer(layer);
                 } else if (feature.properties.KONDISI === "Cukup Baik") {
-                    fasumGroups.cukup.addLayer(layer);
+                    kondisijalanGroups.cukup.addLayer(layer);
                 } else if (feature.properties.KONDISI === "Kurang Baik") {
-                    fasumGroups.kurang.addLayer(layer);
+                    kondisijalanGroups.kurang.addLayer(layer);
                 } else {
-                    fasumGroups.tidak.addLayer(layer);
+                    kondisijalanGroups.tidak.addLayer(layer);
                 }
             },
         });
@@ -444,10 +444,10 @@
         };
 
         var layers = {
-            baik: fasumGroups.baik,
-            cukup: fasumGroups.cukup,
-            kurang: fasumGroups.kurang,
-            tidak: fasumGroups.tidak,
+            baik: kondisijalanGroups.baik,
+            cukup: kondisijalanGroups.cukup,
+            kurang: kondisijalanGroups.kurang,
+            tidak: kondisijalanGroups.tidak,
             jalan: jalan,
             sungai: sungaiLayer,
             irigasi: irigasiLayer,

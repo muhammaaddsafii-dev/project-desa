@@ -21,7 +21,7 @@ class TeritorialResource extends Resource
 
     protected static ?string $navigationLabel = 'Wilayah';
 
-    protected static ?string $navigationGroup = 'Data Statistik';
+    protected static ?string $navigationGroup = 'Data';
 
     protected static ?int $navigationSort = 9;
 
