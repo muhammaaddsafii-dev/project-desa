@@ -7,10 +7,10 @@
             <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
                 data-aos="zoom-out">
                 <!-- <img
-                                                                                                src="{{ 'assets/img/hero-img.svg' }}"
-                                                                                                class="img-fluid animated"
-                                                                                                alt=""
-                                                                                              /> -->
+                                                                                                            src="{{ 'assets/img/hero-img.svg' }}"
+                                                                                                            class="img-fluid animated"
+                                                                                                            alt=""
+                                                                                                          /> -->
                 <h1 style="color: black">
                     <b>Selamat Datang di</b><span>
                         @foreach ($assets as $asset)
@@ -187,14 +187,14 @@
                     </div>
 
                     <!-- <div class="col-lg-5 order-1 order-lg-2">
-                                                  <img
-                                                    src="assets/img/faq.jpg"
-                                                    class="img-fluid"
-                                                    alt=""
-                                                    data-aos="zoom-in"
-                                                    data-aos-delay="100"
-                                                  />
-                                                </div> -->
+                                                              <img
+                                                                src="assets/img/faq.jpg"
+                                                                class="img-fluid"
+                                                                alt=""
+                                                                data-aos="zoom-in"
+                                                                data-aos-delay="100"
+                                                              />
+                                                            </div> -->
                 </div>
             </div>
         </section>
@@ -226,9 +226,9 @@
 
                         <div class="col-lg-7">
                             <!-- <h3 class="pt-0 pt-lg-5">
-                                                                                                    Neque officiis dolore maiores et exercitationem quae est seda
-                                                                                                    lidera pat claero
-                                                                                                  </h3> -->
+                                                                                                                Neque officiis dolore maiores et exercitationem quae est seda
+                                                                                                                lidera pat claero
+                                                                                                              </h3> -->
 
                             <!-- Tabs -->
                             <ul class="nav nav-pills mb-3">
@@ -400,13 +400,6 @@
                                             </div>
                                         @endforeach
                                     </div>
-
-                                    <!-- Pagination -->
-                                    {{-- <div class="row mt-4">
-                                        <div class="col-12 d-flex justify-content-center">
-                                            {{ $news->links() }}
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </section>
                             <a href="" class="read-more align-self-end"
@@ -430,7 +423,7 @@
             </div>
             <!-- End Section Title -->
 
-            <div class="container-fluid">
+            {{-- <div class="container-fluid">
                 <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
                     <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
                         <li data-filter="*" class="filter-active">All</li>
@@ -457,11 +450,36 @@
                         @endforeach
                         <!-- End Portfolio Item -->
                     </div>
-                    <!-- End Portfolio Container -->
-                    <div class="row mt-4">
-                        <div class="col-12 d-flex justify-content-center">
-                            {{ $activities->links() }}
-                        </div>
+
+                </div>
+            </div> --}}
+            <div class="container-fluid">
+                <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+                    <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+                        <li data-filter="*" class="filter-active">All</li>
+                        <li data-filter=".filter-internal">Internal</li>
+                        <li data-filter=".filter-eksternal">Eksternal</li>
+                    </ul>
+                    <!-- End Portfolio Filters -->
+
+                    <div class="row g-0 isotope-container" data-aos="fade-up" data-aos-delay="200">
+                        @foreach ($activities as $activity)
+                            <div
+                                class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ strtolower($activity->category) }}">
+                                <div class="portfolio-content h-100">
+                                    <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $activity->image }}"
+                                        alt="" class="img-fluid" />
+                                    <div class="portfolio-info">
+                                        <a href="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $activity->image }}"
+                                            data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
+                                                class="bi bi-zoom-in"></i></a>
+                                        <a href="{{ route('activity_details', $activity->id) }}" title="More Details"
+                                            class="details-link"><i class="bi bi-link-45deg"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        <!-- End Portfolio Item -->
                     </div>
                 </div>
             </div>
