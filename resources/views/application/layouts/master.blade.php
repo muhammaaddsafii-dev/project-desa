@@ -49,8 +49,7 @@
     <link rel="stylesheet" href="{{ asset('assets/map-assets/Plugin/libs/leaflet/leaflet.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/map-assets/Plugin/fontawesome 5.15.4/all.css') }}" />
 
-    <link rel="stylesheet"
-        href="{{ asset('assets/map-assets/Plugin/libs/leaflet-search/leaflet-search.src.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/map-assets/Plugin/libs/leaflet-search/leaflet-search.src.css') }}" />
     <link rel="stylesheet"
         href="{{ asset('assets/map-assets/Plugin/libs/leaflet-control-search/leaflet-search.css') }}" />
     <link rel="stylesheet"
@@ -125,9 +124,16 @@
             margin: 5px;
             background: #beeef6;
             border-radius: 5px;
+
+            .list-group-item-action.active {
+                background-color: #0d6efd;
+                border-color: #0d6efd;
+            }
+
         }
     </style>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
@@ -147,8 +153,7 @@
     <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-locatecontrol/L.Control.Locate.min.js') }}"></script>
     <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.js') }}">
     </script>
-    <script
-        src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.utils.js') }}">
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.utils.js') }}">
     </script>
     <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.sizes.js') }}">
     </script>

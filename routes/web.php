@@ -28,3 +28,4 @@ Route::get('/map', [LandingPageController::class, 'map']);
 Route::get('/peta-kependudukan', [LandingPageController::class, 'petakependudukan']);
 Route::get('/peta-kondisi-jalan', [LandingPageController::class, 'petakondisijalan']);
 Route::get('/peta-sarana-prasarana', [LandingPageController::class, 'petasaranaprasarana']);
+Route::get('/data-kependudukan', [LandingPageController::class, 'datakependudukan']);

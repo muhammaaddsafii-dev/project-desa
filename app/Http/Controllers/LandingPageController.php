@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\News;
 use App\Models\Organizer;
 use App\Models\Asset;
+use App\Models\Resident;
+use Illuminate\Support\Facades\DB;
 
 class LandingPageController extends Controller
 {
@@ -65,7 +67,7 @@ class LandingPageController extends Controller
     public function news()
     {
         $assets = Asset::all();
-        
+
         $news = News::paginate(1);
         return view('application.news', [
             'news' => $news,
@@ -93,6 +95,27 @@ class LandingPageController extends Controller
         return view('application.activity-details', [
             'activity' => $activity,
             'assets' => $assets,
+        ]);
+    }
+
+    public function datakependudukan()
+    {
+        $assets = Asset::all();
+        $residents = Resident::latest()->paginate(10);
+        $residentsByRT = Resident::select('RT', DB::raw('count(*) as total'))
+            ->groupBy('RT')
+            ->orderBy('RT')
+            ->get();
+
+        $residentsByRW = Resident::select('RW', DB::raw('count(*) as total'))
+            ->groupBy('RW')
+            ->orderBy('RW')
+            ->get();
+        return view('application.data-kependudukan', [
+            'assets' => $assets,
+            'residents' => $residents,
+            'residentsByRT' => $residentsByRT,
+            'residentsByRW' => $residentsByRW,
         ]);
     }
 
