@@ -20,17 +20,18 @@
         <section id="blog-posts" class="blog-posts section">
             <div class="container">
                 <div class="row gy-4">
-                    @foreach ($news as $news)
+                    @foreach ($news as $newsItem)
                         <div class="col-lg-4">
                             <article>
                                 <div class="post-img">
-                                    <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $news->image }}" alt="" class="img-fluid" />
+                                    <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $newsItem->image }}"
+                                        alt="" class="img-fluid" />
                                 </div>
 
                                 <p class="post-category">Politics</p>
 
                                 <h2 class="title">
-                                    <a href="{{ route('news.details', ['slug' => $news->slug]) }}">{{ $news->title }}</a>
+                                    <a href="{{ route('news.details', ['slug' => $newsItem->slug]) }}">{{ $newsItem->title }}</a>
                                 </h2>
 
                                 <div class="d-flex align-items-center">
@@ -54,13 +55,18 @@
 
         <!-- Pagination 2 Section -->
         <section id="pagination-2" class="pagination-2 section">
-            <div class="container">
+            {{-- <div class="container">
                 <div class="d-flex justify-content-center">
                     <ul>
                         <li><a href="#">1</a></li>
                         <li class="active"><a href="#">2</a></li>
                         <li><a href="#">3</a></li>
                     </ul>
+                </div>
+            </div> --}}
+            <div class="row mt-4">
+                <div class="col-12 d-flex justify-content-center">
+                    {{ $news->links() }}
                 </div>
             </div>
         </section>

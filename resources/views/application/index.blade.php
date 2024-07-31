@@ -369,11 +369,11 @@
 
                                 <div class="container">
                                     <div class="row gy-4">
-                                        @foreach ($news as $newsItem)
+                                        @foreach ($recentNews as $recent)
                                             <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                                                 <article>
                                                     <div class="post-img">
-                                                        <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $newsItem->image }}"
+                                                        <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $recent->image }}"
                                                             alt="" class="img-fluid" />
                                                     </div>
 
@@ -381,7 +381,7 @@
 
                                                     <h2 class="title">
                                                         <a
-                                                            href="{{ route('news.details', ['slug' => $newsItem->slug]) }}">{{ $newsItem->title }}</a>
+                                                            href="{{ route('news.details', ['slug' => $recent->slug]) }}">{{ $recent->title }}</a>
                                                     </h2>
 
                                                     <div class="d-flex align-items-center">
@@ -389,10 +389,10 @@
                                                             alt=""
                                                             class="img-fluid post-author-img flex-shrink-0" />
                                                         <div class="post-meta">
-                                                            <p class="post-author">{{ $newsItem->author->name }}</p>
+                                                            <p class="post-author">{{ $recent->author->name }}</p>
                                                             <p class="post-date">
                                                                 <time
-                                                                    datetime="{{ $newsItem->created_at->format('Y-m-d') }}">{{ $newsItem->created_at->format('M d, Y') }}</time>
+                                                                    datetime="{{ $recent->created_at->format('Y-m-d') }}">{{ $recent->created_at->format('M d, Y') }}</time>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -402,11 +402,11 @@
                                     </div>
 
                                     <!-- Pagination -->
-                                    <div class="row mt-4">
+                                    {{-- <div class="row mt-4">
                                         <div class="col-12 d-flex justify-content-center">
                                             {{ $news->links() }}
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </section>
                             <a href="" class="read-more align-self-end"

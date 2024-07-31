@@ -17,13 +17,13 @@ class LandingPageController extends Controller
     public function index()
     {
         $announcements = Announcement::with('images')->get();
-        $news = News::with('author')->orderBy('created_at', 'desc')->paginate(1);
+        $recentNews = News::latest()->take(3)->get();
         $organizers = Organizer::all();
         // $activities = Activity::all();
         $activities = Activity::orderBy('created_at', 'desc')->paginate(1);
         $assets = Asset::all();
         return view('application.index', [
-            'news' => $news,
+            'recentNews' => $recentNews,
             'announcements' => $announcements,
             'organizers' => $organizers,
             'activities' => $activities,
@@ -66,7 +66,8 @@ class LandingPageController extends Controller
     public function news()
     {
         $assets = Asset::all();
-        $news = News::all();
+        
+        $news = News::paginate(1);
         return view('application.news', [
             'news' => $news,
             'assets' => $assets,

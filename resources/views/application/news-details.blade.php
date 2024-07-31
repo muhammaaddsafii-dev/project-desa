@@ -77,7 +77,7 @@
                                 <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $item->image }}" alt="" class="flex-shrink-0" />
                                 <div>
                                     <h4>
-                                        <a href="blog-details.html">{{$item->title}}</a>
+                                        <a href="/detail-berita/{{$item->slug}}">{{$item->title}}</a>
                                     </h4>
                                     <time datetime="2020-01-01">{{$item->published_at}}</time>
                                 </div>
