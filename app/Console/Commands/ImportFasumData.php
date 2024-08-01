@@ -4,38 +4,54 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Fasum;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
 
 class ImportFasumData extends Command
 {
-    protected $signature = 'fasum:import';
-    protected $description = 'Import fasum data from fasum.geojson';
+    protected $signature = 'import:fasum-data';
+    protected $description = 'Import Fasum data from GeoJSON file in S3 to PostgreSQL';
 
     public function handle()
     {
-        $s3Path = 'desa-template/geojson/fasum.geojson'; // Update this with the actual S3 path
+        $this->info('Importing Fasum data...');
 
-        try {
-            $contents = Storage::disk('s3')->get($s3Path);
-            $geojson = json_decode($contents, true);
+        // S3 file URL
+        $url = 'https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/fasum.geojson';
 
-            foreach ($geojson['features'] as $feature) {
-                Fasum::create([
-                    'foto' => $feature['properties']['FOTO'],
-                    'jenis' => $feature['properties']['JENIS'],
-                    'objek' => $feature['properties']['OBJEK'],
-                    'toponim' => $feature['properties']['TOPONIM'],
-                    'sumber' => $feature['properties']['SUMBER'],
-                    'keterangan' => $feature['properties']['Keterangan'],
-                    'latitude' => $feature['geometry']['coordinates'][1],
-                    'longitude' => $feature['geometry']['coordinates'][0],
-                ]);
-            }
+        // Fetch the file content
+        $client = new Client();
+        $response = $client->get($url);
+        $content = $response->getBody()->getContents();
 
-            $this->info('Fasum data imported successfully.');
-        } catch (\Exception $e) {
-            $this->error('Error importing Fasum data: ' . $e->getMessage());
+        // Parse the GeoJSON
+        $geojson = json_decode($content, true);
+
+        // Check if the parsing was successful
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            $this->error('Failed to parse GeoJSON: ' . json_last_error_msg());
+            return;
         }
+
+        // Import each feature
+        foreach ($geojson['features'] as $feature) {
+            $properties = $feature['properties'];
+            $coordinates = $feature['geometry']['coordinates'];
+
+            DB::table('fasum')->insert([
+                'foto' => $properties['FOTO'] ?? null,
+                'jenis' => $properties['JENIS'] ?? '',
+                'objek' => $properties['OBJEK'] ?? null,
+                'toponim' => $properties['TOPONIM'] ?? '',
+                'sumber' => $properties['SUMBER'] ?? '',
+                'keterangan' => $properties['Keterangan'] ?? '',
+                'latitude' => $coordinates[1],
+                'longitude' => $coordinates[0],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        $this->info('Fasum data imported successfully!');
     }
 }
