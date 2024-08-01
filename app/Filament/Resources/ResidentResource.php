@@ -225,6 +225,7 @@ class ResidentResource extends Resource
         return [
             ResidentResource\Widgets\JumlahPendudukRT::class,
             ResidentResource\Widgets\KartuJaminan::class,
+            ResidentResource\Widgets\ResidentCharts::class,
         ];
     }
 }

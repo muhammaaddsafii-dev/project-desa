@@ -20,8 +20,9 @@ class ListResidents extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            ResidentResource\Widgets\JumlahPendudukRT::class,
-            ResidentResource\Widgets\KartuJaminan::class,
+            // ResidentResource\Widgets\JumlahPendudukRT::class,
+            // ResidentResource\Widgets\KartuJaminan::class,
+            ResidentResource\Widgets\ResidentCharts::class,
         ];
     }
 }

@@ -203,7 +203,7 @@
                                         class="bi bi-chevron-down toggle-dropdown"></i></a>
                                 <ul>
                                     <li><a href="#">Teritorial</a></li>
-                                    <li><a href="#">Kependudukan</a></li>
+                                    <li><a href="/data-kependudukan">Kependudukan</a></li>
                                     <li><a href="#">dll</a></li>
                                 </ul>
                             </li>
