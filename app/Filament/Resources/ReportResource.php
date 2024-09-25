@@ -28,7 +28,7 @@ class ReportResource extends Resource
 
     protected static ?string $navigationGroup = 'Layanan';
 
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 31;
 
     public static ?string $label = 'Laporan Masyarakat';
 
@@ -122,7 +122,9 @@ class ReportResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

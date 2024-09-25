@@ -24,7 +24,7 @@ class AnnouncementResource extends Resource
 
     protected static ?string $navigationGroup = 'Informasi';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 22;
 
     public static ?string $label = 'Pengumuman';
 
@@ -67,7 +67,9 @@ class AnnouncementResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

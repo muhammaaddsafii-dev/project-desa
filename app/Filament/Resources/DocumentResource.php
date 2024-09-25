@@ -35,7 +35,7 @@ class DocumentResource extends Resource
 
     protected static ?string $navigationGroup = 'Layanan';
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 30;
 
     public static ?string $label = 'Permohonan Surat';
 
@@ -190,7 +190,9 @@ class DocumentResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
                 Action::make('download')
                     ->label('Download')
                     ->url(fn (Document $record) => route('documents.download', $record))

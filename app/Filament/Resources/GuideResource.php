@@ -29,7 +29,7 @@ class GuideResource extends Resource
 
     protected static ?string $navigationGroup = 'Layanan';
 
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = 32;
 
     public static ?string $label = 'Panduan';
 
@@ -67,9 +67,10 @@ class GuideResource extends Resource
                     ->label('Lihat')
                     ->icon('heroicon-o-eye') // Anda bisa mengganti ikon sesuai kebutuhan
                     ->color('primary') // Mengatur warna ikon sesuai tema Anda
-                    ->url(fn ($record) => 'https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/' . $record->pdf_file)
+                    ->url(fn($record) => 'https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/' . $record->pdf_file)
                     ->openUrlInNewTab(), // Membuka URL di tab baru
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -50,7 +50,9 @@ class GeospatialResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -74,4 +76,6 @@ class GeospatialResource extends Resource
             'edit' => Pages\EditGeospatial::route('/{record}/edit'),
         ];
     }
+
+    protected static bool $shouldRegisterNavigation = false;
 }

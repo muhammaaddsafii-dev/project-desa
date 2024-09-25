@@ -26,6 +26,8 @@ class JalanResource extends Resource
 
     protected static ?string $navigationGroup = 'Data';
 
+    protected static ?int $navigationSort = 12;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -96,15 +98,15 @@ class JalanResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('Name'),
+                Tables\Columns\TextColumn::make('Name')->label('Nama'),
                 Tables\Columns\ImageColumn::make('FOTO')
                     ->getStateUsing(function ($record) {
                         return $record->getFotoUrl(); // Method to get full URL
                     })
                     ->label('Foto'),
-                Tables\Columns\TextColumn::make('PERKERASAN'),
-                Tables\Columns\TextColumn::make('KONDISI'),
-                Tables\Columns\TextColumn::make('SUMBER'),
+                Tables\Columns\TextColumn::make('PERKERASAN')->label('Perkerasan'),
+                Tables\Columns\TextColumn::make('KONDISI')->label('Kondisi'),
+                Tables\Columns\TextColumn::make('SUMBER')->label('Sumber'),
                 Tables\Columns\TextColumn::make('longitude'),
                 Tables\Columns\TextColumn::make('latitude'),
             ])
@@ -112,7 +114,9 @@ class JalanResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

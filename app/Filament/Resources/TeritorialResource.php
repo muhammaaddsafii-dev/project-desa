@@ -50,7 +50,9 @@ class TeritorialResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -74,4 +76,6 @@ class TeritorialResource extends Resource
             'edit' => Pages\EditTeritorial::route('/{record}/edit'),
         ];
     }
+
+    protected static bool $shouldRegisterNavigation = false;
 }

@@ -23,7 +23,7 @@ class AssetResource extends Resource
 
     protected static ?string $navigationGroup = 'Data Profil Desa';
 
-    protected static ?int $navigationSort = 12;
+    protected static ?int $navigationSort = 40;
 
     public static function form(Form $form): Form
     {
@@ -65,7 +65,9 @@ class AssetResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

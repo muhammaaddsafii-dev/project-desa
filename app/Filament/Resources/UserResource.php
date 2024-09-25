@@ -20,6 +20,8 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
+    protected static ?string $navigationLabel = 'Pengguna';
+
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
@@ -27,6 +29,7 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nama')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp')
@@ -37,17 +40,19 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('roles')
+                    ->label('Peran')
                     ->relationship('roles', 'name')
                     ->preload()
                     ->searchable(),
                 Forms\Components\DateTimePicker::make('email_verified_at')
-                    ->visible(fn (string $context): bool => $context === 'create'),
+                    ->label('Email dibuat pada')
+                    ->visible(fn(string $context): bool => $context === 'create'),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->maxLength(255)
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->required(fn (string $context): bool => $context === 'create')
+                    ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                    ->dehydrated(fn($state) => filled($state))
+                    ->required(fn(string $context): bool => $context === 'create')
             ]);
     }
 
@@ -56,18 +61,22 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nama')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('whatsapp')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')
+                    ->label('Peran')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat pada')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui pada')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -76,7 +85,9 @@ class UserResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

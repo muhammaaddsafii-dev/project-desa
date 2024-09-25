@@ -28,6 +28,8 @@ class FasumResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cube';
 
+    protected static ?int $navigationSort = 11;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -121,7 +123,9 @@ class FasumResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('approve')
                     ->action(fn (Fasum $record) => $record->update(['status' => 'approved']))
                     ->requiresConfirmation()

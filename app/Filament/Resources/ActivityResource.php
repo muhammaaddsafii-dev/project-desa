@@ -30,7 +30,7 @@ class ActivityResource extends Resource
 
     protected static ?string $navigationGroup = 'Informasi';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 21;
 
     public static ?string $label = 'Kegiatan Masyarakat';
 
@@ -96,7 +96,9 @@ class ActivityResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

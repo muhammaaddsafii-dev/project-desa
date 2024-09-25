@@ -38,22 +38,25 @@ class OrganizerResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required()->maxLength(255),
+                Forms\Components\TextInput::make('name')->required()->maxLength(255)->label('Nama'),
                 Forms\Components\TextInput::make('whatsapp')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('position')
+                    ->label('Jabatan')
                     ->options([
                         'Kepala Desa' => 'Kepala Desa',
                         'Sekretaris Desa' => 'Sekretaris Desa',
                         'Kepala Urusan Keuangan' => 'Kepala Urusan Keuangan',
                     ])->required(),
                 FileUpload::make('image')
+                    ->label('Foto')
                     ->disk('s3')
                     ->directory('desa-template/organisasi')
                     ->visibility('private')
                     ->preserveFilenames(),
                 RichEditor::make('quote')
+                    ->label('Kutipan')
                     ->maxLength(65535)
                     ->columnSpan('full'),
             ]);
@@ -63,10 +66,11 @@ class OrganizerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('position'),
+                Tables\Columns\TextColumn::make('name')->searchable()->label('Nama'),
+                Tables\Columns\TextColumn::make('position')->label('Jabatan'),
                 Tables\Columns\TextColumn::make('whatsapp')->searchable(),
                 ImageColumn::make('image')
+                    ->label('Foto')
                     ->getStateUsing(function ($record) {
                         $path = $record->image;
                         return Storage::disk('s3')->temporaryUrl($path, now()->addMinutes(5));
@@ -81,7 +85,9 @@ class OrganizerResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
