@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Template Web Desa GCI</title>
+    <title>Pemerintah Desa Kemasan</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -28,16 +28,6 @@
 
     <!-- Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" />
-
-    <!-- =======================================================
-      * Template Name: HeroBiz
-      * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
-      * Updated: Jun 06 2024 with Bootstrap v5.3.3
-      * Author: BootstrapMade.com
-      * License: https://bootstrapmade.com/license/
-      ======================================================== -->
-
-
 
     <!-- Leaflet CSS Library -->
     <!-- <link
@@ -153,26 +143,30 @@
     <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-locatecontrol/L.Control.Locate.min.js') }}"></script>
     <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.js') }}">
     </script>
-    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.utils.js') }}">
+    <script
+        src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.utils.js') }}">
     </script>
-    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.sizes.js') }}">
+    <script
+        src="{{ asset('assets/map-assets/Plugin/libs/leaflet-browser-print-master/leaflet.browser.print.sizes.js') }}">
     </script>
-    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-minimap/Control.MiniMap.js') }}" type="text/javascript">
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-minimap/Control.MiniMap.js') }}"
+        type="text/javascript">
     </script>
     <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-layergrup-control/leaflet.groupedlayercontrol.js') }}">
     </script>
     <script src="{{ asset('assets/map-assets/Plugin/libs/esri-leaflet/esri-leaflet-debug.js') }}"></script>
     <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-easybutton-master/easy-button.js') }}"></script>
-    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-mouseposition/L.Control.MousePosition.js') }}"></script>
+    <script src="{{ asset('assets/map-assets/Plugin/libs/leaflet-mouseposition/L.Control.MousePosition.js') }}">
+    </script>
     <script src="https://rawgit.com/MarcChasse/leaflet.ScaleFactor/master/leaflet.scalefactor.min.js"></script>
     <script src="{{ asset('assets/map-assets/Plugin/js_map/Autolinker.min.js') }}"></script>
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="{{ asset('assets/img/lg.png') }}" alt="" /> -->
+                <img src="{{ asset('assets/img/favicon.png') }}" alt="" />
                 @foreach ($assets as $asset)
-                    <h5 class="sitename"><b>{{ $asset->nama_desa }}</b></h5>
+                <h5 class="sitename"><b>{{ $asset->nama_desa }}</b></h5>
                 @endforeach
             </a>
 
@@ -202,13 +196,11 @@
                                 <a href="#"><span>Statistik</span> <i
                                         class="bi bi-chevron-down toggle-dropdown"></i></a>
                                 <ul>
-                                    <li><a href="#">Teritorial</a></li>
                                     <li><a href="/data-kependudukan">Kependudukan</a></li>
-                                    <li><a href="#">dll</a></li>
+                                    <li><a href="#">Keuangan</a></li>
                                 </ul>
                             </li>
                             <li><a href="/peta-kependudukan">Geospasial</a></li>
-                            <li><a href="#">Keuangan</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -217,7 +209,6 @@
                             <li><a href="#">Surat Online</a></li>
                             <li><a href="#">Pengaduan</a></li>
                             <li><a href="#">Panduan</a></li>
-                            <li><a href="#">Dll</a></li>
                         </ul>
                     </li>
                     <li><a href="#contact">Kontak</a></li>
@@ -237,22 +228,23 @@
                 class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
                 <div class="d-flex flex-column align-items-center align-items-lg-start">
                     <div>
-                        © Copyright <strong><span>MyWebsite</span></strong>. All Rights Reserved
+                        ©Copyright <strong><span>Pemerintah Desa Kemasan</span></strong>. All Rights Reserved
                     </div>
                     <div class="credits">
                         <!-- All the links in the footer should remain intact. -->
                         <!-- You can delete the links only if you purchased the pro version. -->
                         <!-- Licensing information: https://bootstrapmade.com/license/ -->
                         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                        Powered by <a href="https://www.geo-circle.com/">GeoCircle Indonesia</a>
                     </div>
                 </div>
 
                 <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                    <a href=""><i class="bi bi-facebook"></i></a>
-                    <a href=""><i class="bi bi-instagram"></i></a>
-                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-whatsapp"></i></a>
+                    <a
+                        href="https://www.instagram.com/geo_circle?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i
+                            class="bi bi-instagram"></i></a>
+                    <a href="https://www.geo-circle.com/"><i class="bi bi-globe"></i></a>
                 </div>
             </div>
         </div>
