@@ -19,7 +19,7 @@
                 @endforeach
             </h1>
             <p style="color: azure">
-                <i>"Desa Cerdas, Maju, Transparan, dan SejahteraAAA"</i>
+                <i>"Desa Cerdas, Maju, Transparan, dan Sejahtera"</i>
             </p>
             <div class="d-flex">
                 <a href="#features" class="btn-get-started scrollto">Layanan</a>
@@ -46,7 +46,7 @@
                             <a href="#faq" class="stretched-link">Pengumuman</a>
                         </h4>
                         <p>
-                            Informasi pengumuman untuk seluruh masyarakat Desa Geocircle.
+                            Informasi pengumuman untuk seluruh masyarakat Desa Kemasan.
                         </p>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                         </div>
                         <h4><a href="#onfocus" class="stretched-link">Berita</a></h4>
                         <p>
-                            Informasi pengumuman untuk seluruh masyarakat Desa Geocircle.
+                            Informasi pengumuman untuk seluruh masyarakat Desa Kemasan.
                         </p>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                         <h4>
                             <a href="#portfolio" class="stretched-link">Kegiatan</a>
                         </h4>
-                        <p>Dokumentasi kegiatan-kegiatan Desa Geocircle.</p>
+                        <p>Dokumentasi kegiatan-kegiatan Desa Kemasan.</p>
                     </div>
                 </div>
                 <!-- End Service Item -->
@@ -87,7 +87,7 @@
                             <a href="#features" class="stretched-link">Surat Online</a>
                         </h4>
                         <p>
-                            Pengajuan kebutuhan surat menyurat masyarakat Desa Geocircle.
+                            Pengajuan kebutuhan surat menyurat masyarakat Desa Kemasan.
                         </p>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         <h3 style="color: #df1529">
                             <b>PENGUMUMAN</b>
                         </h3>
-                        <p>Informasi terkait segala pengumuman di Desa Geocircle.</p>
+                        <p>Informasi terkait segala pengumuman di Desa Kemasan.</p>
                     </div>
 
                     <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
@@ -151,7 +151,7 @@
                         <h3 style="color: #df1529">
                             <b>PENGUMUMAN</b>
                         </h3>
-                        <p>Informasi terkait segala pengumuman di Desa Geocircle.</p>
+                        <p>Informasi terkait segala pengumuman di Desa Kemasan.</p>
                     </div>
 
                     <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
@@ -211,7 +211,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up" style="margin-bottom: -70px">
             <h3><b>TENTANG DESA</b></h3>
-            <p>Informasi terkait Desa Geocircle beserta visi dan misi nya</p>
+            <p>Informasi terkait Desa Kemasan beserta visi dan misi nya</p>
         </div>
         <!-- End Section Title -->
         @foreach ($assets as $asset)
@@ -292,7 +292,7 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h3><b>STRUKTUR DESA</b></h3>
-            <p>Informasi terkait sturktur kepengurusan Desa Geocircle.</p>
+            <p>Informasi terkait sturktur kepengurusan Desa Kemasan.</p>
         </div>
         <!-- Call To Action Section -->
         <section id="call-to-action" class="call-to-action section"
@@ -363,7 +363,7 @@
                             <!-- Section Title -->
                             <div class="container section-title" data-aos="fade-up">
                                 <h3><b>BERITA DESA</b></h3>
-                                <p>Informasi terkait berita-berita Desa Geocircle.</p>
+                                <p>Informasi terkait berita-berita Desa Kemasan.</p>
                             </div>
                             <!-- End Section Title -->
 
@@ -401,8 +401,6 @@
                                 </div>
                             </div>
                         </section>
-                        <a href="" class="read-more align-self-end" style="margin-top: 20px"><span>Lainnya</span><i
-                                class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -417,7 +415,7 @@
             <h3><b>KEGIATAN</b></h3>
             <p>
                 Informasi dan dokumentasi terkait kegiatan-kegiatan yang dilakukan
-                Desa Geocircle.
+                Desa Kemasan.
             </p>
         </div>
         <!-- End Section Title -->
@@ -490,7 +488,7 @@
         <div class="container section-title" data-aos="fade-up" style="color: white;">
             <h3 style="color: white;""><b>DATA DESA</b></h3>
                 <p style=" color: white;">
-                Informasi terkait data statistik dan data geospasial Desa Geocircle
+                Informasi terkait data statistik dan data geospasial Desa Kemasan
                 </p>
         </div>
         <!-- End Section Title -->
@@ -504,14 +502,13 @@
                         </div>
                         <div class="details position-relative">
                             <div class="icon">
-                                <i class="bi bi-bounding-box"></i>
+                                <i class="bi bi-currency-exchange"></i>
                             </div>
                             <a href="service-details.html" class="stretched-link">
-                                <h3>Teritorial</h3>
+                                <h3>Keuangan</h3>
                             </a>
                             <p>
-                                Provident nihil minus qui consequatur non omnis maiores. Eos
-                                accusantium minus dolores iure perferendis.
+                                Informasi keuangan dan pengelolaan dana desa Desa Kemasan.
                             </p>
                         </div>
                     </div>
@@ -531,8 +528,7 @@
                                 <h3>Kependudukan</h3>
                             </a>
                             <p>
-                                Ut autem aut autem non a. Sint sint sit facilis nam iusto
-                                sint. Libero corrupti neque eum hic non ut nesciunt dolorem.
+                                Tabel informasi kependudukan Desa Kemasan.
                             </p>
                         </div>
                     </div>
@@ -552,9 +548,7 @@
                                 <h3>Geospasial</h3>
                             </a>
                             <p>
-                                Ut excepturi voluptatem nisi sed. Quidem fuga consequatur.
-                                Minus ea aut. Vel qui id voluptas adipisci eos earum
-                                corrupti.
+                                Peta informasi kependudukan, fasilitas umum, dan kondisi jalan Desa Kemasan.
                             </p>
                         </div>
                     </div>
@@ -731,13 +725,13 @@
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h3><b>KONTAK</b></h3>
-            <p>Informasi terkait layanan dan segala sesuatu Desa Geocircle.</p>
+            <p>Informasi terkait layanan dan segala sesuatu Desa Kemasan.</p>
         </div>
         <!-- End Section Title -->
 
         <div class="mb-5">
             <iframe style="width: 100%; height: 400px"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7906.22851765392!2d110.41752489271606!3d-7.777707988797493!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a59f429cb44e5%3A0x889572c558f9cfef!2sCorongan%2C%20Maguwoharjo%2C%20Depok%2C%20Sleman%20Regency%2C%20Special%20Region%20of%20Yogyakarta!5e0!3m2!1sen!2sid!4v1718164458945!5m2!1sen!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8497.077564212683!2d110.67810514270471!3d-7.574609284508648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a6b1e12b3c0ab%3A0x67eb39b28ebd9a3b!2sKemasan%2C%20Sawit%2C%20Boyolali%20Regency%2C%20Central%20Java!5e1!3m2!1sen!2sid!4v1727248522960!5m2!1sen!2sid"
                 width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade" frameborder="0" allowfullscreen=""></iframe>
         </div>
@@ -752,7 +746,7 @@
                             </div>
                             <div class="col-11">
                                 <h4>Lokasi:</h4>
-                                <p>Corongan, Maguwoharjo, Sleman DIY</p>
+                                <p>Sawit, Boyolali, Jawa Tengah</p>
                             </div>
                         </div>
                     </div>
@@ -765,7 +759,7 @@
                             </div>
                             <div class="col-11">
                                 <h4>Email:</h4>
-                                <p>geocircle@gmail.com</p>
+                                <p>desakemasan@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -778,7 +772,7 @@
                             </div>
                             <div class="col-11">
                                 <h4>Telp:</h4>
-                                <p>085171231926</p>
+                                <p>087829962210</p>
                             </div>
                         </div>
                     </div>
