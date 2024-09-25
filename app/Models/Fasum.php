@@ -20,6 +20,7 @@ class Fasum extends Model
         'keterangan',
         'latitude',
         'longitude',
+        'status',
     ];
 
     protected $casts = [
@@ -46,5 +47,16 @@ class Fasum extends Model
     public function scopeLatestRecords($query)
     {
         return $query->latest('created_at'); // Use 'updated_at' if you prefer
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($fasum) {
+            if (!auth()->user()->hasRole('super_admin')) {
+                $fasum->status = 'pending';
+            }
+        });
     }
 }

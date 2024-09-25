@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Storage;
 use Dotswan\MapPicker\Fields\Map;
 use Filament\Forms\Set;
+use Filament\Tables\Actions\Action;
+use Illuminate\Support\Facades\Auth;
 
 class FasumResource extends Resource
 {
@@ -74,6 +76,15 @@ class FasumResource extends Resource
                         'zoomDelta' => 1,
                         'zoomSnap' => 2,
                     ]),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'approved' => 'Approved',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->default('pending')
+                    ->disabled(fn () => !auth()->user()->hasRole('super_admin'))
+                    ->visible(fn () => auth()->user()->hasRole('super_admin')),
             ]);
     }
 
@@ -93,12 +104,36 @@ class FasumResource extends Resource
                 Tables\Columns\TextColumn::make('keterangan'),
                 Tables\Columns\TextColumn::make('latitude'),
                 Tables\Columns\TextColumn::make('longitude'),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'approved' => 'success',
+                        'rejected' => 'danger',
+                        default => 'warning',
+                    }),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'approved' => 'Approved',
+                        'rejected' => 'Rejected',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('approve')
+                    ->action(fn (Fasum $record) => $record->update(['status' => 'approved']))
+                    ->requiresConfirmation()
+                    ->hidden(fn (Fasum $record) => $record->status === 'approved' || !auth()->user()->hasRole('super_admin'))
+                    ->color('success')
+                    ->icon('heroicon-o-check'),
+                Tables\Actions\Action::make('reject')
+                    ->action(fn (Fasum $record) => $record->update(['status' => 'rejected']))
+                    ->requiresConfirmation()
+                    ->hidden(fn (Fasum $record) => $record->status === 'rejected' || !auth()->user()->hasRole('super_admin'))
+                    ->color('danger')
+                    ->icon('heroicon-o-x-mark'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -125,22 +160,33 @@ class FasumResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->withoutGlobalScopes();
+        $query = parent::getEloquentQuery()->withoutGlobalScopes();
+
+        // Jika user bukan super_admin, hanya tampilkan data yang diapprove
+        if (!auth()->user()->hasRole('super_admin')) {
+            $query->where('status', 'approved');
+        }
+
+        return $query;
     }
 
     public static function afterSave(): void
     {
-        self::updateGeojsonFile();
+        if (auth()->user()->hasRole('super_admin')) {
+            self::updateGeojsonFile();
+        }
     }
 
     public static function afterDelete(): void
     {
-        self::updateGeojsonFile();
+        if (auth()->user()->hasRole('super_admin')) {
+            self::updateGeojsonFile();
+        }
     }
 
     protected static function updateGeojsonFile(): void
     {
-        $fasums = Fasum::all();
+        $fasums = Fasum::where('status', 'approved')->get();
 
         $geojson = [
             'type' => 'FeatureCollection',

@@ -16,4 +16,5 @@ class ListFasums extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
 }
