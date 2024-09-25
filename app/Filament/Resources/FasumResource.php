@@ -85,8 +85,8 @@ class FasumResource extends Resource
                         'rejected' => 'Rejected',
                     ])
                     ->default('pending')
-                    ->disabled(fn () => !auth()->user()->hasRole('super_admin'))
-                    ->visible(fn () => auth()->user()->hasRole('super_admin')),
+                    ->disabled(fn() => !auth()->user()->hasRole('super_admin'))
+                    ->visible(fn() => auth()->user()->hasRole('super_admin')),
             ]);
     }
 
@@ -99,16 +99,16 @@ class FasumResource extends Resource
                         return $record->getFotoUrl(); // Method to get full URL
                     })
                     ->label('Foto'),
-                Tables\Columns\TextColumn::make('jenis'),
-                Tables\Columns\TextColumn::make('objek'),
-                Tables\Columns\TextColumn::make('toponim'),
-                Tables\Columns\TextColumn::make('sumber'),
-                Tables\Columns\TextColumn::make('keterangan'),
-                Tables\Columns\TextColumn::make('latitude'),
-                Tables\Columns\TextColumn::make('longitude'),
-                Tables\Columns\TextColumn::make('status')
+                Tables\Columns\TextColumn::make('jenis')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('objek')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('toponim')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('sumber')->searchable()->sortable()->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('keterangan')->searchable()->sortable()->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('latitude')->searchable()->sortable()->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('longitude')->searchable()->sortable()->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('status')->searchable()->sortable()
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'approved' => 'success',
                         'rejected' => 'danger',
                         default => 'warning',
@@ -127,15 +127,15 @@ class FasumResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('approve')
-                    ->action(fn (Fasum $record) => $record->update(['status' => 'approved']))
+                    ->action(fn(Fasum $record) => $record->update(['status' => 'approved']))
                     ->requiresConfirmation()
-                    ->hidden(fn (Fasum $record) => $record->status === 'approved' || !auth()->user()->hasRole('super_admin'))
+                    ->hidden(fn(Fasum $record) => $record->status === 'approved' || !auth()->user()->hasRole('super_admin'))
                     ->color('success')
                     ->icon('heroicon-o-check'),
                 Tables\Actions\Action::make('reject')
-                    ->action(fn (Fasum $record) => $record->update(['status' => 'rejected']))
+                    ->action(fn(Fasum $record) => $record->update(['status' => 'rejected']))
                     ->requiresConfirmation()
-                    ->hidden(fn (Fasum $record) => $record->status === 'rejected' || !auth()->user()->hasRole('super_admin'))
+                    ->hidden(fn(Fasum $record) => $record->status === 'rejected' || !auth()->user()->hasRole('super_admin'))
                     ->color('danger')
                     ->icon('heroicon-o-x-mark'),
             ])

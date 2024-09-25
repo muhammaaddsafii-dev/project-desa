@@ -104,11 +104,11 @@ class JalanResource extends Resource
                         return $record->getFotoUrl(); // Method to get full URL
                     })
                     ->label('Foto'),
-                Tables\Columns\TextColumn::make('PERKERASAN')->label('Perkerasan'),
-                Tables\Columns\TextColumn::make('KONDISI')->label('Kondisi'),
-                Tables\Columns\TextColumn::make('SUMBER')->label('Sumber'),
-                Tables\Columns\TextColumn::make('longitude'),
-                Tables\Columns\TextColumn::make('latitude'),
+                Tables\Columns\TextColumn::make('PERKERASAN')->label('Perkerasan')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('KONDISI')->label('Kondisi')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('SUMBER')->label('Sumber')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('longitude')->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('latitude')->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
