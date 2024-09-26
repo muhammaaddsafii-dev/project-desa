@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Document;
 use App\Models\News;
 use App\Models\Activity;
+use App\Models\Resident;
 
 
 class StatsOverview extends BaseWidget
@@ -18,6 +19,7 @@ class StatsOverview extends BaseWidget
         $documentCount = Document::count();
         $newsCount = News::count();
         $activityCount = Activity::count();
+        $residentCount = Resident::count();
 
         $documentsPerMonth = Document::selectRaw('COUNT(*) as count, EXTRACT(MONTH FROM created_at) as month')
             ->groupBy('month')
@@ -29,23 +31,23 @@ class StatsOverview extends BaseWidget
         }
 
         return [
-            Stat::make('Jumlah User', $userCount)
-                ->description('Total Users')
+            Stat::make('Jumlah Pengguna', $userCount)
+                ->description('Total Pengguna')
                 ->descriptionIcon('heroicon-m-user-group')
                 ->color('success'),
 
-            // Stat::make('Jumlah Permohonan Surat', $documentCount)
-            //     ->description('Total Documents')
-            //     ->descriptionIcon('heroicon-m-document-text')
-            //     ->chart($chartData),
+            Stat::make('Jumlah Penduduk', $residentCount)
+                ->description('Total Penduduk')
+                ->descriptionIcon('heroicon-m-user-group')
+                ->color('danger'),
 
             Stat::make('Jumlah Berita', $newsCount)
-                ->description('Total News')
+                ->description('Total Berita')
                 ->descriptionIcon('heroicon-m-newspaper')
                 ->color('warning'),
 
             Stat::make('Jumlah Kegiatan', $activityCount)
-                ->description('Total Activities')
+                ->description('Total Kegiatan')
                 ->descriptionIcon('heroicon-m-calendar')
                 ->color('info'),
         ];
