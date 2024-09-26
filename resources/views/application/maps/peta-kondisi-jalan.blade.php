@@ -1,58 +1,42 @@
 @extends('application.layouts.master')
 
 @section('content')
-    <main class="main">
-        <!-- Page Title -->
-        <div class="page-title" data-aos="fade" style="background-color: #effdff; padding: 12px">
-            <div class="container d-lg-flex justify-content-between align-items-center">
-                <nav class="breadcrumbs">
-                    <ol>
-                        <li><a href="#">Data Desa</a></li>
-                        <li class="current">Geospasial</li>
-                    </ol>
-                </nav>
+<main class="main">
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade" style="background-color: #effdff; padding: 12px">
+        <div class="container d-lg-flex justify-content-between align-items-center">
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="#">Data Desa</a></li>
+                    <li class="current">Geospasial</li>
+                </ol>
+            </nav>
 
-                <div class="btn-group">
-                    <button type="button" class="btn btn-getstarted btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false" style="font-size: 14px; margin-top: 10px">
-                        Kategori Peta
-                    </button>
-                    <ul class="dropdown-menu" style="font-size: 14px">
-                        <li>
-                            <a class="dropdown-item" href="/peta-kependudukan">Peta Kependudukan</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/peta-sarana-prasarana">Peta Sarana Prasarana</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/peta-kondisi-jalan">Peta Kondisi Jalan</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- <nav class="nav-item dropdown">
-                                      <a
-                                        class="nav-link dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        href="#"
-                                        role="button"
-                                        aria-expanded="false"
-                                        style="font-size: 14px; margin-top: 10px"
-                                        >Kategori Peta</a
-                                      >
-                                      <ul class="dropdown-menu" style="font-size: 14px">
-                                        <li><a class="dropdown-item" href="#">Peta 1</a></li>
-                                        <li><a class="dropdown-item" href="#">Peta 2</a></li>
-                                        <li><a class="dropdown-item" href="#">Peta 3</a></li>
-                                      </ul>
-                                    </nav> -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-getstarted btn-sm dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false" style="font-size: 14px; margin-top: 10px">
+                    Kategori Peta
+                </button>
+                <ul class="dropdown-menu" style="font-size: 14px">
+                    <li>
+                        <a class="dropdown-item" href="/peta-kependudukan">Peta Kependudukan</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/peta-sarana-prasarana">Peta Sarana Prasarana</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/peta-kondisi-jalan">Peta Kondisi Jalan</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Page Title -->
-    </main>
+    </div>
+    <!-- End Page Title -->
+</main>
 
-    <div id="map"></div>
-    <script>
-        var icons = {
+<div id="map"></div>
+<script>
+    var icons = {
             baik: L.icon({
                 iconUrl: "{{ 'assets/map-assets/WebGIS/assets/img/legend/jalan_baik.png' }}",
                 iconSize: [22, 22],
@@ -193,10 +177,6 @@
             ),
         };
 
-        $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/kondisi_jalan.geojson", function(data) {
-            fasum.addData(data);
-        });
-
         var kondisijalanGroups = {
             baik: L.featureGroup().addTo(map),
             cukup: L.featureGroup().addTo(map),
@@ -204,59 +184,108 @@
             tidak: L.featureGroup().addTo(map),
         };
 
-        var fasum = L.geoJson(null, {
+        var kondisijalan = L.geoJson(null, {
             pointToLayer: function(feature, latlng) {
                 var icon;
-                if (feature.properties.KONDISI === "Baik") {
+                if (feature.properties["Kondisi Jalan"] === "Baik") {
                     icon = icons.baik;
-                } else if (feature.properties.KONDISI === "Cukup Baik") {
+                } else if (feature.properties["Kondisi Jalan"] === "Cukup Baik") {
                     icon = icons.cukup;
-                } else if (feature.properties.KONDISI === "Kurang Baik") {
+                } else if (feature.properties["Kondisi Jalan"] === "Kurang Baik") {
                     icon = icons.kurang;
                 } else {
                     icon = icons.tidak;
                 }
+
 
                 return L.marker(latlng, {
                     icon: icon
                 });
             },
             onEachFeature: function(feature, layer) {
-                var content =
-                    "Nama Jalan : " +
-                    feature.properties.Name +
-                    "<br>" +
-                    "Perkerasan : " +
-                    feature.properties.PERKERASAN +
-                    "<br>" +
-                    "Kondisi Jalan: " +
-                    feature.properties.KONDISI +
-                    "<br>";
+                var content = "";
+
+                // Menambahkan gambar jika tersedia
+                if (feature.properties["Gambar"]) {
+                    content +=
+                        "<div style='margin-top: 10px; margin-bottom: 10px;'>" +
+                        "<img src='" +
+                        feature.properties["Gambar"] +
+                        "' alt='Gambar Kondisi Jalan' style='max-width:100%; max-height:200px; display: block; margin: 0 auto;'>" +
+                        "</div>";
+                }
+
+                content +=
+                    "<div class='my-2'>" +
+                    "<table class='table table-bordered'>" +
+                    "<tr><th>Nama Jalan</th><td>" +
+                    feature.properties["Nama Jalan"] +
+                    "</td></tr>" +
+                    "<tr><th>Perkerasan</th><td>" +
+                    feature.properties["Perkerasan"] +
+                    "</td></tr>" +
+                    "<tr><th>Kondisi Jalan</th><td>" +
+                    feature.properties["Kondisi Jalan"] +
+                    "</td></tr>" +
+                    "</table>" +
+                    "</div>";
+                layer.bindPopup(content, {
+                    maxWidth: 300 // Atur lebar maksimum popup
+                });
 
                 layer.on({
                     click: function(e) {
-                        layer.bindPopup(content);
+                        layer.bindPopup(content).openPopup(); // Gunakan layer, bukan BatasKec
+                    },
+                    mouseover: function(e) {
+                        layer.bindTooltip(feature.properties["Nama Jalan"], {
+                            direction: "center"
+                        }).openTooltip();
+                    },
+                    mouseout: function(e) {
+                        kondisijalan.resetStyle(layer); // Mengembalikan style layer ke style awal
+                        layer.closeTooltip(); // Menutup tooltip saat mouse keluar dari layer
                     },
                 });
-
-                // Menentukan grup dan menambahkan layer
-                if (feature.properties.KONDISI === "Baik") {
+                 // Menentukan grup dan menambahkan layer
+                if (feature.properties["Kondisi Jalan"] === "Baik") {
                     kondisijalanGroups.baik.addLayer(layer);
-                } else if (feature.properties.KONDISI === "Cukup Baik") {
+                } else if (feature.properties["Kondisi Jalan"] === "Cukup Baik") {
                     kondisijalanGroups.cukup.addLayer(layer);
-                } else if (feature.properties.KONDISI === "Kurang Baik") {
+                } else if (feature.properties["Kondisi Jalan"] === "Kurang Baik") {
                     kondisijalanGroups.kurang.addLayer(layer);
                 } else {
                     kondisijalanGroups.tidak.addLayer(layer);
                 }
-            },
+            }
         });
 
+        @foreach ($kondisijalans as $item)
+            var feature = {
+                "type": "Feature",
+                "properties": {
+                    "Nama Jalan": "{{ $item->Name }}",
+                    "Perkerasan": "{{ $item->PERKERASAN }}",
+                    "Kondisi Jalan": "{{ $item->KONDISI }}",
+                    "Gambar": "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/images/jalan/{{ $item->FOTO }}"
+                    // Tambahkan properti lain yang Anda inginkan di sini
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [{{ $item->longitude }}, {{ $item->latitude }}]
+                }
+            };
+            kondisijalan.addData(feature);
+        @endforeach
+
+        map.addLayer(kondisijalan);
+
+
         /* memanggil data file geojson line */
-        $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/jalan.geojson", function(data) {
+        $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/jalan.geojson", function(
+            data) {
             jalan.addData(data);
             map.addLayer(jalan);
-            //map.fitBounds(fasum.getBounds());
         });
 
         //Menampilkan Data Garis
@@ -271,29 +300,13 @@
                     };
                 }
             },
-
-            onEachFeature: function(feature, layer) {
-                layer.on({
-                    click: function(e) {
-                        //Fungsi ketika icon simbol di-klik
-                        jalan.bindPopup(content);
-                    },
-
-                    mouseover: function(e) {
-                        jalan.bindTooltip(feature.properties.KETERANGAN);
-                    },
-
-                    //mouseout: function (e) {
-                    //fasum.closePopup();
-                    //},
-                });
-            },
         });
 
         // Memuat data GeoJSON
-        $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/perairan.geojson", function(data) {
-            jaringanAir.addData(data);
-        });
+        $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/perairan.geojson",
+            function(data) {
+                jaringanAir.addData(data);
+            });
 
         // Buat dua feature group untuk sungai dan irigasi
         var sungaiLayer = L.featureGroup().addTo(map);
@@ -318,9 +331,6 @@
             },
             onEachFeature: function(feature, layer) {
                 layer.on({
-                    click: function(e) {
-                        layer.bindPopup(feature.properties.JENIS);
-                    },
                     mouseover: function(e) {
                         layer.bindTooltip(feature.properties.JENIS);
                     },
@@ -336,11 +346,12 @@
         });
 
         /* memanggil data file geojson area */
-        $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/batas_admin.geojson", function(data) {
-            BatasDukuh.addData(data);
-            map.addLayer(BatasDukuh);
-            //map.fitBounds(fasum.getBounds());
-        });
+        $.getJSON(
+            "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/batas_admin.geojson",
+            function(data) {
+                BatasDukuh.addData(data);
+                map.addLayer(BatasDukuh);
+            });
         //Deklarasi variabel batas admin
         var BatasDukuh = L.geoJSON(null, {
             style: function(feature) {
@@ -357,28 +368,30 @@
             },
             onEachFeature: function(feature, layer) {
                 var content =
-                    "Dukuh: " +
+                    "<div class='my-2'>" +
+                    "<table class='table table-bordered'>" +
+                    "<tr><th>Dukuh</th><td>" +
                     feature.properties.DUKUH +
-                    "<br>" +
-                    "RT: " +
+                    "</td></tr>" +
+                    "<tr><th>RT</th><td>" +
                     feature.properties.RT +
-                    "<br>" +
-                    "RW: " +
+                    "</td></tr>" +
+                    "<tr><th>RW</th><td>" +
                     feature.properties.RW +
-                    "<br>" +
-                    "Ketua RT: " +
+                    "</td></tr>" +
+                    "<tr><th>Ketua RT</th><td>" +
                     feature.properties.KETUA_RT +
-                    "<br>";
+                    "</td></tr>" +
+                    "</table>" +
+                    "</div>";
 
                 layer.on({
                     click: function(e) {
-                        //Fungsi ketika obyek di klik}
-                        BatasDukuh.bindPopup(content);
+                        layer.bindPopup(content).openPopup(); // Gunakan layer, bukan BatasKec
                     },
                     mouseover: function(e) {
-                        //Fungsi mouse berada di atas objek untuk highlight
-                        var BatasDukuh = e.target; //variabel layer}
-                        BatasDukuh.setStyle({
+                        const targetLayer = e.target; // Ambil layer target
+                        targetLayer.setStyle({
                             //Highlight style
                             color: "grey", //Warna garis tepi polygon
                             weight: 0.2, //Tebal garis tepi polygon
@@ -386,32 +399,44 @@
                             fillColor: "#beeff6", //Warna tengah polygon
                             fillOpacity: 0.4, //Transparansi polygon
                         });
-                        BatasDukuh.bindTooltip(feature.properties.DUKUH);
+                        targetLayer
+                            .bindTooltip(feature.properties.DUKUH, {
+                                direction: "center"
+                            })
+                            .openTooltip();
                     },
                     mouseout: function(e) {
-                        //Fungsi mouse keluar dari obyek
-                        BatasDukuh.resetStyle(e.target); //Mengembalikan style garis ke style awal
-                        map.closePopup(); //Menutup popup
+                        const targetLayer = e.target;
+                        BatasDukuh.resetStyle(
+                            targetLayer); // Mengembalikan style layer ke style awal
+                        targetLayer.closeTooltip(); // Menutup tooltip saat mouse keluar dari layer
                     },
                 });
+
             },
         });
+
         map.createPane("pane_jalan");
         map.getPane("pane_jalan").style.zIndex = 404;
-        map.getPane("pane_jalan").style["mix-blend-mode"] = "normal";
+        map.getPane("pane_jalan").style[
+            "mix-blend-mode"] = "normal";
 
         map.createPane("pane_sungai");
         map.getPane("pane_sungai").style.zIndex = 403;
-        map.getPane("pane_sungai").style["mix-blend-mode"] = "normal";
+        map.getPane("pane_sungai")
+            .style["mix-blend-mode"] = "normal";
 
         map.createPane("pane_irigasi");
         map.getPane("pane_irigasi").style.zIndex = 402;
-        map.getPane("pane_irigasi").style["mix-blend-mode"] = "normal";
+        map.getPane("pane_irigasi")
+            .style["mix-blend-mode"] = "normal";
 
         map.createPane("pane_batasdukuh");
         map.getPane("pane_batasdukuh").style.zIndex = 401;
-        map.getPane("pane_batasdukuh").style["mix-blend-mode"] = "normal";
+        map.getPane(
+            "pane_batasdukuh").style["mix-blend-mode"] = "normal";
 
+        
         // Fungsi untuk membuat label dengan ikon
         var createLayerLabel = (icon, label) =>
             `<img src="${icon.options.iconUrl}" width="20" height="20"> ${label}`;
@@ -454,18 +479,18 @@
             batasdukuh: BatasDukuh,
         };
 
+
         addGroupedLayerControl(layers);
 
-        /*cari layer*/
         L.control
             .search({
-                layer: fasum,
-                textPlaceholder: "Cari Jalan...",
+                layer: kondisijalan,
+                textPlaceholder: "Cari Nama Jalan...",
                 initial: false,
                 zoom: 20,
-                propertyName: "Name",
+                propertyName: "Nama Jalan",
                 buildTip: function(text, val) {
-                    var type = val.layer.feature.properties.KONDISI;
+                    var type = val.layer.feature.properties["Kondisi Jalan"];
                     return (
                         '<a href="#" class="' +
                         type +
@@ -536,5 +561,5 @@
         map.on("baselayerchange", function(e) {
             miniMap.changeLayer(basemapLayersCopy[e.name]);
         });
-    </script>
+</script>
 @endsection
