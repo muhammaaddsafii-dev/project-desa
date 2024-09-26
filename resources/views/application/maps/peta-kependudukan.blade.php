@@ -1,58 +1,42 @@
 @extends('application.layouts.master')
 
 @section('content')
-    <main class="main">
-        <!-- Page Title -->
-        <div class="page-title" data-aos="fade" style="background-color: #effdff; padding: 12px">
-            <div class="container d-lg-flex justify-content-between align-items-center">
-                <nav class="breadcrumbs">
-                    <ol>
-                        <li><a href="#">Data Desa</a></li>
-                        <li class="current">Geospasial</li>
-                    </ol>
-                </nav>
+<main class="main">
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade" style="background-color: #effdff; padding: 12px">
+        <div class="container d-lg-flex justify-content-between align-items-center">
+            <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="#">Data Desa</a></li>
+                    <li class="current">Geospasial</li>
+                </ol>
+            </nav>
 
-                <div class="btn-group">
-                    <button type="button" class="btn btn-getstarted btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false" style="font-size: 14px; margin-top: 10px">
-                        Kategori Peta
-                    </button>
-                    <ul class="dropdown-menu" style="font-size: 14px">
-                        <li>
-                            <a class="dropdown-item" href="/peta-kependudukan">Peta Kependudukan</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/peta-sarana-prasarana">Peta Sarana Prasarana</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/peta-kondisi-jalan">Peta Kondisi Jalan</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- <nav class="nav-item dropdown">
-                      <a
-                        class="nav-link dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        href="#"
-                        role="button"
-                        aria-expanded="false"
-                        style="font-size: 14px; margin-top: 10px"
-                        >Kategori Peta</a
-                      >
-                      <ul class="dropdown-menu" style="font-size: 14px">
-                        <li><a class="dropdown-item" href="#">Peta 1</a></li>
-                        <li><a class="dropdown-item" href="#">Peta 2</a></li>
-                        <li><a class="dropdown-item" href="#">Peta 3</a></li>
-                      </ul>
-                    </nav> -->
+            <div class="btn-group">
+                <button type="button" class="btn btn-getstarted btn-sm dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-expanded="false" style="font-size: 14px; margin-top: 10px">
+                    Kategori Peta
+                </button>
+                <ul class="dropdown-menu" style="font-size: 14px">
+                    <li>
+                        <a class="dropdown-item" href="/peta-kependudukan">Peta Kependudukan</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/peta-sarana-prasarana">Peta Sarana Prasarana</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/peta-kondisi-jalan">Peta Kondisi Jalan</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End Page Title -->
-    </main>
+    </div>
+    <!-- End Page Title -->
+</main>
 
-    <div id="map"></div>
-    <script>
-        var icons = {
+<div id="map"></div>
+<script>
+    var icons = {
             rumah: L.icon({
                 iconUrl: "{{ 'assets/map-assets/WebGIS/assets/img/legend/home.png' }}",
                 iconSize: [15, 15],
@@ -181,30 +165,77 @@
             ),
         };
 
-        $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/penduduk.geojson",
-            function(data) {
-                rumah.addData(data);
-                map.addLayer(rumah);
-            });
-        // Deklarasi variabel rumah
+
         var rumah = L.geoJson(null, {
             pointToLayer: function(feature, latlng) {
-                var icon = icons.rumah; // Sesuaikan dengan tipe ikon yang diinginkan
                 return L.marker(latlng, {
-                    icon: icon
+                    icon: icons.rumah,
                 });
             },
             onEachFeature: function(feature, layer) {
-                var content = "Pemilik Rumah : " + feature.properties.Nama_Kepal;
+                var content = "";
+
+                // Menambahkan gambar jika tersedia
+                if (feature.properties["Gambar"]) {
+                    content +=
+                        "<div style='margin-top: 10px; margin-bottom: 10px;'>" +
+                        "<img src='" +
+                        feature.properties["Gambar"] +
+                        "' alt='Gambar Rumah' style='max-width:100%; max-height:200px; display: block; margin: 0 auto;'>" +
+                        "</div>";
+                }
+
+                content +=
+                    "<div class='my-2'>" +
+                    "<table class='table table-bordered'>" +
+                    "<tr><th>Pemilik Rumah</th><td>" +
+                    feature.properties["Pemilik Rumah"] +
+                    "</td></tr>" +
+                    "<tr><th>Status Rumah</th><td>" +
+                    feature.properties["Status Rumah"] +
+                    "</td></tr>" +
+                    "</table>" +
+                    "</div>";
+                layer.bindPopup(content, {
+                    maxWidth: 300 // Atur lebar maksimum popup
+                });
 
                 layer.on({
                     click: function(e) {
-                        // layer.bindPopup(content).openPopup();
-                        layer.bindPopup(content);
+                        layer.bindPopup(content).openPopup(); // Gunakan layer, bukan BatasKec
+                    },
+                    mouseover: function(e) {
+                        layer.bindTooltip(feature.properties["Pemilik Rumah"], {
+                            direction: "center"
+                        }).openTooltip();
+                    },
+                    mouseout: function(e) {
+                        rumah.resetStyle(layer); // Mengembalikan style layer ke style awal
+                        layer.closeTooltip(); // Menutup tooltip saat mouse keluar dari layer
                     },
                 });
-            },
+            }
         });
+
+        @foreach ($residents as $item)
+            var feature = {
+                "type": "Feature",
+                "properties": {
+                    "Pemilik Rumah": "{{ $item->Nama_Kepal }}",
+                    "Status Rumah": "{{ $item->Status_Tem }}",
+                    "Gambar": "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/images/rumah-warga/{{ $item->Foto }}"
+                    // Tambahkan properti lain yang Anda inginkan di sini
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [{{ $item->longitude }}, {{ $item->latitude }}]
+                }
+            };
+            rumah.addData(feature);
+        @endforeach
+
+        map.addLayer(rumah);
+
 
         /* memanggil data file geojson line */
         $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/jalan.geojson", function(
@@ -224,23 +255,6 @@
                         weight: 2.0,
                     };
                 }
-            },
-
-            onEachFeature: function(feature, layer) {
-                layer.on({
-                    click: function(e) {
-                        //Fungsi ketika icon simbol di-klik
-                        jalan.bindPopup(content);
-                    },
-
-                    mouseover: function(e) {
-                        jalan.bindTooltip(feature.properties.KETERANGAN);
-                    },
-
-                    //mouseout: function (e) {
-                    //fasum.closePopup();
-                    //},
-                });
             },
         });
 
@@ -273,9 +287,6 @@
             },
             onEachFeature: function(feature, layer) {
                 layer.on({
-                    click: function(e) {
-                        layer.bindPopup(feature.properties.JENIS);
-                    },
                     mouseover: function(e) {
                         layer.bindTooltip(feature.properties.JENIS);
                     },
@@ -308,25 +319,27 @@
             },
             onEachFeature: function(feature, layer) {
                 var content =
-                    "NIK: " +
+                    "<div class='my-2'>" +
+                    "<table class='table table-bordered'>" +
+                    "<tr><th>NIK</th><td>" +
                     feature.properties.NIK +
-                    "<br>" +
-                    "Alamat OBJP: " +
+                    "</td></tr>" +
+                    "<tr><th>Alamat OBJP</th><td>" +
                     feature.properties.ALMAT_OBJP +
-                    "<br>" +
-                    "Luas (m2): " +
+                    "</td></tr>" +
+                    "<tr><th>Luas (m2)</th><td>" +
                     feature.properties.LUAS +
-                    "<br>";
-
+                    "</td></tr>" +
+                    "</table>" +
+                    "</div>";
                 layer.on({
                     click: function(e) {
-                        //Fungsi ketika obyek di klik}
-                        TanahDesa.bindPopup(content);
+                        layer.bindPopup(content).openPopup(); // Gunakan layer, bukan BatasKec
                     },
                     mouseover: function(e) {
                         //Fungsi mouse berada di atas objek untuk highlight
-                        var TanahDesa = e.target; //variabel layer}
-                        TanahDesa.setStyle({
+                        var targetLayer = e.target; //variabel layer}
+                        targetLayer.setStyle({
                             //Highlight style
                             color: "red", //Warna garis tepi polygon
                             weight: 0.2, //Tebal garis tepi polygon
@@ -334,18 +347,26 @@
                             fillColor: "#62f71b", //Warna tengah polygon
                             fillOpacity: 0.4, //Transparansi polygon
                         });
-                        TanahDesa.bindTooltip(feature.properties.NAMA_WP);
+                        targetLayer
+                            .bindTooltip(feature.properties.NAMA_WP, {
+                                direction: "center"
+                            })
+                            .openTooltip();
                     },
                     mouseout: function(e) {
-                        //Fungsi mouse keluar dari obyek
-                        TanahDesa.resetStyle(e.target); //Mengembalikan style garis ke style awal
-                        map.closePopup(); //Menutup popup
+
+                        const targetLayer = e.target;
+                        TanahDesa.resetStyle(
+                            targetLayer); // Mengembalikan style layer ke style awal
+                        targetLayer
+                            .closeTooltip(); // Menutup tooltip saat mouse keluar dari layer
                     },
                 });
             },
         });
         /* memanggil data file geojson area */
-        $.getJSON("https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/batas_admin.geojson",
+        $.getJSON(
+            "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/geojson/batas_admin.geojson",
             function(data) {
                 BatasDukuh.addData(data);
                 map.addLayer(BatasDukuh);
@@ -367,28 +388,30 @@
             },
             onEachFeature: function(feature, layer) {
                 var content =
-                    "Dukuh: " +
+                    "<div class='my-2'>" +
+                    "<table class='table table-bordered'>" +
+                    "<tr><th>Dukuh</th><td>" +
                     feature.properties.DUKUH +
-                    "<br>" +
-                    "RT: " +
+                    "</td></tr>" +
+                    "<tr><th>RT</th><td>" +
                     feature.properties.RT +
-                    "<br>" +
-                    "RW: " +
+                    "</td></tr>" +
+                    "<tr><th>RW</th><td>" +
                     feature.properties.RW +
-                    "<br>" +
-                    "Ketua RT: " +
+                    "</td></tr>" +
+                    "<tr><th>Ketua RT</th><td>" +
                     feature.properties.KETUA_RT +
-                    "<br>";
+                    "</td></tr>" +
+                    "</table>" +
+                    "</div>";
 
                 layer.on({
                     click: function(e) {
-                        //Fungsi ketika obyek di klik}
-                        BatasDukuh.bindPopup(content);
+                        layer.bindPopup(content).openPopup(); // Gunakan layer, bukan BatasKec
                     },
                     mouseover: function(e) {
-                        //Fungsi mouse berada di atas objek untuk highlight
-                        var BatasDukuh = e.target; //variabel layer}
-                        BatasDukuh.setStyle({
+                        const targetLayer = e.target; // Ambil layer target
+                        targetLayer.setStyle({
                             //Highlight style
                             color: "grey", //Warna garis tepi polygon
                             weight: 0.2, //Tebal garis tepi polygon
@@ -396,35 +419,47 @@
                             fillColor: "#beeff6", //Warna tengah polygon
                             fillOpacity: 0.4, //Transparansi polygon
                         });
-                        BatasDukuh.bindTooltip(feature.properties.DUKUH);
+                        targetLayer
+                            .bindTooltip(feature.properties.DUKUH, {
+                                direction: "center"
+                            })
+                            .openTooltip();
                     },
                     mouseout: function(e) {
-                        //Fungsi mouse keluar dari obyek
-                        BatasDukuh.resetStyle(e.target); //Mengembalikan style garis ke style awal
-                        map.closePopup(); //Menutup popup
+                        const targetLayer = e.target;
+                        BatasDukuh.resetStyle(
+                            targetLayer); // Mengembalikan style layer ke style awal
+                        targetLayer.closeTooltip(); // Menutup tooltip saat mouse keluar dari layer
                     },
                 });
+
             },
         });
+
         map.createPane("pane_jalan");
         map.getPane("pane_jalan").style.zIndex = 404;
-        map.getPane("pane_jalan").style["mix-blend-mode"] = "normal";
+        map.getPane("pane_jalan").style[
+            "mix-blend-mode"] = "normal";
 
         map.createPane("pane_sungai");
         map.getPane("pane_sungai").style.zIndex = 403;
-        map.getPane("pane_sungai").style["mix-blend-mode"] = "normal";
+        map.getPane("pane_sungai")
+            .style["mix-blend-mode"] = "normal";
 
         map.createPane("pane_irigasi");
         map.getPane("pane_irigasi").style.zIndex = 402;
-        map.getPane("pane_irigasi").style["mix-blend-mode"] = "normal";
+        map.getPane("pane_irigasi")
+            .style["mix-blend-mode"] = "normal";
 
         map.createPane("pane_batasdukuh");
         map.getPane("pane_batasdukuh").style.zIndex = 401;
-        map.getPane("pane_batasdukuh").style["mix-blend-mode"] = "normal";
+        map.getPane(
+            "pane_batasdukuh").style["mix-blend-mode"] = "normal";
 
         map.createPane("pane_tanahdesa");
         map.getPane("pane_tanahdesa").style.zIndex = 400;
-        map.getPane("pane_tanahdesa").style["mix-blend-mode"] = "normal";
+        map.getPane(
+            "pane_tanahdesa").style["mix-blend-mode"] = "normal";
 
         // Fungsi untuk membuat label dengan ikon
         var createLayerLabel = (icon, label) =>
@@ -481,7 +516,7 @@
                     opacity: 0.5, // Opasitas lingkaran
                 },
             },
-            propertyName: "Nama_Kepal", // Pastikan nama field yang sesuai untuk pencarian
+            propertyName: "Pemilik Rumah", // Pastikan nama field yang sesuai untuk pencarian
         });
 
         map.addControl(controlSearch);
@@ -543,5 +578,5 @@
         map.on("baselayerchange", function(e) {
             miniMap.changeLayer(basemapLayersCopy[e.name]);
         });
-    </script>
+</script>
 @endsection
