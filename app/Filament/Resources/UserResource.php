@@ -39,6 +39,9 @@ class UserResource extends Resource
                     ->email()
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('nik')
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\Select::make('roles')
                     ->label('Peran')
                     ->relationship('roles', 'name')
@@ -66,6 +69,9 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('whatsapp')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('nik')
+                    ->label('NIK')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->label('Peran')
