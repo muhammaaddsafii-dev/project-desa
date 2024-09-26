@@ -33,21 +33,25 @@ class JalanResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('Name')
+                    ->label('Nama')
                     ->required()
                     ->maxLength(255),
-                    Forms\Components\FileUpload::make('FOTO')
+                Forms\Components\FileUpload::make('FOTO')
+                    ->label('Foto')
                     ->disk('s3')
                     ->directory('desa-template/images/jalan')
                     ->visibility('private')
                     ->preserveFilenames()
                     ->required(),
                 Forms\Components\Select::make('PERKERASAN')
+                    ->label('Perkerasan')
                     ->options([
                         'Aspal' => 'Aspal',
                         'Beton/Cor' => 'Beton/Cor',
                     ])
                     ->required(),
                 Forms\Components\Select::make('KONDISI')
+                    ->label('Kondisi')
                     ->options([
                         'Baik' => 'Baik',
                         'Kurang Baik' => 'Kurang Baik',
@@ -55,6 +59,7 @@ class JalanResource extends Resource
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('SUMBER')
+                    ->label('Sumber')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Hidden::make('latitude'),

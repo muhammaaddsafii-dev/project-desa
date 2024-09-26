@@ -223,7 +223,7 @@
                 "properties": {
                     "Pemilik Rumah": "{{ $item->Nama_Kepal }}",
                     "Status Rumah": "{{ $item->Status_Tem }}",
-                    "Gambar": "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/images/rumah-warga/{{ $item->Foto }}"
+                    "Gambar": "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $item->Foto }}"
                     // Tambahkan properti lain yang Anda inginkan di sini
                 },
                 "geometry": {

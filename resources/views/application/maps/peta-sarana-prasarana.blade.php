@@ -280,7 +280,7 @@
                 "properties": {
                     "Jenis Fasum": "{{ $item->jenis }}",
                     "Nama Fasum": "{{ $item->toponim }}",
-                    "Gambar": "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/images/fasilitas-umum/{{ $item->foto }}"
+                    "Gambar": "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $item->foto }}"
                     // Tambahkan properti lain yang Anda inginkan di sini
                 },
                 "geometry": {

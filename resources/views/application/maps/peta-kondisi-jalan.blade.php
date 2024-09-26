@@ -267,7 +267,7 @@
                     "Nama Jalan": "{{ $item->Name }}",
                     "Perkerasan": "{{ $item->PERKERASAN }}",
                     "Kondisi Jalan": "{{ $item->KONDISI }}",
-                    "Gambar": "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/desa-template/images/jalan/{{ $item->FOTO }}"
+                    "Gambar": "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $item->FOTO }}"
                     // Tambahkan properti lain yang Anda inginkan di sini
                 },
                 "geometry": {
