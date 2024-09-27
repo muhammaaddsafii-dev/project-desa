@@ -21,6 +21,16 @@ class PetaSaranaPrasaranaController extends Controller
         ]);
     }
 
+    public function index_admin()
+    {
+        $fasums = Fasum::get();
+        $assets = Asset::all();
+        return view('application.maps-admin.peta-sarana-prasarana', [
+            'fasums' => $fasums,
+            'assets' => $assets
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

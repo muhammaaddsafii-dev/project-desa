@@ -21,6 +21,17 @@ class PetaKependudukanController extends Controller
     }
 
 
+    public function index_admin()
+    {
+        $residents = Resident::get();
+        $assets = Asset::all();
+        return view('application.maps-admin.peta-kependudukan', [
+            'residents' => $residents,
+            'assets' => $assets
+        ]);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

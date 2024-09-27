@@ -20,6 +20,16 @@ class PetaKondisiJalanController extends Controller
         ]);
     }
 
+    public function index_admin()
+    {
+        $kondisijalans = Jalan::get();
+        $assets = Asset::all();
+        return view('application.maps-admin.peta-kondisi-jalan', [
+            'kondisijalans' => $kondisijalans,
+            'assets' => $assets
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
