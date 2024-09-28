@@ -1,4 +1,4 @@
-@extends('application.layouts.master')
+@extends('application.layouts.master-admin')
 
 @section('content')
 <main class="main">
@@ -231,12 +231,10 @@
                 content +=
                     "<div class='my-2'>" +
                     "<table class='table table-bordered'>" +
-                    "<tr><th>Jenis Fasilitas Umum</th><td>" +
-                    feature.properties["Jenis Fasum"] +
-                    "</td></tr>" +
-                    "<tr><th>Nama Fasilitas</th><td>" +
-                    feature.properties["Nama Fasum"] +
-                    "</td></tr>" +
+                    "<tr><th>Jenis Fasum</th><td>" + feature.properties["Jenis Fasum"] + "</td></tr>" +
+                    "<tr><th>Objek</th><td>" + feature.properties["Objek"] + "</td></tr>" +
+                    "<tr><th>Nama Fasum</th><td>" + feature.properties["Nama Fasum"] + "</td></tr>" +
+                    "<tr><th>Keterangan</th><td>" + feature.properties["Keterangan"] + "</td></tr>" +
                     "</table>" +
                     "</div>";
                 layer.bindPopup(content, {
@@ -257,8 +255,8 @@
                         layer.closeTooltip(); // Menutup tooltip saat mouse keluar dari layer
                     },
                 });
-                 // Menentukan grup dan menambahkan layer
-                 if (feature.properties["Jenis Fasum"] === "Fasilitas Sosial") {
+                // Menentukan grup dan menambahkan layer
+                if (feature.properties["Jenis Fasum"] === "Fasilitas Sosial") {
                     fasumGroups.sosial.addLayer(layer);
                 } else if (feature.properties["Jenis Fasum"] === "Perkantoran") {
                     fasumGroups.kantor.addLayer(layer);
@@ -279,7 +277,9 @@
                 "type": "Feature",
                 "properties": {
                     "Jenis Fasum": "{{ $item->jenis }}",
+                    "Objek": "{{ $item->objek }}",
                     "Nama Fasum": "{{ $item->toponim }}",
+                    "Keterangan": "{{ $item->keterangan }}",
                     "Gambar": "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $item->foto }}"
                     // Tambahkan properti lain yang Anda inginkan di sini
                 },
@@ -518,7 +518,7 @@
         map.getPane(
             "pane_batasdukuh").style["mix-blend-mode"] = "normal";
 
-        
+
         // Fungsi untuk membuat label dengan ikon
         var createLayerLabel = (icon, label) =>
             `<img src="${icon.options.iconUrl}" width="20" height="20"> ${label}`;

@@ -16,7 +16,8 @@ class PetaKependudukanController extends Controller
         $assets = Asset::all();
         return view('application.maps.peta-kependudukan', [
             'residents' => $residents,
-            'assets' => $assets
+            'assets' => $assets,
+            
         ]);
     }
 
@@ -27,7 +28,7 @@ class PetaKependudukanController extends Controller
         $assets = Asset::all();
         return view('application.maps-admin.peta-kependudukan', [
             'residents' => $residents,
-            'assets' => $assets
+            'assets' => $assets,
         ]);
     }
 
