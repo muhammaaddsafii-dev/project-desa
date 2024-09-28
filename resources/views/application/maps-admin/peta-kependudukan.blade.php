@@ -1,4 +1,4 @@
-@extends('application.layouts.master')
+@extends('application.layouts.master-admin')
 
 @section('content')
 <main class="main">
@@ -33,6 +33,125 @@
     </div>
     <!-- End Page Title -->
 </main>
+@if (session('success'))
+<script>
+    alert('Data updated successfully');
+</script>
+@endif
+
+<!-- Modal Data-->
+<div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dataModalLabel">
+                    <b>DETAIL DATA PENDUDUK</b>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="OBJECTID" name="OBJECTID">
+                    <div class="col-md-6">
+                        <label for="nik" class="form-label"><b>NIK</b></label>
+                        <input type="text" class="form-control" id="nik" name="NIK" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Nama_Kepal" class="form-label"><b>Kepala Keluarga</b></label>
+                        <input type="text" class="form-control" id="Nama_Kepal" name="Nama_Kepal" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Jenis_Kela" class="form-label"><b>Jenis Kelamin</b></label>
+                        <input type="text" class="form-control" id="Jenis_Kela" name="Jenis_Kela" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Profesi_KK" class="form-label"><b>Pekerjaan</b></label>
+                        <input type="text" class="form-control" id="Profesi_KK" name="Profesi_KK" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Jumlah_KK" class="form-label"><b>Jumlah KK</b></label>
+                        <input type="text" class="form-control" id="Jumlah_KK" name="Jumlah_KK" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="RT" class="form-label"><b>RT</b></label>
+                        <input type="text" class="form-control" id="RT" name="RT" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="RW" class="form-label"><b>RW</b></label>
+                        <input type="text" class="form-control" id="RW" name="RW" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Status_Tem" class="form-label"><b>Status Rumah</b></label>
+                        <input type="text" class="form-control" id="Status_Tem" name="Status_Tem" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Luas_Lanta" class="form-label"><b>Luas Lantai</b></label>
+                        <input type="text" class="form-control" id="Luas_Lanta" name="Luas_Lanta" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Jenis_Lanta" class="form-label"><b>Jenis Lantai</b></label>
+                        <input type="text" class="form-control" id="Jenis_Lanta" name="Jenis_Lanta" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Jenis_Dind" class="form-label"><b>Jenis Dinding</b></label>
+                        <input type="text" class="form-control" id="Jenis_Dind" name="Jenis_Dind" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Fasilitas_" class="form-label"><b>Fasilitas MCK</b></label>
+                        <input type="text" class="form-control" id="Fasilitas_" name="Fasilitas_" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Fasilitas1" class="form-label"><b>Fasilitas Listrik</b></label>
+                        <input type="text" class="form-control" id="Fasilitas1" name="Fasilitas1" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Fasilita_1" class="form-label"><b>Fasilitas Air</b></label>
+                        <input type="text" class="form-control" id="Fasilita_1" name="Fasilita_1" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Bahan_Baka" class="form-label"><b>Bahan Bakar</b></label>
+                        <input type="text" class="form-control" id="Bahan_Baka" name="Bahan_Baka" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Kartu_Jami" class="form-label"><b>Kartu Kesehatan</b></label>
+                        <input type="text" class="form-control" id="Kartu_Jami" name="Kartu_Jami" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Akses_Info" class="form-label"><b>Akses Informasi</b></label>
+                        <input type="text" class="form-control" id="Akses_Info" name="Akses_Info" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Keterangan" class="form-label"><b>Keterangan</b></label>
+                        <input type="text" class="form-control" id="Keterangan" name="Keterangan" />
+                    </div>
+                    <!-- geometry field is omitted since it's not updated via form -->
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Ubah Data</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="gambarModal" tabindex="-1" aria-labelledby="gambarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gambarModalLabel">
+                    <b>DETAIL GAMBAR</b>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="text" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="map"></div>
 <script>
@@ -188,13 +307,31 @@
                 content +=
                     "<div class='my-2'>" +
                     "<table class='table table-bordered'>" +
-                    "<tr><th>Pemilik Rumah</th><td>" +
-                    feature.properties["Pemilik Rumah"] +
+                    "<tr><th>NIK</th><td>" + feature.properties["NIK"] + "</td></tr>" +
+                    "<tr><th>Kepala Keluarga</th><td>" + feature.properties["Kepala Keluarga"] + "</td></tr>" +
+                    "<tr><th>Jenis Kelamin</th><td>" + feature.properties["Jenis Kelamin"] + "</td></tr>" +
+                    "<tr><th>Pekerjaan</th><td>" + feature.properties["Pekerjaan"] + "</td></tr>" +
+                    "<tr><th>Jumlah KK</th><td>" + feature.properties["Jumlah KK"] + "</td></tr>" +
+                    "<tr><th>RT</th><td>" + feature.properties["RT"] + "</td></tr>" +
+                    "<tr><th>RW</th><td>" + feature.properties["RW"] + "</td></tr>" +
+                    "<tr><th>Status Rumah</th><td>" + feature.properties["Status Rumah"] + "</td></tr>" +
+                    "<tr><th>Luas Lantai</th><td>" + feature.properties["Luas Lantai"] + "</td></tr>" +
+                    "<tr><th>Jenis Lantai</th><td>" + feature.properties["Jenis Lantai"] + "</td></tr>" +
+                    "<tr><th>Jenis Dinding</th><td>" + feature.properties["Jenis Dinding"] + "</td></tr>" +
+                    "<tr><th>Fasilitas MCK</th><td>" + feature.properties["Fasilitas MCK"] + "</td></tr>" +
+                    "<tr><th>Fasilitas Listrik</th><td>" + feature.properties["Fasilitas Listik"] +
                     "</td></tr>" +
-                    "<tr><th>Status Rumah</th><td>" +
-                    feature.properties["Status Rumah"] +
-                    "</td></tr>" +
+                    "<tr><th>Fasilitas Air</th><td>" + feature.properties["Fasilitas Air"] + "</td></tr>" +
+                    "<tr><th>Bahan Bakar</th><td>" + feature.properties["Bahan Bakar"] + "</td></tr>" +
+                    "<tr><th>Kartu Kesehatan</th><td>" + feature.properties["Kartu Kesehatan"] + "</td></tr>" +
+                    "<tr><th>Akses Informasi</th><td>" + feature.properties["Akses Infromasi"] + "</td></tr>" +
+                    "<tr><th>Keterangan</th><td>" + feature.properties["Keterangan"] + "</td></tr>" +
                     "</table>" +
+                    "</div>" +
+                    "<div class='my-2 d-flex justify-content-center' style='gap: 14px;'>" +
+                    "<button type='button' class='btn btn-outline-warning btn-sm lihat-gambar' data-bs-toggle='modal' data-bs-target='#gambarModal' onclick='populateForm(" + JSON.stringify(feature.properties) + ")'>Lihat Gambar</button>" +
+                    "<button type='button' class='btn btn-outline-info btn-sm edit-data' data-bs-toggle='modal' data-bs-target='#dataModal' onclick='populateForm(" +
+                    JSON.stringify(feature.properties) + ")'>Edit Data</button>" +
                     "</div>";
                 layer.bindPopup(content, {
                     maxWidth: 300 // Atur lebar maksimum popup
@@ -205,7 +342,7 @@
                         layer.bindPopup(content).openPopup(); // Gunakan layer, bukan BatasKec
                     },
                     mouseover: function(e) {
-                        layer.bindTooltip(feature.properties["Pemilik Rumah"], {
+                        layer.bindTooltip(feature.properties["Kepala Keluarga"], {
                             direction: "center"
                         }).openTooltip();
                     },
@@ -221,8 +358,25 @@
             var feature = {
                 "type": "Feature",
                 "properties": {
-                    "Pemilik Rumah": "{{ $item->Nama_Kepal }}",
+                    "NIK": "{{ $item->NIK }}",
+                    "Kepala Keluarga": "{{ $item->Nama_Kepal }}",
+                    "Jenis Kelamin": "{{ $item->Jenis_Kela }}",
+                    "Pekerjaan": "{{ $item->Profesi_KK }}",
+                    "Jumlah KK": "{{ $item->Jumlah_KK }}",
+                    "RT": "{{ $item->RT }}",
+                    "RW": "{{ $item->RW }}",
                     "Status Rumah": "{{ $item->Status_Tem }}",
+                    "Luas Lantai": "{{ $item->Luas_Lanta }}",
+                    "Jenis Lantai": "{{ $item->Jenis_Lanta }}",
+                    "Jenis Dinding": "{{ $item->Jenis_Dind }}",
+                    "Fasilitas MCK": "{{ $item->Fasilitas_ }}",
+                    "Fasilitas Listik": "{{ $item->Fasilitas1 }}",
+                    "Fasilitas Air": "{{ $item->Fasilita_1 }}",
+                    "Bahan Bakar": "{{ $item->Bahan_Baka }}",
+                    "Kartu Kesehatan": "{{ $item->Kartu_Jami }}",
+                    "Akses Infromasi": "{{ $item->Akses_Info }}",
+                    "Keterangan": "{{ $item->Keterangan }}",
+
                     "Gambar": "https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $item->Foto }}"
                     // Tambahkan properti lain yang Anda inginkan di sini
                 },
@@ -516,7 +670,7 @@
                     opacity: 0.5, // Opasitas lingkaran
                 },
             },
-            propertyName: "Pemilik Rumah", // Pastikan nama field yang sesuai untuk pencarian
+            propertyName: "Kepala Keluarga", // Pastikan nama field yang sesuai untuk pencarian
         });
 
         map.addControl(controlSearch);
@@ -578,5 +732,15 @@
         map.on("baselayerchange", function(e) {
             miniMap.changeLayer(basemapLayersCopy[e.name]);
         });
+
+        function populateForm(properties) {
+    // Set the image URL to the modal
+            const modalImage = document.querySelector('#gambarModal .modal-body img');
+            modalImage.src = properties["Gambar"] || ''; // Set image URL or empty string if undefined
+
+            // Optionally, you can set the alt text to something descriptive
+            modalImage.alt = properties["Keterangan"] || 'Gambar Rumah';
+        }
+
 </script>
 @endsection
