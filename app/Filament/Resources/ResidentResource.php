@@ -121,15 +121,16 @@ class ResidentResource extends Resource
                         return $record->getFotoUrl(); // Method to get full URL
                     })
                     ->label('Foto'),
-                Tables\Columns\TextColumn::make('Nama_Kepal')
-                    ->label('Nama Kepala Keluarga')
-                    ->sortable(query: function ($query, $direction) {
-                        return $query->orderBy(new Expression('"Nama_Kepal"'), $direction);
-                    })
-                    ->searchable(query: function ($query, $search) {
-                        return $query->orWhere(new Expression('LOWER("Nama_Kepal")'), 'LIKE', '%' . strtolower($search) . '%');
-                    })
-                    ->toggleable(isToggledHiddenByDefault: false),
+                Tables\Columns\TextColumn::make('Nama_Kepal')->label('Nama Kepala Keluarga')->searchable()->sortable()->toggleable(isToggledHiddenByDefault: false),
+                // Tables\Columns\TextColumn::make('Nama_Kepal')
+                //     ->label('Nama Kepala Keluarga')
+                //     ->sortable(query: function ($query, $direction) {
+                //         return $query->orderBy(new Expression('"Nama_Kepal"'), $direction);
+                //     })
+                //     ->searchable(query: function ($query, $search) {
+                //         return $query->orWhere(new Expression('LOWER("Nama_Kepal")'), 'LIKE', '%' . strtolower($search) . '%');
+                //     })
+                //     ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('Jenis_Kela')->label('Jenis Kelamin')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('Status_Tem')->label('Status Tempat Tinggal')->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('Luas_Lanta')->label('Luas Lantai')->toggleable(isToggledHiddenByDefault: true),
@@ -145,15 +146,16 @@ class ResidentResource extends Resource
                 Tables\Columns\TextColumn::make('RW')->label(label: 'RW')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('Keterangan')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('Profesi_KK')->label('Profesi Kepala Keluarga')->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('NIK')
-                    ->label('NIK')
-                    ->sortable(query: function ($query, $direction) {
-                        return $query->orderBy(new Expression('"NIK"'), $direction);
-                    })
-                    ->searchable(query: function ($query, $search) {
-                        return $query->orWhere(new Expression('LOWER("NIK")'), 'LIKE', '%' . strtolower($search) . '%');
-                    })
-                    ->toggleable(isToggledHiddenByDefault: false),
+                // Tables\Columns\TextColumn::make('NIK')
+                //     ->label('NIK')
+                //     ->sortable(query: function ($query, $direction) {
+                //         return $query->orderBy(new Expression('"NIK"'), $direction);
+                //     })
+                //     ->searchable(query: function ($query, $search) {
+                //         return $query->orWhere(new Expression('LOWER("NIK")'), 'LIKE', '%' . strtolower($search) . '%');
+                //     })
+                //     ->toggleable(isToggledHiddenByDefault: false),
+                Tables\Columns\TextColumn::make('NIK')->label('NIK')->searchable()->sortable()->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\TextColumn::make('DATA')->label('Data')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('Jumlah_KK')->label('Jumlah KK')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('SUMBER')->label('Sumber')->toggleable(isToggledHiddenByDefault: true),
