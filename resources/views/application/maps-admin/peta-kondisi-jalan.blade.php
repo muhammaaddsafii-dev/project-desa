@@ -96,7 +96,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="text" class="img-fluid">
+                    <img src="text" class="img-fluid" style="display: block; margin: auto">
                 </div>
             </div>
         </div>

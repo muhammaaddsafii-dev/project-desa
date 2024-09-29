@@ -8,7 +8,7 @@
                 <h5 class="mb-2 mb-lg-0"><b>DETAIL BERITA</b></h5>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="/">Beranda</a></li>
                         <li class="current">Detail Berita</li>
                     </ol>
                 </nav>
@@ -24,7 +24,8 @@
                         <div class="container">
                             <article class="article">
                                 <div class="post-img">
-                                    <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid" />
+                                    <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $news->image_path }}"
+                                        alt="" class="img-fluid" />
                                 </div>
 
                                 <h2 class="title">
@@ -35,11 +36,11 @@
                                     <ul>
                                         <li class="d-flex align-items-center">
                                             <i class="bi bi-person"></i>
-                                            <a href="blog-details.html">{{ $news->author->name }}</a>
+                                            <a href="">{{ $news->author->name }}</a>
                                         </li>
                                         <li class="d-flex align-items-center">
                                             <i class="bi bi-clock"></i>
-                                            <a href="blog-details.html"><time
+                                            <a href=""><time
                                                     datetime="2020-01-01">{{ $news->published_at }}</time></a>
                                         </li>
                                     </ul>

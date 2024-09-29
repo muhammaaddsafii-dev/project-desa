@@ -35,8 +35,8 @@ return new class extends Migration
             $table->string('DATA')->nullable();
             $table->string('Jumlah_KK')->nullable();
             $table->string('SUMBER')->nullable();
-            $table->float('latitude')->nullable();
-            $table->float('longitude')->nullable();
+            $table->decimal('longitude', 15, 12);
+            $table->decimal('latitude', 15, 12);
             $table->timestamps();
         });
     }

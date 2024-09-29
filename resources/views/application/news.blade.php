@@ -28,20 +28,20 @@
                                         alt="" class="img-fluid" />
                                 </div>
 
-                                <p class="post-category">Politics</p>
+                                {{-- <p class="post-category">Politics</p> --}}
 
                                 <h2 class="title">
                                     <a href="{{ route('news.details', ['slug' => $newsItem->slug]) }}">{{ $newsItem->title }}</a>
                                 </h2>
 
                                 <div class="d-flex align-items-center">
-                                    <img src="assets/img/blog/blog-author.jpg" alt=""
+                                    <img src="assets/img/blog/blog-author.png" alt=""
                                         class="img-fluid post-author-img flex-shrink-0" />
                                     <div class="post-meta">
                                         <p class="post-author">Maria Doe</p>
-                                        <p class="post-date">
+                                        {{-- <p class="post-date">
                                             <time datetime="2022-01-01">Jan 1, 2022</time>
-                                        </p>
+                                        </p> --}}
                                     </div>
                                 </div>
                             </article>
