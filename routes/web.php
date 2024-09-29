@@ -35,6 +35,12 @@ Route::get('/data-kependudukan', [LandingPageController::class, 'datakependuduka
 
 
 Route::get('/peta-kependudukan-admin', [PetaKependudukanController::class, 'index_admin'])->name('peta-penduduk-admin');
+Route::put('/peta-penduduk-admin/{id}', [PetaKependudukanController::class, 'update'])->name('update.peta-penduduk-admin');
+
 // Route::get('/peta-kependudukan-admin/{id?}', [PetaKependudukanController::class, 'index_admin'])->name('peta-penduduk-admin');
 Route::get('/peta-sarana-prasarana-admin', [PetaSaranaPrasaranaController::class, 'index_admin'])->name('peta-fasum-admin');
+Route::put('/peta-sarana-prasarana-admin/{id}', [PetaSaranaPrasaranaController::class, 'update'])->name('update.peta-fasum-admin');
+
+
 Route::get('/peta-kondisi-jalan-admin', [PetaKondisiJalanController::class, 'index_admin'])->name('peta-jalan-admin');
+Route::put('/peta-kondisi-jalan-admin/{id}', [PetaKondisiJalanController::class, 'update'])->name('update.peta-jalan-admin');

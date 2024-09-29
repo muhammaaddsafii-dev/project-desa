@@ -31,6 +31,33 @@ class PetaSaranaPrasaranaController extends Controller
         ]);
     }
 
+    public function update(Request $request, $id)
+    {
+        // Validate the request data
+        $request->validate([
+            'jenis' => 'nullable|string|max:255',
+            'objek' => 'nullable|string|max:255',
+            'toponim' => 'nullable|string|max:255',
+            'keterangan' => 'nullable|string|max:255',
+            // 'SUMBER' => 'nullable|string|max:255',
+        ]);
+
+        // Find the resident by ID
+        $jalan = Fasum::findOrFail($id);
+
+        // Update the resident with form data
+        $jalan->update([
+            'jenis' => $request->jenis,
+            'objek' => $request->objek,
+            'toponim' => $request->toponim,
+            'keterangan' => $request->keterangan,
+            // 'SUMBER' => $request->SUMBER,
+        ]);
+
+        // Redirect or return a response
+        return redirect()->back()->with('success', 'Data successfully updated.');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -66,10 +93,6 @@ class PetaSaranaPrasaranaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

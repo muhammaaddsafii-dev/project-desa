@@ -1,42 +1,114 @@
 @extends('application.layouts.master-admin')
 
 @section('content')
-<main class="main">
-    <!-- Page Title -->
-    <div class="page-title" data-aos="fade" style="background-color: #effdff; padding: 12px">
-        <div class="container d-lg-flex justify-content-between align-items-center">
-            <nav class="breadcrumbs">
-                <ol>
-                    <li><a href="#">Data Desa</a></li>
-                    <li class="current">Geospasial</li>
-                </ol>
-            </nav>
+    <main class="main">
+        <!-- Page Title -->
+        <div class="page-title" data-aos="fade" style="background-color: #effdff; padding: 12px">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="#">Data Desa</a></li>
+                        <li class="current">Geospasial</li>
+                    </ol>
+                </nav>
 
-            <div class="btn-group">
-                <button type="button" class="btn btn-getstarted btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-                    aria-expanded="false" style="font-size: 14px; margin-top: 10px">
-                    Kategori Peta
-                </button>
-                <ul class="dropdown-menu" style="font-size: 14px">
-                    <li>
-                        <a class="dropdown-item" href="/peta-kependudukan-admin">Peta Kependudukan</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="/peta-sarana-prasarana-admin">Peta Sarana Prasarana</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="/peta-kondisi-jalan-admin">Peta Kondisi Jalan</a>
-                    </li>
-                </ul>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-getstarted btn-sm dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false" style="font-size: 14px; margin-top: 10px">
+                        Kategori Peta
+                    </button>
+                    <ul class="dropdown-menu" style="font-size: 14px">
+                        <li>
+                            <a class="dropdown-item" href="/peta-kependudukan-admin">Peta Kependudukan</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/peta-sarana-prasarana-admin">Peta Sarana Prasarana</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/peta-kondisi-jalan-admin">Peta Kondisi Jalan</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Title -->
+    </main>
+
+    @if (session('success'))
+        <script>
+            alert('Data updated successfully');
+        </script>
+    @endif
+
+    <!-- Modal Data-->
+    <div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dataModalLabel">
+                        <b>DETAIL DATA SARANA DAN PRASARANA</b>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editResidentForm" class="row g-3" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" id="OBJECTID" name="OBJECTID">
+                        <div class="col-md-6">
+                            <label for="id" class="form-label"><b>ID</b></label>
+                            <input type="text" class="form-control" id="id" name="id" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="jenis" class="form-label"><b>Jenis</b></label>
+                            <input type="text" class="form-control" id="jenis" name="jenis" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="objek" class="form-label"><b>Objek</b></label>
+                            <input type="text" class="form-control" id="objek" name="objek" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="toponim" class="form-label"><b>Toponim</b></label>
+                            <input type="text" class="form-control" id="toponim" name="toponim" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="keterangan" class="form-label"><b>Keterangan</b></label>
+                            <input type="text" class="form-control" id="keterangan" name="keterangan" />
+                        </div>
+                        {{-- <div class="col-md-6">
+                            <label for="sumber" class="form-label"><b>Sumber</b></label>
+                            <input type="text" class="form-control" id="sumber" name="sumber" />
+                        </div> --}}
+                        <!-- geometry field is omitted since it's not updated via form -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Ubah Data</button>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
-    <!-- End Page Title -->
-</main>
 
-<div id="map"></div>
-<script>
-    var icons = {
+    <div class="modal fade" id="gambarModal" tabindex="-1" aria-labelledby="gambarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gambarModalLabel">
+                        <b>DETAIL GAMBAR</b>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="text" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map"></div>
+    <script>
+        var icons = {
             sosial: L.icon({
                 iconUrl: "{{ 'assets/map-assets/WebGIS/assets/img/legend/kantorpemerintah.png' }}",
                 iconSize: [22, 22],
@@ -231,11 +303,18 @@
                 content +=
                     "<div class='my-2'>" +
                     "<table class='table table-bordered'>" +
+                    "<tr><th>ID</th><td>" + feature.properties["id"] + "</td></tr>" +
                     "<tr><th>Jenis Fasum</th><td>" + feature.properties["Jenis Fasum"] + "</td></tr>" +
                     "<tr><th>Objek</th><td>" + feature.properties["Objek"] + "</td></tr>" +
                     "<tr><th>Nama Fasum</th><td>" + feature.properties["Nama Fasum"] + "</td></tr>" +
                     "<tr><th>Keterangan</th><td>" + feature.properties["Keterangan"] + "</td></tr>" +
                     "</table>" +
+                    "</div>" +
+                    "<div class='my-2 d-flex justify-content-center' style='gap: 14px;'>" +
+                    "<button type='button' class='btn btn-outline-warning btn-sm lihat-gambar' data-bs-toggle='modal' data-bs-target='#gambarModal' onclick='populateForm(" +
+                    JSON.stringify(feature.properties) + ")'>Lihat Gambar</button>" +
+                    "<button type='button' class='btn btn-outline-info btn-sm edit-data' data-bs-toggle='modal' data-bs-target='#dataModal' onclick='populateForm(" +
+                    JSON.stringify(feature.properties) + ")'>Edit Data</button>" +
                     "</div>";
                 layer.bindPopup(content, {
                     maxWidth: 300 // Atur lebar maksimum popup
@@ -276,6 +355,7 @@
             var feature = {
                 "type": "Feature",
                 "properties": {
+                    "id": "{{ $item->id}}",
                     "Jenis Fasum": "{{ $item->jenis }}",
                     "Objek": "{{ $item->objek }}",
                     "Nama Fasum": "{{ $item->toponim }}",
@@ -649,5 +729,24 @@
         map.on("baselayerchange", function(e) {
             miniMap.changeLayer(basemapLayersCopy[e.name]);
         });
-</script>
+
+        function populateForm(properties) {
+            // Set the image URL to the modal
+            const modalImage = document.querySelector('#gambarModal .modal-body img');
+            modalImage.src = properties["Gambar"] || ''; // Set image URL or empty string if undefined
+
+            // modalImage.alt = properties["Keterangan"] || 'Gambar Rumah';
+
+            // Populate form fields
+            document.getElementById('id').value = properties['id'];
+            document.getElementById('jenis').value = properties['Jenis Fasum'];
+            document.getElementById('objek').value = properties['Objek'];
+            document.getElementById('toponim').value = properties['Nama Fasum'];
+            document.getElementById('keterangan').value = properties['Keterangan'];
+
+            // Set the form action dynamically based on OBJECTID (or any unique identifier)
+            var form = document.getElementById('editResidentForm');
+            form.action = "/peta-sarana-prasarana-admin/" + properties['id']; // This points to the route created above
+        }
+    </script>
 @endsection

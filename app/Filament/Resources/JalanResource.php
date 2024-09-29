@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Storage;
 use Dotswan\MapPicker\Fields\Map;
 use Filament\Forms\Set;
+use Illuminate\Database\Query\Expression;
 
 class JalanResource extends Resource
 {
@@ -103,15 +104,39 @@ class JalanResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('Name')->label('Nama'),
+                Tables\Columns\TextColumn::make('Name')
+                    ->label('Nama')
+                    ->sortable(query: function ($query, $direction) {
+                        return $query->orderBy(new Expression('"Name"'), $direction);
+                    })
+                    ->searchable(query: function ($query, $search) {
+                        return $query->orWhere(new Expression('LOWER("Name")'), 'LIKE', '%' . strtolower($search) . '%');
+                    })
+                    ->toggleable(isToggledHiddenByDefault: false),
                 Tables\Columns\ImageColumn::make('FOTO')
                     ->getStateUsing(function ($record) {
                         return $record->getFotoUrl(); // Method to get full URL
                     })
                     ->label('Foto'),
-                Tables\Columns\TextColumn::make('PERKERASAN')->label('Perkerasan')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('KONDISI')->label('Kondisi')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('SUMBER')->label('Sumber')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('PERKERASAN')
+                    ->label('Perkerasan')
+                    ->sortable(query: function ($query, $direction) {
+                        return $query->orderBy(new Expression('"PERKERASAN"'), $direction);
+                    })
+                    ->searchable(query: function ($query, $search) {
+                        return $query->orWhere(new Expression('LOWER("PERKERASAN")'), 'LIKE', '%' . strtolower($search) . '%');
+                    })
+                    ->toggleable(isToggledHiddenByDefault: false),
+                Tables\Columns\TextColumn::make('KONDISI')
+                    ->label('Kondisi')
+                    ->sortable(query: function ($query, $direction) {
+                        return $query->orderBy(new Expression('"KONDISI"'), $direction);
+                    })
+                    ->searchable(query: function ($query, $search) {
+                        return $query->orWhere(new Expression('LOWER("KONDISI")'), 'LIKE', '%' . strtolower($search) . '%');
+                    })
+                    ->toggleable(isToggledHiddenByDefault: false),
+                Tables\Columns\TextColumn::make('SUMBER')->label('Sumber'),
                 Tables\Columns\TextColumn::make('longitude')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('latitude')->toggleable(isToggledHiddenByDefault: true),
             ])

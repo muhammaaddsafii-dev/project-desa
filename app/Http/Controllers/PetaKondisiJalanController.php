@@ -30,6 +30,31 @@ class PetaKondisiJalanController extends Controller
         ]);
     }
 
+    public function update(Request $request, $id)
+    {
+        // Validate the request data
+        $request->validate([
+            'Name' => 'nullable|string|max:255',
+            'PERKERASAN' => 'nullable|string|max:255',
+            'KONDISI' => 'nullable|string|max:255',
+            // 'SUMBER' => 'nullable|string|max:255',
+        ]);
+
+        // Find the resident by ID
+        $jalan = Jalan::findOrFail($id);
+
+        // Update the resident with form data
+        $jalan->update([
+            'Name' => $request->Name,
+            'PERKERASAN' => $request->PERKERASAN,
+            'KONDISI' => $request->KONDISI,
+            // 'SUMBER' => $request->SUMBER,
+        ]);
+
+        // Redirect or return a response
+        return redirect()->back()->with('success', 'Data successfully updated.');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -65,10 +90,6 @@ class PetaKondisiJalanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
