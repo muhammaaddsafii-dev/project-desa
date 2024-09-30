@@ -21,7 +21,7 @@ class LandingPageController extends Controller
         $announcements = Announcement::with('images')->get();
         $recentNews = News::latest()->take(3)->get();
         $organizers = Organizer::all();
-        $activities = Activity::orderBy('created_at', 'desc')->latest()->take(5)->get();
+        $activities = Activity::orderBy('created_at', 'desc')->latest()->take(8)->get();
         $assets = Asset::all();
         return view('application.index', [
             'recentNews' => $recentNews,
@@ -68,7 +68,7 @@ class LandingPageController extends Controller
     {
         $assets = Asset::all();
 
-        $news = News::paginate(1);
+        $news = News::paginate(9);
         return view('application.news', [
             'news' => $news,
             'assets' => $assets,
