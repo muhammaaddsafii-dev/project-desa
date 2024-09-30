@@ -88,6 +88,18 @@ class LandingPageController extends Controller
         ]);
     }
 
+
+    public function activity()
+    {
+        $assets = Asset::all();
+
+        $activities = Activity::paginate(12);
+        return view('application.activities', [
+            'activities' => $activities,
+            'assets' => $assets,
+        ]);
+    }
+
     public function activity_details($id)
     {
         $assets = Asset::all();

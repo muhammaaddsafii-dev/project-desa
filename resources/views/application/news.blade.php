@@ -8,7 +8,7 @@
                 <h3 class="mb-2 mb-lg-0"><b>BERITA DESA</b></h3>
                 <nav class="breadcrumbs">
                     <ol>
-                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="/">Beranda</a></li>
                         <li class="current">Berita</li>
                     </ol>
                 </nav>

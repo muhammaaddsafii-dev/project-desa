@@ -186,7 +186,7 @@
                         <ul>
                             <li><a href="/#faq">Pengumuman</a></li>
                             <li><a href="/berita">Berita</a></li>
-                            <li><a href="/#portfolio">Kegiatan</a></li>
+                            <li><a href="/kegiatan">Kegiatan</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
