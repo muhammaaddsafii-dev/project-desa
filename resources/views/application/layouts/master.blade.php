@@ -206,9 +206,9 @@
                     <li class="dropdown">
                         <a href="#"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="#">Surat Online</a></li>
-                            <li><a href="#">Pengaduan</a></li>
-                            <li><a href="#">Panduan</a></li>
+                            <li><a href="/admin/login">Surat Online</a></li>
+                            <li><a href="/admin/login">Pengaduan</a></li>
+                            <li><a href="/admin/login">Panduan</a></li>
                         </ul>
                     </li>
                     <li><a href="#contact">Kontak</a></li>

@@ -25,7 +25,7 @@
                         <th>Nama Kepala Keluarga</th>
                         <th>RT</th>
                         <th>RW</th>
-                        <th>NIK</th>
+                        {{-- <th>NIK</th> --}}
                         <th>Jumlah KK</th>
                     </tr>
                 </thead>
@@ -44,7 +44,7 @@
                             <td>{{ $resident->Nama_Kepal }}</td>
                             <td>{{ $resident->RT }}</td>
                             <td>{{ $resident->RW }}</td>
-                            <td>{{ $resident->NIK }}</td>
+                            {{-- <td>{{ $resident->NIK }}</td> --}}
                             <td>{{ $resident->Jumlah_KK }}</td>
                         </tr>
                     @endforeach
