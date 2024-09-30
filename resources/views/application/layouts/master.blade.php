@@ -176,17 +176,17 @@
                     <li class="dropdown">
                         <a href="#"><span>Profil</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="#about">Tentang Desa</a></li>
-                            <li><a href="#about">Visi dan Misi</a></li>
-                            <li><a href="#team">Struktur</a></li>
+                            <li><a href="/#about">Tentang Desa</a></li>
+                            <li><a href="/#about">Visi dan Misi</a></li>
+                            <li><a href="/#team">Struktur</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#"><span>Info Desa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="#faq">Pengumuman</a></li>
+                            <li><a href="/#faq">Pengumuman</a></li>
                             <li><a href="/berita">Berita</a></li>
-                            <li><a href="#portfolio">Kegiatan</a></li>
+                            <li><a href="/#portfolio">Kegiatan</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -211,7 +211,7 @@
                             <li><a href="/admin/login">Panduan</a></li>
                         </ul>
                     </li>
-                    <li><a href="#contact">Kontak</a></li>
+                    <li><a href="/#contact">Kontak</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
