@@ -504,7 +504,7 @@
                             <div class="icon">
                                 <i class="bi bi-currency-exchange"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
+                            <a href="/" class="stretched-link">
                                 <h3>Keuangan</h3>
                             </a>
                             <p>
@@ -524,7 +524,7 @@
                             <div class="icon">
                                 <i class="bi bi-people-fill"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
+                            <a href="/data-kependudukan" class="stretched-link">
                                 <h3>Kependudukan</h3>
                             </a>
                             <p>
@@ -544,7 +544,7 @@
                             <div class="icon">
                                 <i class="bi bi-map-fill"></i>
                             </div>
-                            <a href="#" class="stretched-link">
+                            <a href="/peta-kependudukan" class="stretched-link">
                                 <h3>Geospasial</h3>
                             </a>
                             <p>
