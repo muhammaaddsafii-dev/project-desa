@@ -37,15 +37,18 @@ class AnnouncementResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')->required()->maxLength(255),
-                Forms\Components\DatePicker::make('published_at')->required()->maxDate(now()),
-                RichEditor::make('content')
+                Forms\Components\TextInput::make('title')->label('Judul')->required()->maxLength(255),
+                Forms\Components\DatePicker::make('published_at')->label('Tanggal Dibuat')->required()->maxDate(now()),
+                Forms\Components\TextInput::make('content')
+                    ->label('Isi Pengumuman')
                     ->maxLength(65535)
                     ->columnSpan('full'),
                 Forms\Components\Repeater::make('images')
+                    ->label('Gambar')
                     ->relationship()
                     ->schema([
                         Forms\Components\FileUpload::make('image_path')
+                            ->label('Gambar')
                             ->disk('s3')
                             ->directory('desa-template/pengumuman')
                             ->preserveFilenames()
