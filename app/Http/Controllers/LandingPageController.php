@@ -18,7 +18,8 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $announcements = Announcement::with('images')->get();
+        // $announcements = Announcement::with('images')->get();
+        $announcements = Announcement::with('images')->latest()->take(3)->get();
         $recentNews = News::latest()->take(3)->get();
         $organizers = Organizer::all();
         $activities = Activity::orderBy('created_at', 'desc')->latest()->take(8)->get();
@@ -93,7 +94,7 @@ class LandingPageController extends Controller
     {
         $assets = Asset::all();
 
-        $activities = Activity::paginate(12);
+        $activities = Activity::latest()->take(12)->paginate(12);
         return view('application.activities', [
             'activities' => $activities,
             'assets' => $assets,
@@ -106,6 +107,17 @@ class LandingPageController extends Controller
         $activity = Activity::with('images')->findOrFail($id);
         return view('application.activity-details', [
             'activity' => $activity,
+            'assets' => $assets,
+        ]);
+    }
+
+    public function announcement()
+    {
+        $assets = Asset::all();
+
+        $announcements = Announcement::with('images')->latest()->take(10)->paginate(10);
+        return view('application.announcements', [
+            'announcements' => $announcements,
             'assets' => $assets,
         ]);
     }

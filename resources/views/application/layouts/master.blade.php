@@ -184,7 +184,7 @@
                     <li class="dropdown">
                         <a href="#"><span>Info Desa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="/#faq">Pengumuman</a></li>
+                            <li><a href="/pengumuman">Pengumuman</a></li>
                             <li><a href="/berita">Berita</a></li>
                             <li><a href="/kegiatan">Kegiatan</a></li>
                         </ul>
