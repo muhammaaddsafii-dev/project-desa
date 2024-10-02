@@ -196,7 +196,7 @@
             <a class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <img src="{{ asset('assets/img/favicon.png') }}" alt="" />
-                <h5 class="sitename"><b>Peta Desa Kemasan</b></h5>
+                <h5 class="sitename" style="color: #ffffff"><b>Peta Desa Kemasan</b></h5>
             </a>
             <a class="btn-getstarted" href="/admin"><i class="bi bi-arrow-return-right"
                     style="font-size: 1rem;"></i></a>
