@@ -6,19 +6,14 @@
     <section id="hero" class="hero section">
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
             data-aos="zoom-out">
-            <!-- <img
-                                                                                                            src="{{ 'assets/img/hero-img.svg' }}"
-                                                                                                            class="img-fluid animated"
-                                                                                                            alt=""
-                                                                                                          /> -->
-            <h1 style="color: black">
+            <h1 style="color: #f31b1b; text-shadow: 5px 5px 10px #dedede, 1px 1px 0 #ffffff; font-weight:500">
                 <b>Selamat Datang di</b><span>
                     @foreach ($assets as $asset)
                     <b>{{ $asset->nama_desa }}</b>
                 </span>
                 @endforeach
             </h1>
-            <p style="color: azure">
+            <p style="color: #e2fbff; text-shadow: 1px 1px 0 #727070;">
                 <i>"Desa Cerdas, Maju, Transparan, dan Sejahtera"</i>
             </p>
             <div class="d-flex">
@@ -95,54 +90,7 @@
             </div>
         </div>
     </section>
-    <!-- /Featured Services Section -->
-    <!-- Faq Section -->
-    {{-- <section id="faq" class="faq section" style="background-color: #e2fbff">
-        <div class="container-fluid">
-            <div class="row gy-4">
-                <div class="col-lg-12 d-flex flex-column justify-content-center order-2 order-lg-1">
-                    <div class="content px-xl-5" data-aos="fade-up" data-aos-delay="100" style="text-align: center">
-                        <h3 style="color: #df1529">
-                            <b>PENGUMUMAN</b>
-                        </h3>
-                        <p>Informasi terkait segala pengumuman di Desa Kemasan.</p>
-                    </div>
 
-                    <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
-                        @foreach ($announcements as $announcement)
-                        <div class="faq-item">
-                            <i class="faq-icon bi bi-info-circle-fill"></i>
-                            <h3>
-                                <b>{{ $announcement->title }}</b> |
-                                <span class="badge bg-danger" style="color: white">{{ $announcement->published_at
-                                    }}</span>
-                            </h3>
-                            <div class="faq-content" style="text-align: justify">
-                                <p>
-                                    <br />
-                                    {!! $announcement->content !!}
-                                </p>
-                            </div>
-                            <i class="faq-toggle bi bi-chevron-right"></i>
-                        </div>
-                        @endforeach
-                        <!-- End Faq item-->
-                    </div>
-                </div>
-
-                <!-- <div class="col-lg-5 order-1 order-lg-2">
-                                                                <img
-                                                                  src="{{ 'assets/img/faq.jpg' }}"
-                                                                  class="img-fluid"
-                                                                  alt=""
-                                                                  data-aos="zoom-in"
-                                                                  data-aos-delay="100"
-                                                                />
-                                                              </div> -->
-            </div>
-        </div>
-    </section>
-    <!-- /Faq Section --> --}}
     <section id="faq" class="faq section" style="background-color: #e2fbff">
         <div class="container-fluid">
             <div class="row gy-4">
@@ -186,24 +134,9 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-lg-5 order-1 order-lg-2">
-                                                              <img
-                                                                src="assets/img/faq.jpg"
-                                                                class="img-fluid"
-                                                                alt=""
-                                                                data-aos="zoom-in"
-                                                                data-aos-delay="100"
-                                                              />
-                                                            </div> -->
             </div>
         </div>
     </section>
-
-
-
-
-
-
 
 
     <!-- About Section -->
@@ -225,11 +158,6 @@
                 </div>
 
                 <div class="col-lg-7">
-                    <!-- <h3 class="pt-0 pt-lg-5">
-                                                                                                                Neque officiis dolore maiores et exercitationem quae est seda
-                                                                                                                lidera pat claero
-                                                                                                              </h3> -->
-
                     <!-- Tabs -->
                     <ul class="nav nav-pills mb-3">
                         <li>
@@ -354,12 +282,12 @@
     <!-- /Team Section -->
 
     <!-- Onfocus Section -->
-    <section id="onfocus" class="onfocus section">
+    <section id="onfocus" class="onfocus section" style="background-color: #ffffff">
         <div class="container-fluid p-0" data-aos="fade-up">
             <div class="row g-0">
                 <div class="col-lg-12">
                     <div class="content d-flex flex-column justify-content-center h-100">
-                        <section id="recent-posts" class="recent-posts section" style="background: #97c3cb">
+                        <section id="recent-posts" class="recent-posts section">
                             <!-- Section Title -->
                             <div class="container section-title" data-aos="fade-up">
                                 <h3><b>BERITA DESA</b></h3>
@@ -409,7 +337,7 @@
     <!-- /Onfocus Section -->
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio section">
+    <section id="portfolio" class="portfolio section" style="background-color: #e2fbff">
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
             <h3><b>KEGIATAN</b></h3>
@@ -418,38 +346,7 @@
                 Desa Kemasan.
             </p>
         </div>
-        <!-- End Section Title -->
 
-        {{-- <div class="container-fluid">
-            <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-                <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                    <li data-filter="*" class="filter-active">All</li>
-                    <li data-filter=".filter-internal">Internal</li>
-                    <li data-filter=".filter-eksternal">Eksternal</li>
-                </ul>
-                <!-- End Portfolio Filters -->
-
-                <div class="row g-0 isotope-container" data-aos="fade-up" data-aos-delay="200">
-                    @foreach ($activities as $activity)
-                    <div class="col-xl-3 col-lg-4 col-md-6 portfolio-item isotope-item filter-internal">
-                        <div class="portfolio-content h-100">
-                            <img src="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $activity->image }}"
-                                alt="" class="img-fluid" />
-                            <div class="portfolio-info">
-                                <a href="https://cdn-project-desa.s3.ap-southeast-1.amazonaws.com/{{ $activity->image }}"
-                                    data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="{{ route('activity_details', $activity->id) }}" title="More Details"
-                                    class="details-link"><i class="bi bi-link-45deg"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                    <!-- End Portfolio Item -->
-                </div>
-
-            </div>
-        </div> --}}
         <div class="container-fluid">
             <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
                 <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
@@ -483,11 +380,11 @@
     </section>
     <!-- /Portfolio Section -->
 
-    <section id="services" class="services section" style="background-color:#97c3cb">
+    <section id="services" class="services section" style="background-color:#ffffff">
         <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up" style="color: white;">
-            <h3 style="color: white;""><b>DATA DESA</b></h3>
-                <p style=" color: white;">
+        <div class="container section-title" data-aos="fade-up">
+            <h3 style="color: #485664;""><b>DATA DESA</b></h3>
+                <p style=" color: #485664;">
                 Informasi terkait data statistik dan data geospasial Desa Kemasan
                 </p>
         </div>
@@ -558,7 +455,7 @@
         </div>
     </section>
 
-    <section id="features" class="features section">
+    <section id="features" class="features section" style="background-color: #e2fbff">
         <div class="container section-title" data-aos="fade-up">
             <h3><b>LAYANAN</b></h3>
             <p>
@@ -567,8 +464,8 @@
             </p>
         </div>
         <div class="container" data-aos="fade-up">
-            <ul class="nav nav-tabs row gy-4 d-flex">
-                <li class="nav-item col-4 col-md-4 col-lg-4">
+            <ul class="nav nav-tabs row gy-4 d-flex" style="background-color: #ffffff; margin-top: 5px;">
+                <li class="nav-item col-4 col-md-4 col-lg-4" style="margin: 0px">
                     <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
                         <i class="bi bi-ui-checks" style="color: #0dcaf0"></i>
                         <h4>Panduan</h4>
@@ -576,7 +473,7 @@
                 </li>
                 <!-- End Tab 1 Nav -->
 
-                <li class="nav-item col-4 col-md-4 col-lg-4">
+                <li class="nav-item col-4 col-md-4 col-lg-4" style="margin: 0px">
                     <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
                         <i class="bi bi-envelope-plus-fill" style="color: #16e149"></i>
                         <h4>Surat Online</h4>
@@ -584,7 +481,7 @@
                 </li>
                 <!-- End Tab 2 Nav -->
 
-                <li class="nav-item col-4 col-md-4 col-lg-4">
+                <li class="nav-item col-4 col-md-4 col-lg-4" style="margin: 0px">
                     <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
                         <i class="bi bi- bi-megaphone-fill" style="color: #d10b0b"></i>
                         <h4>Pangaduan</h4>
