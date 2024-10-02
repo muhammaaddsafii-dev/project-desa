@@ -202,7 +202,7 @@
                         <ul>
                             <li><a href="/admin/login">Surat Online</a></li>
                             <li><a href="/admin/login">Pengaduan</a></li>
-                            <li><a href="/admin/login">Panduan</a></li>
+                            <li><a href="/#features">Panduan</a></li>
                         </ul>
                     </li>
                     <li><a href="/#contact">Kontak</a></li>
