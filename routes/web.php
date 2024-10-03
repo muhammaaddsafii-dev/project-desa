@@ -22,6 +22,7 @@ Route::get('documents/{document}/download', [DocumentController::class, 'generat
 Route::post('/upload-and-process-document', [DocumentController::class, 'uploadAndProcessDocument'])->name('upload-and-process-document');
 
 
+Route::get('/progres', [LandingPageController::class, 'progres']);
 Route::get('/', [LandingPageController::class, 'index']);
 Route::get('/berita', [LandingPageController::class, 'news']);
 Route::get('/detail-berita/{slug}', [LandingPageController::class, 'news_details'])->name('news.details');

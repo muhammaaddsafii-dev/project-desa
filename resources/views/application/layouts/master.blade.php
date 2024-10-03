@@ -191,7 +191,7 @@
                                         class="bi bi-chevron-down toggle-dropdown"></i></a>
                                 <ul>
                                     <li><a href="/data-kependudukan">Kependudukan</a></li>
-                                    <li><a href="#">Keuangan</a></li>
+                                    <li><a href="/progres">Keuangan</a></li>
                                 </ul>
                             </li>
                             <li><a href="/peta-kependudukan">Geospasial</a></li>

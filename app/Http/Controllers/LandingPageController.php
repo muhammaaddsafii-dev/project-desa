@@ -143,6 +143,13 @@ class LandingPageController extends Controller
         ]);
     }
 
+    public function progres(){
+        $assets = Asset::all();
+        return view('application.progres',[
+            'assets' => $assets,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

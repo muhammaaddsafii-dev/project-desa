@@ -401,7 +401,7 @@
                             <div class="icon">
                                 <i class="bi bi-currency-exchange"></i>
                             </div>
-                            <a href="/" class="stretched-link">
+                            <a href="/progres" class="stretched-link">
                                 <h3>Keuangan</h3>
                             </a>
                             <p>

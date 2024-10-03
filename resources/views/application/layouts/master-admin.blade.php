@@ -29,13 +29,6 @@
     <!-- Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" />
 
-    <!-- Leaflet CSS Library -->
-    <!-- <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    /> -->
     <link rel="stylesheet" href="{{ asset('assets/map-assets/Plugin/libs/leaflet/leaflet.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/map-assets/Plugin/fontawesome 5.15.4/all.css') }}" />
 
