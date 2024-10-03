@@ -166,46 +166,67 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="/" class="active">Beranda<br /></a></li>
+                    <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}">Beranda<br /></a></li>
                     <li class="dropdown">
-                        <a href="#"><span>Profil</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="#"
+                            class="{{ request()->is('profil*') || request()->is('/#about') || request()->is('/#team') ? 'active' : '' }}"><span>Profil</span>
+                            <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="/#about">Tentang Desa</a></li>
-                            <li><a href="/#about">Visi dan Misi</a></li>
-                            <li><a href="/#team">Struktur</a></li>
+                            <li><a href="/#about" class="{{ request()->is('/#about') ? 'active' : '' }}">Tentang
+                                    Desa</a></li>
+                            <li><a href="/#about" class="{{ request()->is('/#about') ? 'active' : '' }}">Visi dan
+                                    Misi</a></li>
+                            <li><a href="/#team" class="{{ request()->is('/#team') ? 'active' : '' }}">Struktur</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#"><span>Info Desa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="#"
+                            class="{{ request()->is('info-desa*') || request()->is('pengumuman*') || request()->is('berita*') || request()->is('kegiatan*') ? 'active' : '' }}"><span>Info
+                                Desa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="/pengumuman">Pengumuman</a></li>
-                            <li><a href="/berita">Berita</a></li>
-                            <li><a href="/kegiatan">Kegiatan</a></li>
+                            <li><a href="/pengumuman"
+                                    class="{{ request()->is('pengumuman*') ? 'active' : '' }}">Pengumuman</a></li>
+                            <li><a href="/berita" class="{{ request()->is('berita*') ? 'active' : '' }}">Berita</a></li>
+                            <li><a href="/kegiatan"
+                                    class="{{ request()->is('kegiatan*') ? 'active' : '' }}">Kegiatan</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#"><span>Data Desa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="#"
+                            class="{{ request()->is('data-desa*') || request()->is('data-kependudukan*') || request()->is('progres*') || request()->is('peta-kependudukan*') ? 'active' : '' }}"><span>Data
+                                Desa</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li class="dropdown">
-                                <a href="#"><span>Statistik</span> <i
-                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
+                                <a href="#"
+                                    class="{{ request()->is('statistik*') || request()->is('data-kependudukan*') || request()->is('progres*') ? 'active' : '' }}"><span>Statistik</span>
+                                    <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                                 <ul>
-                                    <li><a href="/data-kependudukan">Kependudukan</a></li>
-                                    <li><a href="/progres">Keuangan</a></li>
+                                    <li><a href="/data-kependudukan"
+                                            class="{{ request()->is('data-kependudukan*') ? 'active' : '' }}">Kependudukan</a>
+                                    </li>
+                                    <li><a href="/progres"
+                                            class="{{ request()->is('progres*') ? 'active' : '' }}">Keuangan</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/peta-kependudukan">Geospasial</a></li>
+                            <li><a href="/peta-kependudukan"
+                                    class="{{ request()->is('peta-kependudukan*') ? 'active' : '' }}">Geospasial</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#"><span>Layanan</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <a href="#"
+                            class="{{ request()->is('layanan*') || request()->is('admin/login*') || request()->is('/#features') ? 'active' : '' }}"><span>Layanan</span>
+                            <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="/admin/login">Surat Online</a></li>
-                            <li><a href="/admin/login">Pengaduan</a></li>
-                            <li><a href="/#features">Panduan</a></li>
+                            <li><a href="/admin/login" class="{{ request()->is('admin/login*') ? 'active' : '' }}">Surat
+                                    Online</a></li>
+                            <li><a href="/admin/login"
+                                    class="{{ request()->is('admin/login*') ? 'active' : '' }}">Pengaduan</a></li>
+                            <li><a href="/#features"
+                                    class="{{ request()->is('/#features') ? 'active' : '' }}">Panduan</a></li>
                         </ul>
                     </li>
-                    <li><a href="/#contact">Kontak</a></li>
+                    <li><a href="/#contact" class="{{ request()->is('/#contact') ? 'active' : '' }}">Kontak</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
