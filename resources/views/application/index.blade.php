@@ -305,8 +305,6 @@
                                                     alt="" class="img-fluid" />
                                             </div>
 
-                                            <p class="post-category">Politics</p>
-
                                             <h2 class="title">
                                                 <a href="{{ route('news.details', ['slug' => $recent->slug]) }}">{{
                                                     $recent->title }}</a>
