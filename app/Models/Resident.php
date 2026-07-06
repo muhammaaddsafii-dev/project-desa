@@ -41,6 +41,7 @@ class Resident extends Model
     protected $casts = [
         'latitude' => 'float',
         'longitude' => 'float',
+        'Foto' => 'string'
     ];
 
     public function getFotoUrl(): string
